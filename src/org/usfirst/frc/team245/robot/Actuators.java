@@ -1,33 +1,35 @@
 package org.usfirst.frc.team245.robot;
 
+import edu.wpi.first.wpilibj.PWMTalonSRX;
+
 public class Actuators {
 	
-	private static CANTalon rightFrontMotor;
-	private static CANTalon rightRearMotor;
-	private static CANTalon leftFrontMotor;
-	private static CANTalon leftRearMotor;
+	private static PWMTalonSRX rightFrontMotor;
+	private static PWMTalonSRX rightRearMotor;
+	private static PWMTalonSRX leftFrontMotor;
+	private static PWMTalonSRX leftRearMotor;
 	
 	// 
 	public static void init() {
-		rightFrontMotor = new CANTalon(Constants.RIGHT_FRONT_DRIVE_MOTOR_PORT)
-		rightRearMotor = new CANTalon(Constants.RIGHT_REAR_DRIVE_MOTOR_PORT)
-		leftFrontMotor = new CANTalon(Constants.LEFT_FRONT_DRIVE_MOTOR_PORT);
-		leftRearMotor = new CANTalon(Constants.LEFT_REAR_DRIVE_MOTOR_PORT);
+		rightFrontMotor = new PWMTalonSRX(Constants.RIGHT_FRONT_DRIVE_MOTOR_PORT);
+		rightRearMotor = new PWMTalonSRX(Constants.RIGHT_REAR_DRIVE_MOTOR_PORT);
+		leftFrontMotor = new PWMTalonSRX(Constants.LEFT_FRONT_DRIVE_MOTOR_PORT);
+		leftRearMotor = new PWMTalonSRX(Constants.LEFT_REAR_DRIVE_MOTOR_PORT);
 	}
 
-	public static CANTalon getRightFrontMotor() {
+	public static PWMTalonSRX getRightFrontMotor() {
 		return rightFrontMotor;
 	}
 
-	public static CANTalon getRightRearMotor() {
+	public static PWMTalonSRX getRightRearMotor() {
 		return rightRearMotor;
 	}
 
-	public static CANTalon getLeftFrontMotor() {
+	public static PWMTalonSRX getLeftFrontMotor() {
 		return leftFrontMotor;
 	}
 
-	public static CANTalon getLeftRearMotor() {
+	public static PWMTalonSRX getLeftRearMotor() {
 		return leftRearMotor;
 	}
 	

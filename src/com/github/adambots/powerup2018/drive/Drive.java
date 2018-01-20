@@ -2,9 +2,11 @@ package com.github.adambots.powerup2018.drive;
 
 import org.usfirst.frc.team245.robot.Actuators;
 
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
+
 public class Drive {
 
-	private MecanumDrive robotDrive;
+	private static MecanumDrive robotDrive;
 	
 	// precondition: run Actuators.init()
 	public static void init() {
