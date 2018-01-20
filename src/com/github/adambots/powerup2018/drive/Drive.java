@@ -5,8 +5,6 @@ import org.usfirst.frc.team245.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
-
-
 public class Drive {
 	
 	public static void init() {
