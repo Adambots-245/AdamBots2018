@@ -32,13 +32,18 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		System.out.println("Got here");
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
 		
 		Actuators.init();
-		Drive.init();
 	}
+	
+//	public void teleopInit() {
+//		System.out.println("Got to teleopInit");
+//		Actuators.init();
+//	}
 
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
@@ -80,7 +85,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		
 		Drive.mecDrive(Gamepad.primary.getRightY(), Gamepad.primary.getRightX(), Gamepad.primary.getLeftX());
+		
 	}
 
 	/**
