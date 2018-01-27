@@ -3,13 +3,13 @@ package org.usfirst.frc.team245.robot;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class Actuators {
-	
+
 	private static TalonSRX rightFrontMotor;
 	private static TalonSRX rightRearMotor;
 	private static TalonSRX leftFrontMotor;
 	private static TalonSRX leftRearMotor;
-	
-	// 
+
+	//
 	public static void init() {
 		rightFrontMotor = new TalonSRX(Constants.RIGHT_FRONT_DRIVE_MOTOR_PORT);
 		rightRearMotor = new TalonSRX(Constants.RIGHT_REAR_DRIVE_MOTOR_PORT);
@@ -32,6 +32,5 @@ public class Actuators {
 	public static TalonSRX getLeftRearMotor() {
 		return leftRearMotor;
 	}
-	
-	
+
 }
