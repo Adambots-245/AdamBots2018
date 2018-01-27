@@ -5,10 +5,15 @@ import org.usfirst.frc.team245.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
+
 public class Drive {
 
-	public static void init() {
+	private static MecanumDrive robotDrive;
 
+	public static void init() {
+		robotDrive = new MecanumDrive(Actuators.getLeftFrontMotor(), Actuators.getLeftRearMotor(),
+				Actuators.getRightFrontMotor(), Actuators.getRightRearMotor());
 	}
 
 	private static double capSpeed(double speed) {
@@ -18,21 +23,22 @@ public class Drive {
 	}
 
 	public static void mecDrive(double ySpeed, double xSpeed, double zRotation) {
-
-		double leftFrontSpeed = ySpeed - zRotation - xSpeed;
-		double rightFrontSpeed = -(ySpeed + zRotation + xSpeed);
-		double leftRearSpeed = ySpeed - zRotation + xSpeed;
-		double rightRearSpeed = -(ySpeed + zRotation - xSpeed);
-
-		leftFrontSpeed = capSpeed(leftFrontSpeed);
-		rightFrontSpeed = capSpeed(rightFrontSpeed);
-		leftRearSpeed = capSpeed(leftRearSpeed);
-		rightRearSpeed = capSpeed(rightRearSpeed);
-
-		Actuators.getLeftFrontMotor().set(ControlMode.PercentOutput, leftFrontSpeed);
-		Actuators.getRightFrontMotor().set(ControlMode.PercentOutput, rightFrontSpeed);
-		Actuators.getLeftRearMotor().set(ControlMode.PercentOutput, leftRearSpeed);
-		Actuators.getRightRearMotor().set(ControlMode.PercentOutput, rightRearSpeed);
+		robotDrive.driveCartesian(ySpeed, xSpeed, zRotation);
+		// double leftFrontSpeed = ySpeed - zRotation - xSpeed;
+		// double rightFrontSpeed = -(ySpeed + zRotation + xSpeed);
+		// double leftRearSpeed = ySpeed - zRotation + xSpeed;
+		// double rightRearSpeed = -(ySpeed + zRotation - xSpeed);
+		//
+		// leftFrontSpeed = capSpeed(leftFrontSpeed);
+		// rightFrontSpeed = capSpeed(rightFrontSpeed);
+		// leftRearSpeed = capSpeed(leftRearSpeed);
+		// rightRearSpeed = capSpeed(rightRearSpeed);
+		//
+		// Actuators.getLeftFrontMotor().set(ControlMode.PercentOutput, leftFrontSpeed);
+		// Actuators.getRightFrontMotor().set(ControlMode.PercentOutput,
+		// rightFrontSpeed);
+		// Actuators.getLeftRearMotor().set(ControlMode.PercentOutput, leftRearSpeed);
+		// Actuators.getRightRearMotor().set(ControlMode.PercentOutput, rightRearSpeed);
 	}
 
 }

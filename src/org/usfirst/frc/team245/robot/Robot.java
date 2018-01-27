@@ -38,6 +38,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto choices", m_chooser);
 
 		Actuators.init();
+		Drive.init();
 	}
 
 	// public void teleopInit() {
@@ -88,7 +89,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 
 		Drive.mecDrive(Gamepad.primary.getLeftY(), Gamepad.primary.getLeftX(), Gamepad.primary.getRightX());
-
+		
 	}
 
 	/**
