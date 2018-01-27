@@ -36,14 +36,14 @@ public class Robot extends IterativeRobot {
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
-		
+
 		Actuators.init();
 	}
-	
-//	public void teleopInit() {
-//		System.out.println("Got to teleopInit");
-//		Actuators.init();
-//	}
+
+	// public void teleopInit() {
+	// System.out.println("Got to teleopInit");
+	// Actuators.init();
+	// }
 
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
@@ -52,8 +52,9 @@ public class Robot extends IterativeRobot {
 	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
 	 * getString line to get the auto name from the text box below the Gyro
 	 *
-	 * <p>You can add additional auto modes by adding additional comparisons to
-	 * the switch structure below with additional strings. If using the
+	 * <p>
+	 * You can add additional auto modes by adding additional comparisons to the
+	 * switch structure below with additional strings. If using the
 	 * SendableChooser make sure to add them to the chooser code above as well.
 	 */
 	@Override
@@ -70,13 +71,13 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		switch (m_autoSelected) {
-			case kCustomAuto:
-				// Put custom auto code here
-				break;
-			case kDefaultAuto:
-			default:
-				// Put default auto code here
-				break;
+		case kCustomAuto:
+			// Put custom auto code here
+			break;
+		case kDefaultAuto:
+		default:
+			// Put default auto code here
+			break;
 		}
 	}
 
@@ -85,9 +86,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		
+
 		Drive.mecDrive(Gamepad.primary.getLeftY(), Gamepad.primary.getLeftX(), Gamepad.primary.getRightX());
-		
+
 	}
 
 	/**
