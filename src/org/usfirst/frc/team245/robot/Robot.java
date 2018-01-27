@@ -86,7 +86,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		
-		Drive.mecDrive(Gamepad.primary.getRightY(), Gamepad.primary.getRightX(), Gamepad.primary.getLeftX());
+		Drive.mecDrive(Gamepad.primary.getLeftY(), Gamepad.primary.getLeftX(), Gamepad.primary.getRightX());
 		
 	}
 
