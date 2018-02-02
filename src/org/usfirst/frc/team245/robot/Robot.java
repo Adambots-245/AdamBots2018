@@ -7,11 +7,14 @@
 
 package org.usfirst.frc.team245.robot;
 
+import com.github.adambots.powerup2018.auton.Auton;
 import com.github.adambots.powerup2018.drive.Drive;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import java.util.Timer;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,7 +28,9 @@ public class Robot extends IterativeRobot {
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
-
+	
+	SendableChooser autonomousModes;
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -38,6 +43,54 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto choices", m_chooser);
 		
 		Actuators.init();
+		
+		autonomousModes = new SendableChooser();
+		autonomousModes.addDefault("Do Nothing", new DoNothing());
+		autonomousModes.addObject("Cross Baseline", new CrossBaseline());
+		SmartDashboard.putData("Autonomous Mode", autonomousModes);
+				
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			  @Override
+			  public void run() {
+				  
+				  	Auton.DoNothing();
+			  }
+		}, 10*1000);
+		
+		timer.schedule(new TimerTask() {
+			  @Override
+			  public void run() {
+				  	Auton.CrossBaseline();
+			  }
+		}, 5*1000);
+		
+		ExecutorService service = Executors.newSingleThreadExecutor();
+
+		try {
+		    Runnable r = new Runnable() {
+		        @Override
+		        public void run() {
+		            
+		        }
+		    };
+
+		    Future<?> f = service.submit(r);
+
+		    f.get(2, TimeUnit.MINUTES);     // attempt the task for two minutes
+		}
+		catch (final InterruptedException e) {
+		    // The thread was interrupted during sleep, wait or join
+		}
+		catch (final TimeoutException e) {
+		    // Took too long!
+		}
+		catch (final ExecutionException e) {
+		    // An exception from within the Runnable task
+		}
+		finally {
+		    service.shutdown();
+		}
 	}
 	
 //	public void teleopInit() {
@@ -62,6 +115,8 @@ public class Robot extends IterativeRobot {
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
 		System.out.println("Auto selected: " + m_autoSelected);
+		
+		
 	}
 
 	/**
