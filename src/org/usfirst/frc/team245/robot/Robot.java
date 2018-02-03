@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team245.robot;
 
+import com.github.adambots.powerup2018.controller.Gamepad;
 import com.github.adambots.powerup2018.drive.Drive;
 import com.github.adambots.powerup2018.intake.Intake;
 
@@ -38,6 +39,7 @@ public class Robot extends IterativeRobot {
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
 
+		Gamepad.init();
 		Actuators.init();
 		Sensors.init();
 		Drive.init();
@@ -84,11 +86,12 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-
+		Gamepad.update();
+		
 		Drive.mecDrive(Gamepad.primary.getLeftX(), Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
 
-		Intake.setIntakeWheelsSpeed(Gamepad.secondary.getTriggers());
-		Intake.toggleCarriageWheels(Gamepad.secondary.getA(), Gamepad.secondary.getB());
+//		Intake.setIntakeWheelsSpeed(Gamepad.secondary.getTriggers());
+//		Intake.toggleCarriageWheels(Gamepad.secondary.getA(), Gamepad.secondary.getB());
 	}
 
 	/**
