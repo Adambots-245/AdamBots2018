@@ -8,6 +8,7 @@ public class Drive {
 
 	private static MecanumDrive robotDrive;
 
+	// precondition: run Actuators.init()
 	public static void init() {
 		robotDrive = new MecanumDrive(Actuators.getLeftFrontMotor(), Actuators.getLeftRearMotor(),
 				Actuators.getRightFrontMotor(), Actuators.getRightRearMotor());
@@ -17,10 +18,12 @@ public class Drive {
 		return Math.signum(x) * Math.pow(x, 2);
 	}
 
+	// driving with Mecanum (input squared for smoother control)
 	public static void mecDrive(double rightSpeed, double forwardSpeed, double zRotation) {
 		robotDrive.driveCartesian(sgnSquare(rightSpeed), sgnSquare(forwardSpeed), sgnSquare(zRotation));
 	}
 
+	// driving with field-centric Mecanum (input squared for smoother control)
 	public static void mecDrive(double rightSpeed, double forwardSpeed, double zRotation, double gyroAngle) {
 		robotDrive.driveCartesian(sgnSquare(rightSpeed), sgnSquare(forwardSpeed), sgnSquare(zRotation), gyroAngle);
 	}
