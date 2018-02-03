@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class Gamepad {
 	private Joystick joy;
 	private Presses press;
+	
 	//// CONSTANTS -------------------------------------------------------------
 	/**
 	 * Primary Driver Controller Port Number.
@@ -70,12 +71,12 @@ public class Gamepad {
 	 * XBOX 360 Right Vertical Axis (Up=1, Down=-1)
 	 */
 	private static final int AXIS_RIGHT_Y = 5;
-	private static final int AXIS_DPAD_HORIZONTAL = 6;
-	//// Control Instances
+	
+	// Control Instances
 	public static Gamepad primary;
 	public static Gamepad secondary;
-	//// CONSTRUCTOR -----------------------------------------------------------
-
+	
+	// Constructor
 	/**
 	 * Creates new Joystick instance and Presses instance on the correct driver
 	 * port.
@@ -93,89 +94,58 @@ public class Gamepad {
 		}
 	}
 
+	// initializes the primary and secondary drivers
+	public static void init() {
+		primary = new Gamepad(PRIMARY_DRIVER);
+		secondary = new Gamepad(SECONDARY_DRIVER);
+	}
+	
+	// updates the number of presses for all the buttons of a given instance
 	private void updatePress() {
 		try {
 			press.updatePresses();
 		} catch (Exception e) {
 			System.out.println("Failed to update presses");
-			e.printStackTrace();
 		}
 	}
-
-	public static void init() {
-		primary = new Gamepad(PRIMARY_DRIVER);
-		secondary = new Gamepad(SECONDARY_DRIVER);
-	}
-
+	
+	// updates both isntances
 	public static void update() {
 		Gamepad.primary.updatePress();
 		Gamepad.secondary.updatePress();
 	}
 
+	// deadzoning
 	private double deaden(double u) {
 		return Math.abs(u) < .15 ? 0 : u;
 	}
 
+	// getting joystick values
 	public double getTriggers() {
 		return deaden(joy.getRawAxis(LEFT_AXIS_TRIGGERS) - joy.getRawAxis(RIGHT_AXIS_TRIGGERS));
 	}
 
-	public boolean getDPadLeft() {
-		return joy.getRawAxis(AXIS_DPAD_HORIZONTAL) < -0.5;
-	}
-
-	public boolean getDPadRight() {
-		return joy.getRawAxis(AXIS_DPAD_HORIZONTAL) > 0.5;
-	}
-
-	/**
-	 * Corresponds to HORIZONTAL input on the LEFT joystick.
-	 *
-	 * @return The X coordinate of the left joystick (-1 is LEFT, 1 is RIGHT)
-	 */
 	public double getLeftX() {
 		return deaden(joy.getRawAxis(AXIS_LEFT_X));
 	}
 
-	/**
-	 * Corresponds to VERTICAL input on the LEFT joystick.
-	 *
-	 * @return The Y coordinate of the LEFT joystick (1 is UP, -1 is DOWN)
-	 */
 	public double getLeftY() {
 		return deaden(-joy.getRawAxis(AXIS_LEFT_Y));
 	}
 
-	/**
-	 * Corresponds to HORIZONTAL input on the RIGHT joystick
-	 *
-	 * @return The X coordinate of the RIGHT joystick (-1 is LEFT, 1 is RIGHT)
-	 */
 	public double getRightX() {
 		return deaden(joy.getRawAxis(AXIS_RIGHT_X));
 	}
 
-	/**
-	 * Corresponds to VERTICAL input on the RIGHT joystick
-	 *
-	 * @return The Y coordinate of the RIGHT joystick (1 is UP, -1 is DOWN)
-	 */
+
 	public double getRightY() {
 		return deaden(-joy.getRawAxis(AXIS_RIGHT_Y));
 	}
 
-	/**
-	 *
-	 * @return Is the left bumper pressed? [top one]
-	 */
 	public boolean getLB() {
 		return joy.getRawButton(BUTTON_LB);
 	}
 
-	/**
-	 *
-	 * @return Is the right bumper pressed? [top one]
-	 */
 	public boolean getRB() {
 		return joy.getRawButton(BUTTON_RB);
 	}
@@ -204,13 +174,7 @@ public class Gamepad {
 		return joy.getRawButton(BUTTON_BACK);
 	}
 
-	public int getDPadLeftPresses() {
-		return press.getPresses("DPadLeft");
-	}
-
-	public int getDPadRightPresses() {
-		return press.getPresses("DPadRight");
-	}
+	// get number of times toggle buttons have been pressed
 
 	public int getLBPresses() {
 		return press.getPresses("LB");
