@@ -50,7 +50,7 @@ public class Gamepad {
 	 */
 	private static final int AXIS_LEFT_X = 0;
 	/**
-	 * XBOX 360 Left Vertical Axis (Up=-1, Down=1)
+	 * XBOX 360 Left Vertical Axis (Up=1, Down=-1)
 	 */
 	private static final int AXIS_LEFT_Y = 1;
 	/**
@@ -66,7 +66,7 @@ public class Gamepad {
 	 */
 	private static final int AXIS_RIGHT_X = 4;
 	/**
-	 * XBOX 360 Right Vertical Axis (Up=-1, Down=1)
+	 * XBOX 360 Right Vertical Axis (Up=1, Down=-1)
 	 */
 	private static final int AXIS_RIGHT_Y = 5;
 	private static final int AXIS_DPAD_HORIZONTAL = 6;
@@ -113,10 +113,10 @@ public class Gamepad {
 	/**
 	 * Corresponds to VERTICAL input on the LEFT joystick.
 	 *
-	 * @return The Y coordinate of the LEFT joystick (-1 is UP, 1 is DOWN)
+	 * @return The Y coordinate of the LEFT joystick (1 is UP, -1 is DOWN)
 	 */
 	public double getLeftY() {
-		return deaden(joy.getRawAxis(AXIS_LEFT_Y));
+		return deaden(-joy.getRawAxis(AXIS_LEFT_Y));
 	}
 
 	/**
@@ -131,10 +131,10 @@ public class Gamepad {
 	/**
 	 * Corresponds to VERTICAL input on the RIGHT joystick
 	 *
-	 * @return The Y coordinate of the RIGHT joystick (-1 is UP, 1 is DOWN)
+	 * @return The Y coordinate of the RIGHT joystick (1 is UP, -1 is DOWN)
 	 */
 	public double getRightY() {
-		return deaden(joy.getRawAxis(AXIS_RIGHT_Y));
+		return deaden(-joy.getRawAxis(AXIS_RIGHT_Y));
 	}
 
 	/**
