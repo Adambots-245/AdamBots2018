@@ -2,6 +2,7 @@ package org.usfirst.frc.team245.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 
 public class Actuators {
@@ -16,6 +17,11 @@ public class Actuators {
 	private static VictorSP leftCarriageMotor;
 	private static VictorSP rightCarriageMotor;
 
+	// pneumatics
+	private static DoubleSolenoid leftArmFirstPneumatic;
+	private static DoubleSolenoid leftArmSecondPneumatic;
+	private static DoubleSolenoid rightArmPneumatic;
+
 	// initializes all actuators
 	public static void init() {
 
@@ -28,6 +34,14 @@ public class Actuators {
 		rightIntakeMotor = new VictorSP(Constants.RIGHT_INTAKE_MOTOR_PWM_PORT);
 		leftCarriageMotor = new VictorSP(Constants.LEFT_CARRIAGE_MOTOR_PWM_PORT);
 		rightCarriageMotor = new VictorSP(Constants.RIGHT_CARRIAGE_MOTOR_PWM_PORT);
+
+		// initialize pneumatics
+		leftArmFirstPneumatic = new DoubleSolenoid(Constants.LEFT_ARM_FIRST_PNEUMATIC_FORWARD_PORT,
+				Constants.LEFT_ARM_FIRST_PNEUMATIC_REVERSE_PORT);
+		leftArmSecondPneumatic = new DoubleSolenoid(Constants.LEFT_ARM_SECOND_PNEUMATIC_FORWARD_PORT,
+				Constants.LEFT_ARM_SECOND_PNEUMATIC_REVERSE_PORT);
+		rightArmPneumatic = new DoubleSolenoid(Constants.RIGHT_ARM_PNEUMATIC_FORWARD_PORT,
+				Constants.RIGHT_ARM_PNEUMATIC_REVERSE_PORT);
 
 		// invert motorcontrollers
 		rightFrontMotor.setInverted(Constants.RIGHT_FRONT_DRIVE_MOTOR_INVERTED);
@@ -72,6 +86,18 @@ public class Actuators {
 		return rightIntakeMotor;
 	}
 
+	public static DoubleSolenoid getLeftArmFirstPneumatic() {
+		return leftArmFirstPneumatic;
+	}
+
+	public static DoubleSolenoid getLeftArmSecondPneumatic() {
+		return leftArmSecondPneumatic;
+	}
+
+	public static DoubleSolenoid getRightArmPneumatic() {
+		return rightArmPneumatic;
+	}
+
 	// set speed of left intake motor
 	public static void setLeftIntakeMotor(double speed) {
 		leftIntakeMotor.set(capSpeed(speed));
@@ -80,7 +106,6 @@ public class Actuators {
 	// set speed of right intake motor
 	public static void setRightIntakeMotor(double speed) {
 		rightIntakeMotor.set(capSpeed(speed));
-
 	}
 
 	// set speed of left carriage motor
@@ -93,4 +118,18 @@ public class Actuators {
 		rightCarriageMotor.set(capSpeed(speed));
 	}
 
+	// set left arm first pneumatic position
+	public static void setLeftArmFirstPneumatic(DoubleSolenoid.Value value) {
+		leftArmFirstPneumatic.set(value);
+	}
+
+	// set left arm second pneumatic position
+	public static void setLeftArmSecondPneumatic(DoubleSolenoid.Value value) {
+		leftArmSecondPneumatic.set(value);
+	}
+
+	// set right arm pneumatic position
+	public static void setRightArmPneumatic(DoubleSolenoid.Value value) {
+		rightArmPneumatic.set(value);
+	}
 }

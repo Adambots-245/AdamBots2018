@@ -24,4 +24,38 @@ public class Intake {
 		Actuators.setLeftCarriageMotor(speed);
 		Actuators.setRightCarriageMotor(speed);
 	}
+
+	// toggle left pneumatic arm between 3 states
+	// TODO: Check behavior of pressing button before teleop
+	public static void toggleLeftArm(int buttonPresses) {
+		int position = buttonPresses % 3;
+		switch (position) {
+		case 0:
+			Actuators.setLeftArmFirstPneumatic(Constants.PNEUMATIC_REVERSE);
+			Actuators.setLeftArmSecondPneumatic(Constants.PNEUMATIC_REVERSE);
+			break;
+		case 1:
+			Actuators.setLeftArmFirstPneumatic(Constants.PNEUMATIC_FORWARD);
+			Actuators.setLeftArmSecondPneumatic(Constants.PNEUMATIC_REVERSE);
+			break;
+		case 2:
+			Actuators.setLeftArmFirstPneumatic(Constants.PNEUMATIC_FORWARD);
+			Actuators.setLeftArmSecondPneumatic(Constants.PNEUMATIC_FORWARD);
+			break;
+		}
+	}
+
+	// toggle right pneumatic arm
+	public static void toggleRightArm(int buttonPresses) {
+		int position = buttonPresses % 2;
+		switch (position) {
+		case 0:
+			Actuators.setRightArmPneumatic(Constants.PNEUMATIC_FORWARD);
+			break;
+		case 1:
+			Actuators.setRightArmPneumatic(Constants.PNEUMATIC_REVERSE);
+			break;
+		}
+	}
+
 }

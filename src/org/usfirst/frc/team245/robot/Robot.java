@@ -87,11 +87,13 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Gamepad.update();
-		
+
 		Drive.mecDrive(Gamepad.primary.getLeftX(), Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
 
-//		Intake.setIntakeWheelsSpeed(Gamepad.secondary.getTriggers());
-//		Intake.toggleCarriageWheels(Gamepad.secondary.getA(), Gamepad.secondary.getB());
+		Intake.setIntakeWheelsSpeed(Gamepad.secondary.getTriggers());
+		Intake.toggleCarriageWheels(Gamepad.secondary.getA(), Gamepad.secondary.getB());
+		Intake.toggleLeftArm(Gamepad.secondary.getLBPresses());
+		Intake.toggleRightArm(Gamepad.secondary.getRBPresses());
 	}
 
 	/**

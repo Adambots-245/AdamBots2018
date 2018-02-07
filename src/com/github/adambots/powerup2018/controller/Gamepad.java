@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class Gamepad {
 	private Joystick joy;
 	private Presses press;
-	
+
 	//// CONSTANTS -------------------------------------------------------------
 	/**
 	 * Primary Driver Controller Port Number.
@@ -71,11 +71,11 @@ public class Gamepad {
 	 * XBOX 360 Right Vertical Axis (Up=1, Down=-1)
 	 */
 	private static final int AXIS_RIGHT_Y = 5;
-	
+
 	// Control Instances
 	public static Gamepad primary;
 	public static Gamepad secondary;
-	
+
 	// Constructor
 	/**
 	 * Creates new Joystick instance and Presses instance on the correct driver
@@ -99,7 +99,7 @@ public class Gamepad {
 		primary = new Gamepad(PRIMARY_DRIVER);
 		secondary = new Gamepad(SECONDARY_DRIVER);
 	}
-	
+
 	// updates the number of presses for all the buttons of a given instance
 	private void updatePress() {
 		try {
@@ -108,8 +108,8 @@ public class Gamepad {
 			System.out.println("Failed to update presses");
 		}
 	}
-	
-	// updates both isntances
+
+	// updates both instances
 	public static void update() {
 		Gamepad.primary.updatePress();
 		Gamepad.secondary.updatePress();
@@ -136,7 +136,6 @@ public class Gamepad {
 	public double getRightX() {
 		return deaden(joy.getRawAxis(AXIS_RIGHT_X));
 	}
-
 
 	public double getRightY() {
 		return deaden(-joy.getRawAxis(AXIS_RIGHT_Y));
@@ -175,6 +174,10 @@ public class Gamepad {
 	}
 
 	// get number of times toggle buttons have been pressed
+	// to add something to the press HashMap, just create a public boolean
+	// getSomething()
+	// method in this class, and it will automatically be added with the key
+	// "Something"
 
 	public int getLBPresses() {
 		return press.getPresses("LB");
