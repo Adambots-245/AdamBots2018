@@ -92,8 +92,8 @@ public class Robot extends IterativeRobot {
 
 		Intake.setIntakeWheelsSpeed(Gamepad.secondary.getTriggers());
 		Intake.toggleCarriageWheels(Gamepad.secondary.getA(), Gamepad.secondary.getB());
-		Intake.toggleLeftArm(Gamepad.secondary.getLBPresses());
-		Intake.toggleRightArm(Gamepad.secondary.getRBPresses());
+		Intake.armsPosition(Gamepad.secondary.getX(), Gamepad.secondary.getY(), Gamepad.secondary.getB());
+		Intake.setCarriageLiftSpeed(Gamepad.secondary.getLeftY());
 	}
 
 	/**

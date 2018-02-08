@@ -3,7 +3,14 @@ package com.github.adambots.powerup2018.intake;
 import org.usfirst.frc.team245.robot.Actuators;
 import org.usfirst.frc.team245.robot.Constants;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 public class Intake {
+
+	// initial conditions
+	public static void init() {
+
+	}
 
 	// set the speed of the intake wheels
 	public static void setIntakeWheelsSpeed(double speed) {
@@ -11,7 +18,49 @@ public class Intake {
 		Actuators.setRightIntakeMotor(speed);
 	}
 
-	// set the speed of the carriage wheels
+	// set both first arm pneumatics
+	private static void setArmsFirstPneumatic(DoubleSolenoid.Value value) {
+		Actuators.setLeftArmFirstPneumatic(value);
+		Actuators.setRightArmFirstPneumatic(value);
+	}
+
+	// set both second arm pneumatics
+	private static void setArmsSecondPneumatic(DoubleSolenoid.Value value) {
+		Actuators.setLeftArmSecondPneumatic(value);
+		Actuators.setRightArmSecondPneumatic(value);
+	}
+
+	// set arm pneumatic position to position from Constants class
+	public static void setArmsPosition(int constantPosition) {
+		switch (constantPosition) {
+		case 1:
+			Intake.setArmsFirstPneumatic(Constants.PNEUMATIC_REVERSE);
+			Intake.setArmsSecondPneumatic(Constants.PNEUMATIC_REVERSE);
+			break;
+		case 2:
+			Intake.setArmsFirstPneumatic(Constants.PNEUMATIC_FORWARD);
+			Intake.setArmsSecondPneumatic(Constants.PNEUMATIC_REVERSE);
+			break;
+		case 3:
+			Intake.setArmsFirstPneumatic(Constants.PNEUMATIC_FORWARD);
+			Intake.setArmsSecondPneumatic(Constants.PNEUMATIC_FORWARD);
+			break;
+		}
+	}
+
+	// toggle left pneumatic arm between 3 states
+	// TODO: Check behavior of pressing button before teleop
+	public static void armsPosition(boolean inButton, boolean midButton, boolean outButton) {
+		if (inButton) {
+			Intake.setArmsPosition(Constants.ARMS_IN);
+		} else if (midButton) {
+			Intake.setArmsPosition(Constants.ARMS_MID);
+		} else if (outButton) {
+			Intake.setArmsPosition(Constants.ARMS_OUT);
+		}
+	}
+
+	// toggle the carriage wheels
 	public static void toggleCarriageWheels(boolean intakeButton, boolean outtakeButton) {
 		double speed;
 		if (intakeButton) {
@@ -25,37 +74,9 @@ public class Intake {
 		Actuators.setRightCarriageMotor(speed);
 	}
 
-	// toggle left pneumatic arm between 3 states
-	// TODO: Check behavior of pressing button before teleop
-	public static void toggleLeftArm(int buttonPresses) {
-		int position = buttonPresses % 3;
-		switch (position) {
-		case 0:
-			Actuators.setLeftArmFirstPneumatic(Constants.PNEUMATIC_REVERSE);
-			Actuators.setLeftArmSecondPneumatic(Constants.PNEUMATIC_REVERSE);
-			break;
-		case 1:
-			Actuators.setLeftArmFirstPneumatic(Constants.PNEUMATIC_FORWARD);
-			Actuators.setLeftArmSecondPneumatic(Constants.PNEUMATIC_REVERSE);
-			break;
-		case 2:
-			Actuators.setLeftArmFirstPneumatic(Constants.PNEUMATIC_FORWARD);
-			Actuators.setLeftArmSecondPneumatic(Constants.PNEUMATIC_FORWARD);
-			break;
-		}
-	}
-
-	// toggle right pneumatic arm
-	public static void toggleRightArm(int buttonPresses) {
-		int position = buttonPresses % 2;
-		switch (position) {
-		case 0:
-			Actuators.setRightArmPneumatic(Constants.PNEUMATIC_FORWARD);
-			break;
-		case 1:
-			Actuators.setRightArmPneumatic(Constants.PNEUMATIC_REVERSE);
-			break;
-		}
+	// control the carriage lift
+	public static void setCarriageLiftSpeed(double speed) {
+		Actuators.setCarriageLiftMotor(speed);
 	}
 
 }

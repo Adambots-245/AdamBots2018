@@ -1,5 +1,7 @@
 package org.usfirst.frc.team245.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -16,11 +18,13 @@ public class Actuators {
 	private static VictorSP rightIntakeMotor;
 	private static VictorSP leftCarriageMotor;
 	private static VictorSP rightCarriageMotor;
+	private static TalonSRX carriageLiftMotor;
 
 	// pneumatics
 	private static DoubleSolenoid leftArmFirstPneumatic;
 	private static DoubleSolenoid leftArmSecondPneumatic;
-	private static DoubleSolenoid rightArmPneumatic;
+	private static DoubleSolenoid rightArmFirstPneumatic;
+	private static DoubleSolenoid rightArmSecondPneumatic;
 
 	// initializes all actuators
 	public static void init() {
@@ -34,16 +38,19 @@ public class Actuators {
 		rightIntakeMotor = new VictorSP(Constants.RIGHT_INTAKE_MOTOR_PWM_PORT);
 		leftCarriageMotor = new VictorSP(Constants.LEFT_CARRIAGE_MOTOR_PWM_PORT);
 		rightCarriageMotor = new VictorSP(Constants.RIGHT_CARRIAGE_MOTOR_PWM_PORT);
+		carriageLiftMotor = new TalonSRX(Constants.CARRIAGE_LIFT_MOTOR_PORT);
 
 		// initialize pneumatics
 		leftArmFirstPneumatic = new DoubleSolenoid(Constants.LEFT_ARM_FIRST_PNEUMATIC_FORWARD_PORT,
 				Constants.LEFT_ARM_FIRST_PNEUMATIC_REVERSE_PORT);
 		leftArmSecondPneumatic = new DoubleSolenoid(Constants.LEFT_ARM_SECOND_PNEUMATIC_FORWARD_PORT,
 				Constants.LEFT_ARM_SECOND_PNEUMATIC_REVERSE_PORT);
-		rightArmPneumatic = new DoubleSolenoid(Constants.RIGHT_ARM_PNEUMATIC_FORWARD_PORT,
-				Constants.RIGHT_ARM_PNEUMATIC_REVERSE_PORT);
+		rightArmFirstPneumatic = new DoubleSolenoid(Constants.RIGHT_ARM_FIRST_PNEUMATIC_FORWARD_PORT,
+				Constants.RIGHT_ARM_FIRST_PNEUMATIC_REVERSE_PORT);
+		rightArmSecondPneumatic = new DoubleSolenoid(Constants.RIGHT_ARM_SECOND_PNEUMATIC_FORWARD_PORT,
+				Constants.RIGHT_ARM_SECOND_PNEUMATIC_REVERSE_PORT);
 
-		// invert motorcontrollers
+		// invert motor controllers
 		rightFrontMotor.setInverted(Constants.RIGHT_FRONT_DRIVE_MOTOR_INVERTED);
 		rightRearMotor.setInverted(Constants.RIGHT_REAR_DRIVE_MOTOR_INVERTED);
 		leftFrontMotor.setInverted(Constants.LEFT_FRONT_DRIVE_MOTOR_INVERTED);
@@ -86,6 +93,10 @@ public class Actuators {
 		return rightIntakeMotor;
 	}
 
+	public static TalonSRX getCarriageLiftMotor() {
+		return carriageLiftMotor;
+	}
+
 	public static DoubleSolenoid getLeftArmFirstPneumatic() {
 		return leftArmFirstPneumatic;
 	}
@@ -94,8 +105,32 @@ public class Actuators {
 		return leftArmSecondPneumatic;
 	}
 
-	public static DoubleSolenoid getRightArmPneumatic() {
-		return rightArmPneumatic;
+	public static DoubleSolenoid getRightArmFirstPneumatic() {
+		return rightArmFirstPneumatic;
+	}
+
+	public static DoubleSolenoid getRightArmSecondPnuematic() {
+		return rightArmSecondPneumatic;
+	}
+
+	// set speed of right front drive motor
+	public static void setRightFrontMotor(double speed) {
+		rightFrontMotor.set(ControlMode.PercentOutput, capSpeed(speed));
+	}
+
+	// set speed of right rear drive motor
+	public static void setRightRearMotor(double speed) {
+		rightRearMotor.set(ControlMode.PercentOutput, capSpeed(speed));
+	}
+
+	// set speed of left front drive motor
+	public static void setLeftFrontMotor(double speed) {
+		leftFrontMotor.set(ControlMode.PercentOutput, capSpeed(speed));
+	}
+
+	// set speed of left rear drive motor
+	public static void setLeftRearMotor(double speed) {
+		leftRearMotor.set(ControlMode.PercentOutput, capSpeed(speed));
 	}
 
 	// set speed of left intake motor
@@ -118,6 +153,11 @@ public class Actuators {
 		rightCarriageMotor.set(capSpeed(speed));
 	}
 
+	// set speed of carriage lift motor
+	public static void setCarriageLiftMotor(double speed) {
+		carriageLiftMotor.set(ControlMode.PercentOutput, capSpeed(speed));
+	}
+
 	// set left arm first pneumatic position
 	public static void setLeftArmFirstPneumatic(DoubleSolenoid.Value value) {
 		leftArmFirstPneumatic.set(value);
@@ -128,8 +168,13 @@ public class Actuators {
 		leftArmSecondPneumatic.set(value);
 	}
 
-	// set right arm pneumatic position
-	public static void setRightArmPneumatic(DoubleSolenoid.Value value) {
-		rightArmPneumatic.set(value);
+	// set right arm first pneumatic position
+	public static void setRightArmFirstPneumatic(DoubleSolenoid.Value value) {
+		rightArmFirstPneumatic.set(value);
+	}
+
+	// set right arm second pneumatic position
+	public static void setRightArmSecondPneumatic(DoubleSolenoid.Value value) {
+		rightArmSecondPneumatic.set(value);
 	}
 }
