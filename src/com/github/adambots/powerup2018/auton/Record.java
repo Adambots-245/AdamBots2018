@@ -41,6 +41,7 @@ public class Record {
 		boolean secondaryA = Gamepad.secondary.getA();
 		boolean secondaryB = Gamepad.secondary.getB();
 		
+		
 		long timeStamp = System.nanoTime() - startTime;
 		double [] myDoubleArray = {leftPrimaryY,leftPrimaryX,rightPrimaryX,leftSecondaryY, boolToDouble(secondaryA), boolToDouble(secondaryB), (double)timeStamp};
 		indexArray[index] = myDoubleArray;
