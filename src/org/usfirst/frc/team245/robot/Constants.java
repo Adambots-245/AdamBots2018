@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Constants {
 
+	//need photoeye port
+	public static final int PHOTOEYE_PORT = 0;
+	
 	// CAN port map
 	// TODO: Put in actual CAN map
 	public static final int LEFT_FRONT_DRIVE_MOTOR_PORT = 0;
@@ -60,5 +63,6 @@ public class Constants {
 	public static final int CARRIAGE_LIFT_REVERSE_LIMIT = 1000;
 	public static final boolean CARRIAGE_LIFT_FORWARD_LIMIT_ENABLED = true;
 	public static final boolean CARRIAGE_LIFT_REVERSE_LIMIT_ENABLED = true;
-	public static final boolean CARRIGE_LIFT_MOTOR_PHASE = false;
+	public static final boolean CARRIGE_LIFT_MOTOR_PHASE = false;	
 }
+
