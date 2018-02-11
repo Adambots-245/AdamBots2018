@@ -25,5 +25,26 @@ public class Drive {
 		robotDrive.driveCartesian(Actuators.sgnPow(rightSpeed, 2), Actuators.sgnPow(forwardSpeed, 2),
 				Actuators.sgnPow(zRotation, 2), gyroAngle);
 	}
-
+	
+	public static void autonDrive(double rightSpeed,double forwardSpeed, double zRotation, double AValue, double BValue, double elevatorValue){
+		
+		//*note* Cartesian was a possibility for auton but the teleop drive method is not cartesian, please resolve
+		mecDrive(rightSpeed, forwardSpeed, zRotation);
+		Actuators.getCarriageLiftMotors().set(elevatorValue);
+		
+		//Intake and out take respectively
+		if(AValue != 0){
+		Actuators.getLeftIntakeMotor().set(- AValue);
+		Actuators.getRightIntakeMator().set(AValue);
+		}
+		else{
+			
+		}
+		if(BValue != 0){
+			Actuators.getLeftIntakeMotor().set(BValue);
+			Actuators.getRightIntakeMator().set(- BValue);
+	}
+		else{
+			}
+		}
 }
