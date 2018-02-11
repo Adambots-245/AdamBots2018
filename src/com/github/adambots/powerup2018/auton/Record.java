@@ -1,10 +1,11 @@
 package com.github.adambots.powerup2018.auton;
 
+import org.usfirst.frc.team245.robot.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
-import com.github.adambots.powerup2018.controller.Gamepad;
+//import com.github.adambots.powerup2018.controller.Gamepad;
 
 public class Record {
 	private static long startTime = System.nanoTime();
@@ -43,7 +44,7 @@ public class Record {
 		
 		
 		long timeStamp = System.nanoTime() - startTime;
-		double [] myDoubleArray = {leftPrimaryY,leftPrimaryX,rightPrimaryX,leftSecondaryY, boolToDouble(secondaryA), boolToDouble(secondaryB), (double)timeStamp};
+		double [] myDoubleArray = {leftPrimaryY, leftPrimaryX, rightPrimaryX, leftSecondaryY, boolToDouble(secondaryA), boolToDouble(secondaryB), (double)timeStamp};
 		indexArray[index] = myDoubleArray;
 		index++;
 		}
@@ -69,9 +70,9 @@ public class Record {
 				writing = true;
 				}
 				
-				// old code has an else statement here, should it be added?
+				// old code has an else statement here
 			}catch (IOException e){
-				
+				System.out.println(e.getMessage());
 			}
 			
 			}
