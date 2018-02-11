@@ -81,7 +81,16 @@ public class Constants {
 	public static final boolean CARRIAGE_LIFT_REVERSE_LIMIT_ENABLED = false;
 	public static final double CARRIAGE_LIFT_POSITION_INCREMENT = 512;
 	public static final boolean CARRIGE_LIFT_MOTOR_PHASE = false;	
-
+	
+			//GhostCode Constants
+	public static final int TIME_INDEX = 7; 
+	public static final int FORWARD = 1;
+	public static final int Z_ROTATION = 3;
+	public static final int RIGHT_SPEED = 2;
+	public static final int ELEVATOR_VALUE = 4;
+	public static final int A_VALUE = 5;
+	public static final int B_VALUE = 6;
+	
 	// PID values
 	public static final int CARRIAGE_LIFT_PID_PROFILE = 0;
 	public static final int CARRIAGE_LIFT_TIMEOUT = 0;
