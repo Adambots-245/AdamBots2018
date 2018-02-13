@@ -56,9 +56,9 @@ public class Record {
 		}
 		System.out.println("Starting to write");
 			try{
-			PrintWriter writer = new PrintWriter("/Documents/ghostMode.txt", "UTF-8");
+			PrintWriter writer = new PrintWriter("/Documents/ghostMode.txt", "UTF-8"); ///TODO: make sure to change to Roborio when time comes
 				if (ghostRecording == true && indexArray.length >= 749){
-					for(index = 0; index <+749; index++){
+					for(index = 0; index <= 749; index++){
 					writer.print(index);
 						for(int i = 0; i <7; i++){
 							writer.print(" ");

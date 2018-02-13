@@ -110,7 +110,7 @@ public class Actuators {
 	public static WPI_TalonSRX getLeftRearMotor() {
 		return leftRearMotor;
 	}
-
+	
 	public static VictorSP getLeftIntakeMotor() {
 		return leftIntakeMotor;
 	}
