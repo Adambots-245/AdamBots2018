@@ -16,12 +16,14 @@ public class Drive {
 
 	// driving with Mecanum (input squared for smoother control)
 	public static void mecDrive(double rightSpeed, double forwardSpeed, double zRotation) {
-		robotDrive.driveCartesian(Actuators.sgnPow(rightSpeed, 2), Actuators.sgnPow(forwardSpeed, 2), Actuators.sgnPow(zRotation, 2));
+		robotDrive.driveCartesian(Actuators.sgnPow(rightSpeed, 2), Actuators.sgnPow(forwardSpeed, 2),
+				Actuators.sgnPow(zRotation, 2));
 	}
 
 	// driving with field-centric Mecanum (input squared for smoother control)
 	public static void mecDrive(double rightSpeed, double forwardSpeed, double zRotation, double gyroAngle) {
-		robotDrive.driveCartesian(Actuators.sgnPow(rightSpeed, 2), Actuators.sgnPow(forwardSpeed, 2), Actuators.sgnPow(zRotation, 2), gyroAngle);
+		robotDrive.driveCartesian(Actuators.sgnPow(rightSpeed, 2), Actuators.sgnPow(forwardSpeed, 2),
+				Actuators.sgnPow(zRotation, 2), gyroAngle);
 	}
 
 }

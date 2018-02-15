@@ -62,6 +62,12 @@ public class Actuators {
 		leftCarriageMotor.setInverted(Constants.LEFT_CARRIAGE_MOTOR_INVERTED);
 		rightCarriageMotor.setInverted(Constants.RIGHT_CARRIAGE_MOTOR_INVERTED);
 
+		// set talon neutral modes
+		rightFrontMotor.setNeutralMode(Constants.RIGHT_FRONT_DRIVE_MOTOR_NEUTRAL);
+		rightRearMotor.setNeutralMode(Constants.RIGHT_REAR_DRIVE_MOTOR_NEUTRAL);
+		leftFrontMotor.setNeutralMode(Constants.LEFT_FRONT_DRIVE_MOTOR_NEUTRAL);
+		leftRearMotor.setNeutralMode(Constants.LEFT_REAR_DRIVE_MOTOR_NEUTRAL);
+
 	}
 
 	// cap motor speed
@@ -70,7 +76,7 @@ public class Actuators {
 		speed = Math.max(Constants.MIN_MOTOR_SPEED, speed);
 		return speed;
 	}
-	
+
 	// raise value to power but keep sign
 	public static double sgnPow(double x, double pow) {
 		return Math.signum(x) * Math.pow(Math.abs(x), pow);
@@ -103,7 +109,7 @@ public class Actuators {
 	public static TalonSRX getCarriageLiftMotor() {
 		return carriageLiftMotor;
 	}
-	
+
 	public static int getCarriageLiftMotorPosition() {
 		return carriageLiftMotor.getSelectedSensorPosition(Constants.CARRIAGE_LIFT_ENCODER_SENSOR);
 	}
