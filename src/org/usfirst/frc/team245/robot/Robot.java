@@ -13,12 +13,17 @@ import com.github.adambots.powerup2018.dash.Dash;
 import com.github.adambots.powerup2018.drive.Drive;
 import com.github.adambots.powerup2018.intake.Intake;
 
+import autonModes.leftScale;
+import autonModes.leftSwitch;
+import autonModes.rightScale;
+import autonModes.rightSwitch;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * The VM is configured to automatically run this class, and to call the
+ * The VM is configured to automatically run this class, and to call thek
  * functions corresponding to each mode, as described in the IterativeRobot
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the build.properties file in the
@@ -29,7 +34,9 @@ public class Robot extends IterativeRobot {
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
-
+	
+	Command autonomousCommand;
+	SendableChooser<Object> autoChooser;
 	/**
 	 * This function is run when the robot is first started up and should be used
 	 * for any initialization code.
@@ -40,6 +47,16 @@ public class Robot extends IterativeRobot {
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
+		
+		
+		autoChooser = new SendableChooser<Object>();
+		
+		autoChooser.addObject("leftScale", new leftScale());
+		autoChooser.addObject("leftScale", new rightScale());
+		autoChooser.addObject("leftScale", new leftSwitch());
+		autoChooser.addObject("leftScale", new rightSwitch());
+		
+		SmartDashboard.putData("Autonomous Paths", autoChooser);
 		
 		Actuators.init();
 		Gamepad.init();
@@ -67,8 +84,15 @@ public class Robot extends IterativeRobot {
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
 		System.out.println("Auto selected: " + m_autoSelected);
+	
+		autonomousCommand = (Command) autoChooser.getSelected();
+		
+		if(autonomousCommand != null){
+			System.out.println(autonomousCommand);
+			autonomousCommand.start();
+		}
 	}
-
+	
 	/**
 	 * This function is called periodically during autonomous.
 	 */

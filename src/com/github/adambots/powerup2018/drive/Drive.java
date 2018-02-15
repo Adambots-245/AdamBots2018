@@ -30,19 +30,19 @@ public class Drive {
 		
 		//*note* Cartesian was a possibility for auton but the teleop drive method is not cartesian, please resolve
 		mecDrive(rightSpeed, forwardSpeed, zRotation);
-		Actuators.getCarriageLiftMotors().set(elevatorValue);
+		Actuators.setCarriageLiftMotor(elevatorValue);
 		
 		//Intake and out take respectively
 		if(AValue != 0){
-		Actuators.getLeftIntakeMotor().set(- AValue);
-		Actuators.getRightIntakeMator().set(AValue);
+		Actuators.setLeftCarriageMotor(- AValue);
+		Actuators.setRightCarriageMotor(AValue);
 		}
 		else{
 			
 		}
 		if(BValue != 0){
-			Actuators.getLeftIntakeMotor().set(BValue);
-			Actuators.getRightIntakeMator().set(- BValue);
+			Actuators.setLeftCarriageMotor(BValue);
+			Actuators.setRightCarriageMotor(- BValue);
 	}
 		else{
 			}
