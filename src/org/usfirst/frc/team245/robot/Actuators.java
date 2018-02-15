@@ -1,6 +1,7 @@
 package org.usfirst.frc.team245.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -39,6 +40,7 @@ public class Actuators {
 		leftCarriageMotor = new VictorSP(Constants.LEFT_CARRIAGE_MOTOR_PWM_PORT);
 		rightCarriageMotor = new VictorSP(Constants.RIGHT_CARRIAGE_MOTOR_PWM_PORT);
 		carriageLiftMotor = new TalonSRX(Constants.CARRIAGE_LIFT_MOTOR_PORT);
+		carriageLiftMotor.setNeutralMode(NeutralMode.Brake);
 
 		// initialize pneumatics
 		leftArmFirstPneumatic = new DoubleSolenoid(Constants.LEFT_ARM_FIRST_PNEUMATIC_FORWARD_PORT,
@@ -67,6 +69,11 @@ public class Actuators {
 		speed = Math.min(Constants.MAX_MOTOR_SPEED, speed);
 		speed = Math.max(Constants.MIN_MOTOR_SPEED, speed);
 		return speed;
+	}
+	
+	// raise value to power but keep sign
+	public static double sgnPow(double x, double pow) {
+		return Math.signum(x) * Math.pow(Math.abs(x), pow);
 	}
 
 	public static WPI_TalonSRX getRightFrontMotor() {
@@ -154,8 +161,8 @@ public class Actuators {
 	}
 
 	// set speed of carriage lift motor
-	public static void setCarriageLiftMotor(double speed) {
-		carriageLiftMotor.set(ControlMode.PercentOutput, capSpeed(speed));
+	public static void setCarriageLiftMotorPosition(double position) {
+		carriageLiftMotor.set(ControlMode.Position, position);
 	}
 
 	// set left arm first pneumatic position

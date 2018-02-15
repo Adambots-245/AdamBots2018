@@ -8,6 +8,7 @@
 package org.usfirst.frc.team245.robot;
 
 import com.github.adambots.powerup2018.controller.Gamepad;
+import com.github.adambots.powerup2018.dash.Dash;
 import com.github.adambots.powerup2018.drive.Drive;
 import com.github.adambots.powerup2018.intake.Intake;
 
@@ -42,7 +43,10 @@ public class Robot extends IterativeRobot {
 		Gamepad.init();
 		Actuators.init();
 		Sensors.init();
-		Drive.init();
+		Intake.init();
+		Dash.init();
+
+//		Drive.init();
 	}
 
 	/**
@@ -87,13 +91,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Gamepad.update();
+		 Drive.mecDrive(Gamepad.primary.getLeftX(), Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
 
-		Drive.mecDrive(Gamepad.primary.getLeftX(), Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
-
-		Intake.setIntakeWheelsSpeed(Gamepad.secondary.getTriggers());
-		Intake.toggleCarriageWheels(Gamepad.secondary.getA(), Gamepad.secondary.getB());
-		Intake.armsPosition(Gamepad.secondary.getX(), Gamepad.secondary.getY(), Gamepad.secondary.getB());
-		Intake.setCarriageLiftSpeed(Gamepad.secondary.getLeftY());
+		 Intake.setIntakeWheelsSpeed(Gamepad.secondary.getTriggers());
+		 Intake.toggleCarriageWheels(Gamepad.secondary.getA(), Gamepad.secondary.getB());
+		 Intake.armsPosition(Gamepad.secondary.getX(), Gamepad.secondary.getY(), Gamepad.secondary.getB());
+		 Intake.setCarriageLiftPosition(Gamepad.secondary.getLeftY());
 	}
 
 	/**
