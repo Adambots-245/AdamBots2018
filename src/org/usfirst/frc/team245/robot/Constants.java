@@ -10,7 +10,7 @@ public class Constants {
 	public static final int RIGHT_FRONT_DRIVE_MOTOR_PORT = 2;
 	public static final int LEFT_REAR_DRIVE_MOTOR_PORT = 1;
 	public static final int RIGHT_REAR_DRIVE_MOTOR_PORT = 3;
-	public static final int CARRIAGE_LIFT_MOTOR_PORT = 4;
+	public static final int CARRIAGE_LIFT_MOTOR_PORT = 1;
 	// PWM port map
 	// TODO: Put in actual PWM map
 	public static final int LEFT_INTAKE_MOTOR_PWM_PORT = 1;
@@ -54,11 +54,22 @@ public class Constants {
 	public static final int ARMS_MID = 1;
 	public static final int ARMS_OUT = 2;
 
-	// quadrature encoder
+	// carriage lift
+	// TODO: Find actual limits, increment, deadzone, phase, and PID for carriage
 	public static final com.ctre.phoenix.motorcontrol.FeedbackDevice QUAD_ENCODER = com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder;
-	public static final int CARRIAGE_LIFT_FORWARD_LIMIT = -1000;
-	public static final int CARRIAGE_LIFT_REVERSE_LIMIT = 1000;
-	public static final boolean CARRIAGE_LIFT_FORWARD_LIMIT_ENABLED = true;
-	public static final boolean CARRIAGE_LIFT_REVERSE_LIMIT_ENABLED = true;
+	public static final int CARRIAGE_LIFT_START_POSITION = 0;
+	public static final int CARRIAGE_LIFT_FORWARD_LIMIT = 1024;
+	public static final int CARRIAGE_LIFT_REVERSE_LIMIT = -1024;
+	public static final boolean CARRIAGE_LIFT_FORWARD_LIMIT_ENABLED = false;
+	public static final boolean CARRIAGE_LIFT_REVERSE_LIMIT_ENABLED = false;
+	public static final double CARRIAGE_LIFT_POSITION_INCREMENT = 1;
+	public static final double CARRIAGE_LIFT_DEADZONE = 0.15;
 	public static final boolean CARRIGE_LIFT_MOTOR_PHASE = false;
+
+	// PID values
+	public static final int CARRIAGE_LIFT_PID_PROFILE = 0;
+	public static final int CARRIAGE_LIFT_TIMEOUT = 0;
+	public static final double CARRIAGE_LIFT_P = 0.01;
+	public static final double CARRIAGE_LIFT_I = 0;
+	public static final double CARRIAGE_LIFT_D = 0;
 }

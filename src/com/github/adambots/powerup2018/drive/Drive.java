@@ -14,18 +14,14 @@ public class Drive {
 				Actuators.getRightFrontMotor(), Actuators.getRightRearMotor());
 	}
 
-	private static double sgnSquare(double x) {
-		return Math.signum(x) * Math.pow(x, 2);
-	}
-
 	// driving with Mecanum (input squared for smoother control)
 	public static void mecDrive(double rightSpeed, double forwardSpeed, double zRotation) {
-		robotDrive.driveCartesian(sgnSquare(rightSpeed), sgnSquare(forwardSpeed), sgnSquare(zRotation));
+		robotDrive.driveCartesian(Actuators.sgnPow(rightSpeed, 2), Actuators.sgnPow(forwardSpeed, 2), Actuators.sgnPow(zRotation, 2));
 	}
 
 	// driving with field-centric Mecanum (input squared for smoother control)
 	public static void mecDrive(double rightSpeed, double forwardSpeed, double zRotation, double gyroAngle) {
-		robotDrive.driveCartesian(sgnSquare(rightSpeed), sgnSquare(forwardSpeed), sgnSquare(zRotation), gyroAngle);
+		robotDrive.driveCartesian(Actuators.sgnPow(rightSpeed, 2), Actuators.sgnPow(forwardSpeed, 2), Actuators.sgnPow(zRotation, 2), gyroAngle);
 	}
 
 }
