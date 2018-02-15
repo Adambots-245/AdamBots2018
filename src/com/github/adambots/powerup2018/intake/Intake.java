@@ -3,8 +3,6 @@ package com.github.adambots.powerup2018.intake;
 import org.usfirst.frc.team245.robot.Actuators;
 import org.usfirst.frc.team245.robot.Constants;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Intake {
@@ -25,31 +23,31 @@ public class Intake {
 	}
 
 	// set both first arm pneumatics
-	private static void setArmsFirstPneumatic(DoubleSolenoid.Value value) {
-		Actuators.setLeftArmFirstPneumatic(value);
-		Actuators.setRightArmFirstPneumatic(value);
+	private static void setArmsOpenPneumatic(DoubleSolenoid.Value value) {
+		Actuators.setLeftArmOpenPneumatic(value);
+		Actuators.setRightArmOpenPneumatic(value);
 	}
 
 	// set both second arm pneumatics
-	private static void setArmsSecondPneumatic(DoubleSolenoid.Value value) {
-		Actuators.setLeftArmSecondPneumatic(value);
-		Actuators.setRightArmSecondPneumatic(value);
+	private static void setArmsMidPneumatic(DoubleSolenoid.Value value) {
+		Actuators.setLeftArmMidPneumatic(value);
+		Actuators.setRightArmMidPneumatic(value);
 	}
 
 	// set arm pneumatic position to position from Constants class
 	public static void setArmsPosition(int constantPosition) {
 		switch (constantPosition) {
 		case 1:
-			Intake.setArmsFirstPneumatic(Constants.PNEUMATIC_REVERSE);
-			Intake.setArmsSecondPneumatic(Constants.PNEUMATIC_REVERSE);
+			Intake.setArmsOpenPneumatic(Constants.PNEUMATIC_REVERSE);
+			Intake.setArmsMidPneumatic(Constants.PNEUMATIC_REVERSE);
 			break;
 		case 2:
-			Intake.setArmsFirstPneumatic(Constants.PNEUMATIC_FORWARD);
-			Intake.setArmsSecondPneumatic(Constants.PNEUMATIC_REVERSE);
+			Intake.setArmsOpenPneumatic(Constants.PNEUMATIC_FORWARD);
+			Intake.setArmsMidPneumatic(Constants.PNEUMATIC_REVERSE);
 			break;
 		case 3:
-			Intake.setArmsFirstPneumatic(Constants.PNEUMATIC_FORWARD);
-			Intake.setArmsSecondPneumatic(Constants.PNEUMATIC_FORWARD);
+			Intake.setArmsOpenPneumatic(Constants.PNEUMATIC_FORWARD);
+			Intake.setArmsMidPneumatic(Constants.PNEUMATIC_FORWARD);
 			break;
 		}
 	}

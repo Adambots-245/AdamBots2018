@@ -22,10 +22,10 @@ public class Actuators {
 	private static TalonSRX carriageLiftMotor;
 
 	// pneumatics
-	private static DoubleSolenoid leftArmFirstPneumatic;
-	private static DoubleSolenoid leftArmSecondPneumatic;
-	private static DoubleSolenoid rightArmFirstPneumatic;
-	private static DoubleSolenoid rightArmSecondPneumatic;
+	private static DoubleSolenoid leftArmOpenPneumatic;
+	private static DoubleSolenoid leftArmMidPneumatic;
+	private static DoubleSolenoid rightArmOpenPneumatic;
+	private static DoubleSolenoid rightArmMidPneumatic;
 
 	// initializes all actuators
 	public static void init() {
@@ -43,14 +43,14 @@ public class Actuators {
 		carriageLiftMotor.setNeutralMode(NeutralMode.Brake);
 
 		// initialize pneumatics
-		leftArmFirstPneumatic = new DoubleSolenoid(Constants.LEFT_ARM_FIRST_PNEUMATIC_FORWARD_PORT,
-				Constants.LEFT_ARM_FIRST_PNEUMATIC_REVERSE_PORT);
-		leftArmSecondPneumatic = new DoubleSolenoid(Constants.LEFT_ARM_SECOND_PNEUMATIC_FORWARD_PORT,
-				Constants.LEFT_ARM_SECOND_PNEUMATIC_REVERSE_PORT);
-		rightArmFirstPneumatic = new DoubleSolenoid(Constants.RIGHT_ARM_FIRST_PNEUMATIC_FORWARD_PORT,
-				Constants.RIGHT_ARM_FIRST_PNEUMATIC_REVERSE_PORT);
-		rightArmSecondPneumatic = new DoubleSolenoid(Constants.RIGHT_ARM_SECOND_PNEUMATIC_FORWARD_PORT,
-				Constants.RIGHT_ARM_SECOND_PNEUMATIC_REVERSE_PORT);
+		leftArmOpenPneumatic = new DoubleSolenoid(Constants.LEFT_ARM_OPEN_PNEUMATIC_FORWARD_PORT,
+				Constants.LEFT_ARM_OPEN_PNEUMATIC_REVERSE_PORT);
+		leftArmMidPneumatic = new DoubleSolenoid(Constants.LEFT_ARM_MID_PNEUMATIC_FORWARD_PORT,
+				Constants.LEFT_ARM_MID_PNEUMATIC_REVERSE_PORT);
+		rightArmOpenPneumatic = new DoubleSolenoid(Constants.RIGHT_ARM_OPEN_PNEUMATIC_FORWARD_PORT,
+				Constants.RIGHT_ARM_OPEN_PNEUMATIC_REVERSE_PORT);
+		rightArmMidPneumatic = new DoubleSolenoid(Constants.RIGHT_ARM_MID_PNEUMATIC_FORWARD_PORT,
+				Constants.RIGHT_ARM_MID_PNEUMATIC_REVERSE_PORT);
 
 		// invert motor controllers
 		rightFrontMotor.setInverted(Constants.RIGHT_FRONT_DRIVE_MOTOR_INVERTED);
@@ -108,20 +108,20 @@ public class Actuators {
 		return carriageLiftMotor.getSelectedSensorPosition(Constants.CARRIAGE_LIFT_ENCODER_SENSOR);
 	}
 
-	public static DoubleSolenoid getLeftArmFirstPneumatic() {
-		return leftArmFirstPneumatic;
+	public static DoubleSolenoid getLeftArmOpenPneumatic() {
+		return leftArmOpenPneumatic;
 	}
 
-	public static DoubleSolenoid getLeftArmSecondPneumatic() {
-		return leftArmSecondPneumatic;
+	public static DoubleSolenoid getLeftArmMidPneumatic() {
+		return leftArmMidPneumatic;
 	}
 
-	public static DoubleSolenoid getRightArmFirstPneumatic() {
-		return rightArmFirstPneumatic;
+	public static DoubleSolenoid getRightArmOpenPneumatic() {
+		return rightArmOpenPneumatic;
 	}
 
-	public static DoubleSolenoid getRightArmSecondPnuematic() {
-		return rightArmSecondPneumatic;
+	public static DoubleSolenoid getRightArmMidPnuematic() {
+		return rightArmMidPneumatic;
 	}
 
 	// set speed of right front drive motor
@@ -170,22 +170,22 @@ public class Actuators {
 	}
 
 	// set left arm first pneumatic position
-	public static void setLeftArmFirstPneumatic(DoubleSolenoid.Value value) {
-		leftArmFirstPneumatic.set(value);
+	public static void setLeftArmOpenPneumatic(DoubleSolenoid.Value value) {
+		leftArmOpenPneumatic.set(value);
 	}
 
 	// set left arm second pneumatic position
-	public static void setLeftArmSecondPneumatic(DoubleSolenoid.Value value) {
-		leftArmSecondPneumatic.set(value);
+	public static void setLeftArmMidPneumatic(DoubleSolenoid.Value value) {
+		leftArmMidPneumatic.set(value);
 	}
 
 	// set right arm first pneumatic position
-	public static void setRightArmFirstPneumatic(DoubleSolenoid.Value value) {
-		rightArmFirstPneumatic.set(value);
+	public static void setRightArmOpenPneumatic(DoubleSolenoid.Value value) {
+		rightArmOpenPneumatic.set(value);
 	}
 
 	// set right arm second pneumatic position
-	public static void setRightArmSecondPneumatic(DoubleSolenoid.Value value) {
-		rightArmSecondPneumatic.set(value);
+	public static void setRightArmMidPneumatic(DoubleSolenoid.Value value) {
+		rightArmMidPneumatic.set(value);
 	}
 }

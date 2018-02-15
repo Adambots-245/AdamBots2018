@@ -46,7 +46,7 @@ public class Robot extends IterativeRobot {
 		Intake.init();
 		Dash.init();
 
-//		Drive.init();
+		// Drive.init();
 	}
 
 	/**
@@ -91,12 +91,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Gamepad.update();
-		 Drive.mecDrive(Gamepad.primary.getLeftX(), Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
+		Drive.mecDrive(Gamepad.primary.getLeftX(), Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
 
-		 Intake.setIntakeWheelsSpeed(Gamepad.secondary.getTriggers());
-		 Intake.toggleCarriageWheels(Gamepad.secondary.getA(), Gamepad.secondary.getB());
-		 Intake.armsPosition(Gamepad.secondary.getX(), Gamepad.secondary.getY(), Gamepad.secondary.getB());
-		 Intake.setCarriageLiftPosition(Gamepad.secondary.getLeftY());
+		Intake.setIntakeWheelsSpeed(Gamepad.secondary.getTriggers());
+		Intake.toggleCarriageWheels(Gamepad.secondary.getA(), Gamepad.secondary.getB());
+		Intake.armsPosition(Gamepad.secondary.getX(), Gamepad.secondary.getY(), Gamepad.secondary.getB());
+		Intake.setCarriageLiftPosition(Gamepad.secondary.getLeftY());
 	}
 
 	/**
