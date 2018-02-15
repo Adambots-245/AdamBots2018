@@ -8,14 +8,14 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Intake {
-	
+
 	private static int carriageLiftPositionGoal;
-	
+
 	// initial conditions
 	public static void init() {
-		carriageLiftPositionGoal = Constants.CARRIAGE_LIFT_START_POSITION;
-		Actuators.getCarriageLiftMotor().setSelectedSensorPosition(0, 0, 0);
-		Intake.setCarriageLiftPID(Constants.CARRIAGE_LIFT_P, Constants.CARRIAGE_LIFT_I, Constants.CARRIAGE_LIFT_D, Constants.CARRIAGE_LIFT_TIMEOUT);
+		carriageLiftPositionGoal = Actuators.getCarriageLiftMotorPosition();
+		Intake.setCarriageLiftPID(Constants.CARRIAGE_LIFT_P, Constants.CARRIAGE_LIFT_I, Constants.CARRIAGE_LIFT_D,
+				Constants.CARRIAGE_LIFT_TIMEOUT);
 	}
 
 	// set the speed of the intake wheels
@@ -24,7 +24,7 @@ public class Intake {
 		Actuators.setRightIntakeMotor(speed);
 	}
 
-//	// set both first arm pneumatics
+	// set both first arm pneumatics
 	private static void setArmsFirstPneumatic(DoubleSolenoid.Value value) {
 		Actuators.setLeftArmFirstPneumatic(value);
 		Actuators.setRightArmFirstPneumatic(value);
@@ -86,14 +86,11 @@ public class Intake {
 		Actuators.getCarriageLiftMotor().config_kI(0, i, timeout);
 		Actuators.getCarriageLiftMotor().config_kD(0, d, timeout);
 	}
-	
+
 	// control the carriage lift
 	public static void setCarriageLiftPosition(double controlSpeed) {
-		if(Math.abs(controlSpeed) > Constants.CARRIAGE_LIFT_DEADZONE) {
-			carriageLiftPositionGoal += Actuators.sgnPow(controlSpeed, 2) * Constants.CARRIAGE_LIFT_POSITION_INCREMENT;
-		}
+		carriageLiftPositionGoal += Actuators.sgnPow(controlSpeed, 2) * Constants.CARRIAGE_LIFT_POSITION_INCREMENT;
 		Actuators.setCarriageLiftMotorPosition(carriageLiftPositionGoal);
 	}
-	
 
 }

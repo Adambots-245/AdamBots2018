@@ -103,6 +103,10 @@ public class Actuators {
 	public static TalonSRX getCarriageLiftMotor() {
 		return carriageLiftMotor;
 	}
+	
+	public static int getCarriageLiftMotorPosition() {
+		return carriageLiftMotor.getSelectedSensorPosition(Constants.CARRIAGE_LIFT_ENCODER_SENSOR);
+	}
 
 	public static DoubleSolenoid getLeftArmFirstPneumatic() {
 		return leftArmFirstPneumatic;

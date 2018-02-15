@@ -57,15 +57,16 @@ public class Constants {
 	// carriage lift
 	// TODO: Find actual limits, increment, deadzone, phase, and PID for carriage
 	public static final com.ctre.phoenix.motorcontrol.FeedbackDevice QUAD_ENCODER = com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder;
+	public static final int CARRIAGE_LIFT_ENCODER_SENSOR = 0;
 	public static final int CARRIAGE_LIFT_START_POSITION = 0;
 	public static final int CARRIAGE_LIFT_FORWARD_LIMIT = 1024;
 	public static final int CARRIAGE_LIFT_REVERSE_LIMIT = -1024;
 	public static final boolean CARRIAGE_LIFT_FORWARD_LIMIT_ENABLED = false;
 	public static final boolean CARRIAGE_LIFT_REVERSE_LIMIT_ENABLED = false;
 	public static final double CARRIAGE_LIFT_POSITION_INCREMENT = 1;
-	public static final double CARRIAGE_LIFT_DEADZONE = 0.15;
 	public static final boolean CARRIGE_LIFT_MOTOR_PHASE = false;
-
+	
+	
 	// PID values
 	public static final int CARRIAGE_LIFT_PID_PROFILE = 0;
 	public static final int CARRIAGE_LIFT_TIMEOUT = 0;
