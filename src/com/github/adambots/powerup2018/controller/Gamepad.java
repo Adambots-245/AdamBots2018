@@ -86,8 +86,8 @@ public class Gamepad {
 	 */
 	private Gamepad(int port) {
 		joy = new Joystick(port);
-		press = new Presses(this);
 		try {
+			press = new Presses(this);
 			press.init();
 		} catch (ClassNotFoundException e) {
 			System.out.println("Failed to initialize presses.");
