@@ -23,6 +23,7 @@ public class leftScale {
 		}
 		
 		protected void execute(){
+			crossBaseline.execute();
 			if(leftScaleValue){
 				Play.playRecording();			
 			}

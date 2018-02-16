@@ -91,6 +91,8 @@ public class Constants {
 	public static final int A_VALUE = 5;
 	public static final int B_VALUE = 6;
 	
+		public static final double AUTON_CROSS_BASELINE_TIME = 2.0;
+
 	// PID values
 	public static final int CARRIAGE_LIFT_PID_PROFILE = 0;
 	public static final int CARRIAGE_LIFT_TIMEOUT = 0;

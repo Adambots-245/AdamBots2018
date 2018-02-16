@@ -1,6 +1,9 @@
 package com.github.adambots.powerup2018.auton;
 
 import org.usfirst.frc.team245.robot.*;
+
+import com.github.adambots.powerup2018.controller.Gamepad;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;

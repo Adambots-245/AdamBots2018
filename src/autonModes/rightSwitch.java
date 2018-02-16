@@ -23,6 +23,7 @@ public class rightSwitch {
 		}
 		
 		protected void execute(){
+			crossBaseline.execute();
 			if(rightSwitchValue){
 				Play.playRecording();			
 			}

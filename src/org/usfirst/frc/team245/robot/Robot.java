@@ -55,8 +55,11 @@ public class Robot extends IterativeRobot {
 		autoChooser.addObject("leftScale", new rightScale());
 		autoChooser.addObject("leftScale", new leftSwitch());
 		autoChooser.addObject("leftScale", new rightSwitch());
-		
+		autoChooser.addDefault("Cross Baseline", new crossBaseline());
+			
 		SmartDashboard.putData("Autonomous Paths", autoChooser);
+		
+		
 		
 		Actuators.init();
 		Gamepad.init();
