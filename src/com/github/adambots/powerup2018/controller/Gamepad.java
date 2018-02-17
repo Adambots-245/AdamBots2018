@@ -1,14 +1,13 @@
 package com.github.adambots.powerup2018.controller;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.GenericHID.*;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class Gamepad {
-	private Joystick joy;
+	private static Joystick joy;
 	private Presses press;
-	private static Timer gameTimer = new Timer();
-
+	
+	static long matchStartTime;
 
 	//// CONSTANTS -------------------------------------------------------------
 	/**
@@ -76,9 +75,9 @@ public class Gamepad {
 	 */
 	private static final int AXIS_RIGHT_Y = 5;
 	
-	// rumble constants
+	// Rumble constants
 	public static final float RUMBLE_MAX = (float) 1.0;
-	public static final float RUMBLE_STOP = (float) 1.0;
+	public static final float RUMBLE_STOP = (float) 0.0;
 
 	// Control Instances
 	public static Gamepad primary;
@@ -104,10 +103,10 @@ public class Gamepad {
 
 	// initializes the primary and secondary drivers
 	public static void init() {
+		matchStartTime = System.currentTimeMillis();
+		
 		primary = new Gamepad(PRIMARY_DRIVER);
 		secondary = new Gamepad(SECONDARY_DRIVER);
-		
-		gameTimer.start();
 	}
 
 	// updates the number of presses for all the buttons of a given instance
@@ -123,6 +122,8 @@ public class Gamepad {
 	public static void update() {
 		Gamepad.primary.updatePress();
 		Gamepad.secondary.updatePress();
+		
+		checkTime();
 	}
 
 	// deadzoning
@@ -221,22 +222,26 @@ public class Gamepad {
 		return press.getPresses("Back");
 	}
 	
-	public void rumble(float l, float r, int time, int repeats) {
+	//
+	// Rumble
+	//
+	
+	public static void rumble(float l, float r, int time, int repeats) {
 		
-		long startTime;
+		long rumbleStartTime;
 		
 		for(int i = 0; i < repeats; i++)	{
 			
 			// Rumble for (time) seconds
-			startTime = System.currentTimeMillis();
-			while (System.currentTimeMillis() - startTime <= time) {
+			rumbleStartTime = System.currentTimeMillis();
+			while (System.currentTimeMillis() - rumbleStartTime <= time) {
 				joy.setRumble(RumbleType.kLeftRumble, l);
 	    			joy.setRumble(RumbleType.kRightRumble, r);
 			}
 			
 			// Turn off for (time) seconds
-			startTime = System.currentTimeMillis();
-			while (System.currentTimeMillis() - startTime <= time) {
+			rumbleStartTime = System.currentTimeMillis();
+			while (System.currentTimeMillis() - rumbleStartTime <= time) {
 				joy.setRumble(RumbleType.kLeftRumble, RUMBLE_STOP);
 				joy.setRumble(RumbleType.kRightRumble, RUMBLE_STOP);
 			}
@@ -245,10 +250,14 @@ public class Gamepad {
 		
 	}
 	
-	public void checkTime() {
-		if (gameTimer.get() == 20 || gameTimer.get() == 45) {
-			rumble(RUMBLE_MAX, RUMBLE_MAX, 25, 2);
+	public static void checkTime() {
+		
+		long matchTime = System.currentTimeMillis() - matchStartTime;
+		
+		if (matchTime == 105000 || matchTime == 130000) {
+			rumble(RUMBLE_MAX, RUMBLE_MAX, 50, 2);
 		}
+		
 	}
 
 }
