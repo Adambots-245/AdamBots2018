@@ -40,7 +40,14 @@ public class Actuators {
 		leftCarriageMotor = new VictorSP(Constants.LEFT_CARRIAGE_MOTOR_PWM_PORT);
 		rightCarriageMotor = new VictorSP(Constants.RIGHT_CARRIAGE_MOTOR_PWM_PORT);
 		carriageLiftMotor = new TalonSRX(Constants.CARRIAGE_LIFT_MOTOR_PORT);
-		carriageLiftMotor.setNeutralMode(NeutralMode.Brake);
+		
+		//Brake Motors
+		carriageLiftMotor.setNeutralMode(NeutralMode.Brake);		
+		//Coast Motors
+		rightFrontMotor.setNeutralMode(NeutralMode.Coast);
+		rightRearMotor.setNeutralMode(NeutralMode.Coast);
+		leftFrontMotor.setNeutralMode(NeutralMode.Coast);
+		leftRearMotor.setNeutralMode(NeutralMode.Coast);
 
 		// initialize pneumatics
 		leftArmOpenPneumatic = new DoubleSolenoid(Constants.LEFT_ARM_OPEN_PNEUMATIC_FORWARD_PORT,
