@@ -1,5 +1,6 @@
 package org.usfirst.frc.team245.robot;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 public class Sensors {
@@ -8,6 +9,7 @@ public class Sensors {
 	private static ADXRS450_Gyro gyro;
 	private static DigitalInput photoEye;
 	private static DigitalInput limitSwitch;
+	private static PowerDistributionPanel pdp;
 	// precondition: run Actuators.init()
 	// initializes all sensors
 	public static void init() {
@@ -31,6 +33,7 @@ public class Sensors {
 		limitSwitch = new DigitalInput(Constants.CARRIAGE_LIFT_LIMIT_SWITCH_PORT);
 		//initialize photoEye
 		photoEye = new DigitalInput(Constants.PHOTOEYE_PORT);
+		pdp = new PowerDistributionPanel();
 	}
 	public static boolean getLimitSwitchValue() {
 		return !limitSwitch.get();
@@ -47,5 +50,11 @@ public class Sensors {
 	public static void resetCarriageEncoder() {
 		Actuators.getCarriageLiftMotor().getSensorCollection().setQuadraturePosition(0, 0);
 	}
-
-}
+	public static PowerDistributionPanel getPowerDistributionPanel() {
+		return pdp;
+	}
+	public static double getAngle() {
+		return gyro.getAngle();
+	}
+		}
+			

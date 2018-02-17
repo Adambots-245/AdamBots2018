@@ -1,11 +1,13 @@
 package com.github.adambots.powerup2018.smartDash;
 
 import org.usfirst.frc.team245.robot.Actuators;
+import org.usfirst.frc.team245.robot.Sensors;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Sendable;
 public class SmartDash {
 	
 	public static void init() {
@@ -17,13 +19,32 @@ public class SmartDash {
 		return Math.abs(speed) > 0;
 	}
 	
+	public static double Voltage() {
+		PowerDistributionPanel pdp = Sensors.getPowerDistributionPanel();
+		double voltage = pdp.getVoltage();
+		return voltage;
+	}
+
+	
+	public static void Currents() {
+		PowerDistributionPanel pdp = Sensors.getPowerDistributionPanel();
+		int numChannels = 16;
+		for (int i=0; i<numChannels ; i++) {
+			double current = pdp.getCurrent(i);
+			SmartDashboard.putNumber("Current " + i , current);
+		}
+	}
+	
 	public static void updateDash() {
-		// SmartDashboard.putNumber("batteryPercentage", PowerDistributionPanel.getVoltage());
+		Currents();
+		SmartDashboard.putNumber("Voltage", Voltage());
 		SmartDashboard.putBoolean("rightFrontMotor" , isMotorRunning(Actuators.getRightFrontMotor()));
 		SmartDashboard.putBoolean("rightRearMotor" , isMotorRunning(Actuators.getRightRearMotor()));
 		SmartDashboard.putBoolean("leftFrontMotor" , isMotorRunning(Actuators.getLeftFrontMotor()));
 		SmartDashboard.putBoolean("leftRearMotor" , isMotorRunning(Actuators.getLeftRearMotor()));
-		// SmartDashboard.putData("camera", CameraServer.getInstance());
-		// SmartDashboard.putData("carriageEncoder" , Encoder.getRaw());
-	}
+		SmartDashboard.putData("camera", (Sendable) CameraServer.getInstance());
+		SmartDashboard.putBoolean("photoEyeStatis" , Sensors.getPhotoEyeValue());
+		SmartDashboard.putNumber("encoderVaule" , Actuators.getCarriageLiftMotorPosition());
+		SmartDashboard.putNumber("gyroAngle" , Sensors.getAngle());
+				}
 }
