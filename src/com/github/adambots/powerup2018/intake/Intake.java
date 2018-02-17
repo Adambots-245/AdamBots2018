@@ -19,21 +19,10 @@ public class Intake {
 
 	// set the speed of the intake wheels
 	public static void setIntakeWheelsSpeed(double speed) {
-		boolean isPhotoEyeBlocked = Sensors.getPhotoEyeValue();
 		//speed > 0 is left trigger
-		if (speed < 0 && !isPhotoEyeBlocked) {
-			Actuators.setLeftIntakeMotor(speed);
-			Actuators.setRightIntakeMotor(speed);
-		}
-		else if (speed > 0 && isPhotoEyeBlocked) {
-			Actuators.setLeftIntakeMotor(speed);
-			Actuators.setRightIntakeMotor(speed);
-		}
-		else {
-			Actuators.setLeftIntakeMotor(Constants.STOP_MOTOR_SPEED);
-			Actuators.setRightIntakeMotor(Constants.STOP_MOTOR_SPEED);
-		}
-		
+		//speed > 0 is left trigger
+		Actuators.setLeftIntakeMotor(speed);
+		Actuators.setRightIntakeMotor(-speed);
 	}
 
 	// set both first arm pneumatics
@@ -80,20 +69,22 @@ public class Intake {
 
 	// toggle the carriage wheels
 	public static void toggleCarriageWheels(boolean intakeButton, boolean outtakeButton) {
+		boolean isPhotoEyeBlocked = Sensors.getPhotoEyeValue();
 		double speed;
-		if (intakeButton) {
+		if (intakeButton && !isPhotoEyeBlocked) {
 			speed = Constants.CARRIAGE_MOTOR_INTAKE_SPEED;
-		} else if (outtakeButton) {
+		}
+		else if (outtakeButton) {
 			speed = Constants.CARRIAGE_MOTOR_OUTTAKE_SPEED;
-		} else {
+		}
+		else {
 			speed = Constants.STOP_MOTOR_SPEED;
 		}
 		Actuators.setLeftCarriageMotor(speed);
-		Actuators.setRightCarriageMotor(speed);
+		Actuators.setRightCarriageMotor(-speed);
 		System.out.println("Speed = [" + speed + "]");
 		
 	}
-
 	// set carriage lift PID
 	public static void setCarriageLiftPID(double p, double i, double d, int timeout) {
 		Actuators.getCarriageLiftMotor().config_kP(0, p, timeout);
