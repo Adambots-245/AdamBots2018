@@ -61,6 +61,10 @@ public class Actuators {
 		rightIntakeMotor.setInverted(Constants.RIGHT_INTAKE_MOTOR_INVERTED);
 		leftCarriageMotor.setInverted(Constants.LEFT_CARRIAGE_MOTOR_INVERTED);
 		rightCarriageMotor.setInverted(Constants.RIGHT_CARRIAGE_MOTOR_INVERTED);
+		
+		carriageLiftMotor.enableCurrentLimit(false);
+		//carriageLiftMotor.configPeakCurrentLimit(5, 100);
+		//carriageLiftMotor.configContinuousCurrentLimit(5, 100);
 
 	}
 
@@ -165,27 +169,31 @@ public class Actuators {
 	}
 
 	// set speed of carriage lift motor
-	public static void setCarriageLiftMotorPosition(double position) {
-		carriageLiftMotor.set(ControlMode.Position, position);
+	public static void setCarriageLiftMotorSpeed(double speed) {
+		carriageLiftMotor.set(ControlMode.PercentOutput , capSpeed(speed));
 	}
 
 	// set left arm first pneumatic position
 	public static void setLeftArmOpenPneumatic(DoubleSolenoid.Value value) {
 		leftArmOpenPneumatic.set(value);
+		System.out.println("LEFT ARM OPEN PNEUMATIC: " + value);
 	}
 
 	// set left arm second pneumatic position
 	public static void setLeftArmMidPneumatic(DoubleSolenoid.Value value) {
 		leftArmMidPneumatic.set(value);
+		System.out.println("LEFT ARM MID PNEUMATIC: " + value);
 	}
 
 	// set right arm first pneumatic position
 	public static void setRightArmOpenPneumatic(DoubleSolenoid.Value value) {
 		rightArmOpenPneumatic.set(value);
+		System.out.println("RIGHT ARM OPEN PNEUMATIC: " + value);
 	}
 
 	// set right arm second pneumatic position
 	public static void setRightArmMidPneumatic(DoubleSolenoid.Value value) {
 		rightArmMidPneumatic.set(value);
+		System.out.println("RIGHT ARM MID PNEUMATIC: " + value);
 	}
 }

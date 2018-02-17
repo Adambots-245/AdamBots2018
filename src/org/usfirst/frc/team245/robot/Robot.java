@@ -45,8 +45,7 @@ public class Robot extends IterativeRobot {
 		Sensors.init();
 		Intake.init();
 		Dash.init();
-
-		// Drive.init();
+		Drive.init();
 	}
 
 	/**
@@ -96,7 +95,9 @@ public class Robot extends IterativeRobot {
 		Intake.setIntakeWheelsSpeed(Gamepad.secondary.getTriggers());
 		Intake.toggleCarriageWheels(Gamepad.secondary.getA(), Gamepad.secondary.getB());
 		Intake.armsPosition(Gamepad.secondary.getX(), Gamepad.secondary.getY(), Gamepad.secondary.getB());
-		Intake.setCarriageLiftPosition(Gamepad.secondary.getLeftY());
+		Intake.setCarriageLiftSpeed(Gamepad.secondary.getLeftY());
+		
+		System.out.println("lift position = [" + Actuators.getCarriageLiftMotorPosition() + "]");
 	}
 
 	/**
