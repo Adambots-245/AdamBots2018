@@ -30,8 +30,8 @@ public class Intake {
 			Actuators.setRightIntakeMotor(speed);
 		}
 		else {
-			Actuators.setLeftIntakeMotor(0);
-			Actuators.setRightIntakeMotor(0);
+			Actuators.setLeftIntakeMotor(Constants.STOP_MOTOR_SPEED);
+			Actuators.setRightIntakeMotor(Constants.STOP_MOTOR_SPEED);
 		}
 		
 	}
@@ -90,6 +90,8 @@ public class Intake {
 		}
 		Actuators.setLeftCarriageMotor(speed);
 		Actuators.setRightCarriageMotor(speed);
+		System.out.println("Speed = [" + speed + "]");
+		
 	}
 
 	// set carriage lift PID

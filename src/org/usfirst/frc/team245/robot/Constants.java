@@ -13,16 +13,16 @@ public class Constants {
 	// TODO: Put in actual CAN map
 	public static final int LEFT_FRONT_DRIVE_MOTOR_PORT = 0;
 	public static final int RIGHT_FRONT_DRIVE_MOTOR_PORT = 1;
-	public static final int LEFT_REAR_DRIVE_MOTOR_PORT = 2;
+	public static final int LEFT_REAR_DRIVE_MOTOR_PORT = 4; //used to be 2
 	public static final int RIGHT_REAR_DRIVE_MOTOR_PORT = 3;
-	public static final int CARRIAGE_LIFT_MOTOR_PORT = 4;
+	public static final int CARRIAGE_LIFT_MOTOR_PORT = 2; //used to be 4
 
 	// PWM port map
 	// TODO: Put in actual PWM map
-	public static final int LEFT_INTAKE_MOTOR_PWM_PORT = 6;
-	public static final int RIGHT_INTAKE_MOTOR_PWM_PORT = 9;
-	public static final int LEFT_CARRIAGE_MOTOR_PWM_PORT = 7;
-	public static final int RIGHT_CARRIAGE_MOTOR_PWM_PORT = 8;
+	public static final int LEFT_INTAKE_MOTOR_PWM_PORT = 0; //used to be 6
+	public static final int RIGHT_INTAKE_MOTOR_PWM_PORT = 2; //used to be 9
+	public static final int LEFT_CARRIAGE_MOTOR_PWM_PORT = 1; //used to be 7
+	public static final int RIGHT_CARRIAGE_MOTOR_PWM_PORT = 3; //used to be 8
 
 	// motor controller inversion
 	public static final boolean LEFT_FRONT_DRIVE_MOTOR_INVERTED = true;
