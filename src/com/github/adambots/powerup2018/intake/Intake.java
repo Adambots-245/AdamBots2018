@@ -23,7 +23,6 @@ public class Intake {
 		//speed > 0 is left trigger
 		Actuators.setLeftIntakeMotor(speed);
 		Actuators.setRightIntakeMotor(-speed);
-		System.out.println("intake speed = [" + speed + "]");
 	}
 
 	// set both first arm pneumatics
@@ -82,9 +81,8 @@ public class Intake {
 			speed = Constants.STOP_MOTOR_SPEED;
 		}
 		Actuators.setLeftCarriageMotor(speed);
-		Actuators.setRightCarriageMotor(speed);
+		Actuators.setRightCarriageMotor(-speed);
 		System.out.println("carriage wheel speed = [" + speed + "]");
-		
 	}
 	// set carriage lift PID
 	public static void setCarriageLiftPID(double p, double i, double d, int timeout) {
