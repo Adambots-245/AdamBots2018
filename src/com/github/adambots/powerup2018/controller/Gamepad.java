@@ -1,13 +1,14 @@
 package com.github.adambots.powerup2018.controller;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.GenericHID.*;
 import edu.wpi.first.wpilibj.Joystick;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Gamepad {
 	private Joystick joy;
 	private Presses press;
+	private static Timer gameTimer = new Timer();
+
 
 	//// CONSTANTS -------------------------------------------------------------
 	/**
@@ -77,6 +78,7 @@ public class Gamepad {
 	
 	// rumble constants
 	public static final float RUMBLE_MAX = (float) 1.0;
+	public static final float RUMBLE_STOP = (float) 1.0;
 
 	// Control Instances
 	public static Gamepad primary;
@@ -104,6 +106,8 @@ public class Gamepad {
 	public static void init() {
 		primary = new Gamepad(PRIMARY_DRIVER);
 		secondary = new Gamepad(SECONDARY_DRIVER);
+		
+		gameTimer.start();
 	}
 
 	// updates the number of presses for all the buttons of a given instance
@@ -219,21 +223,32 @@ public class Gamepad {
 	
 	public void rumble(float l, float r, int time, int repeats) {
 		
-		Timer rumbleTimer = new Timer();
+		long startTime;
 		
 		for(int i = 0; i < repeats; i++)	{
 			
-			TimerTask rumble = new TimerTask() {
-		        public void run() {
-		        	joy.setRumble(RumbleType.kLeftRumble, l);
-		    		joy.setRumble(RumbleType.kRightRumble, r);
-		        }
-		    };
+			// Rumble for (time) seconds
+			startTime = System.currentTimeMillis();
+			while (System.currentTimeMillis() - startTime <= time) {
+				joy.setRumble(RumbleType.kLeftRumble, l);
+	    			joy.setRumble(RumbleType.kRightRumble, r);
+			}
 			
-			rumbleTimer.schedule(rumble, time);
+			// Turn off for (time) seconds
+			startTime = System.currentTimeMillis();
+			while (System.currentTimeMillis() - startTime <= time) {
+				joy.setRumble(RumbleType.kLeftRumble, RUMBLE_STOP);
+				joy.setRumble(RumbleType.kRightRumble, RUMBLE_STOP);
+			}
 			
 		}
 		
+	}
+	
+	public void checkTime() {
+		if (gameTimer.get() == 20 || gameTimer.get() == 45) {
+			rumble(RUMBLE_MAX, RUMBLE_MAX, 25, 2);
+		}
 	}
 
 }
