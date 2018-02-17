@@ -40,6 +40,7 @@ public class Drive {
 		else{
 			
 		}
+		//out take
 		if(BValue != 0){
 			Actuators.setLeftCarriageMotor(BValue);
 			Actuators.setRightCarriageMotor(- BValue);

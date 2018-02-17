@@ -82,7 +82,7 @@ public class Constants {
 	public static final double CARRIAGE_LIFT_POSITION_INCREMENT = 512;
 	public static final boolean CARRIGE_LIFT_MOTOR_PHASE = false;	
 	
-			//GhostCode Constants
+	//GhostCode Constants
 	public static final int TIME_INDEX = 7; 
 	public static final int FORWARD = 1;
 	public static final int Z_ROTATION = 3;
