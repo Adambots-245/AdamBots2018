@@ -4,18 +4,13 @@ package com.github.adambots.powerup2018.auton;
 import org.usfirst.frc.team245.robot.*;
 
 import com.github.adambots.powerup2018.controller.Gamepad;
-
 =======
 >>>>>>> 2fc9dc8bc34cb3289b5d4dd0d06639354232846e
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
-<<<<<<< HEAD
-//import com.github.adambots.powerup2018.controller.Gamepad;
-=======
 import com.github.adambots.powerup2018.controller.Gamepad;
->>>>>>> 2fc9dc8bc34cb3289b5d4dd0d06639354232846e
 
 public class Record {
 	private static long startTime = System.nanoTime();
@@ -54,12 +49,10 @@ public class Record {
 		
 <<<<<<< HEAD
 		
-		long timeStamp = System.nanoTime() - startTime;
-		double [] myDoubleArray = {leftPrimaryY, leftPrimaryX, rightPrimaryX, leftSecondaryY, boolToDouble(secondaryA), boolToDouble(secondaryB), (double)timeStamp};
 =======
+>>>>>>> 2fc9dc8bc34cb3289b5d4dd0d06639354232846e
 		long timeStamp = System.nanoTime() - startTime;
 		double [] myDoubleArray = {leftPrimaryY,leftPrimaryX,rightPrimaryX,leftSecondaryY, boolToDouble(secondaryA), boolToDouble(secondaryB), (double)timeStamp};
->>>>>>> 2fc9dc8bc34cb3289b5d4dd0d06639354232846e
 		indexArray[index] = myDoubleArray;
 		index++;
 		}
@@ -71,13 +64,11 @@ public class Record {
 		}
 		System.out.println("Starting to write");
 			try{
-<<<<<<< HEAD
-			PrintWriter writer = new PrintWriter("/Documents/ghostMode.txt", "UTF-8"); ///TODO: make sure to change to Roborio when time comes
-				if (ghostRecording == true && indexArray.length >= 749){
-					for(index = 0; index <= 749; index++){
-=======
 			PrintWriter writer = new PrintWriter("/Documents/ghostMode.txt", "UTF-8");
 				if (ghostRecording == true && indexArray.length >= 749){
+<<<<<<< HEAD
+					for(index = 0; index <= 749; index++){
+=======
 					for(index = 0; index <+749; index++){
 >>>>>>> 2fc9dc8bc34cb3289b5d4dd0d06639354232846e
 					writer.print(index);
@@ -91,13 +82,11 @@ public class Record {
 				writing = true;
 				}
 				
-<<<<<<< HEAD
-				// old code has an else statement here
-			}catch (IOException e){
-				System.out.println(e.getMessage());
-=======
 				// old code has an else statement here, should it be added?
 			}catch (IOException e){
+<<<<<<< HEAD
+				System.out.println(e.getMessage());
+=======
 				
 >>>>>>> 2fc9dc8bc34cb3289b5d4dd0d06639354232846e
 			}
