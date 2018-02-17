@@ -1,6 +1,9 @@
 package com.github.adambots.powerup2018.controller;
 
+import edu.wpi.first.wpilibj.GenericHID.*;
 import edu.wpi.first.wpilibj.Joystick;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Gamepad {
 	private Joystick joy;
@@ -71,6 +74,9 @@ public class Gamepad {
 	 * XBOX 360 Right Vertical Axis (Up=1, Down=-1)
 	 */
 	private static final int AXIS_RIGHT_Y = 5;
+	
+	// rumble constants
+	public static final float RUMBLE_MAX = (float) 1.0;
 
 	// Control Instances
 	public static Gamepad primary;
@@ -209,6 +215,25 @@ public class Gamepad {
 
 	public int getBackPresses() {
 		return press.getPresses("Back");
+	}
+	
+	public void rumble(float l, float r, int time, int repeats) {
+		
+		Timer rumbleTimer = new Timer();
+		
+		for(int i = 0; i < repeats; i++)	{
+			
+			TimerTask rumble = new TimerTask() {
+		        public void run() {
+		        	joy.setRumble(RumbleType.kLeftRumble, l);
+		    		joy.setRumble(RumbleType.kRightRumble, r);
+		        }
+		    };
+			
+			rumbleTimer.schedule(rumble, time);
+			
+		}
+		
 	}
 
 }
