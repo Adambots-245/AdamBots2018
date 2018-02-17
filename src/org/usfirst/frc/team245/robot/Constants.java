@@ -64,9 +64,9 @@ public class Constants {
 	public static final DoubleSolenoid.Value PNEUMATIC_FORWARD = DoubleSolenoid.Value.kForward;
 	public static final DoubleSolenoid.Value PNEUMATIC_REVERSE = DoubleSolenoid.Value.kReverse;
 	public static final DoubleSolenoid.Value PNEUMATIC_OFF = DoubleSolenoid.Value.kOff;
-	public static final int ARMS_IN = 0;
-	public static final int ARMS_MID = 1;
-	public static final int ARMS_OUT = 2;
+	public static final int ARMS_IN = 1;
+	public static final int ARMS_MID = 2;
+	public static final int ARMS_OUT = 3;
 
 	// carriage lift
 	// TODO: Find actual limits, increment, phase, and PID for carriage
@@ -77,14 +77,14 @@ public class Constants {
 	public static final int CARRIAGE_LIFT_REVERSE_LIMIT = -1024;
 	public static final boolean CARRIAGE_LIFT_FORWARD_LIMIT_ENABLED = false;
 	public static final boolean CARRIAGE_LIFT_REVERSE_LIMIT_ENABLED = false;
-	public static final double CARRIAGE_LIFT_POSITION_INCREMENT = 1;
+	public static final double CARRIAGE_LIFT_POSITION_INCREMENT = 512;
 	public static final boolean CARRIGE_LIFT_MOTOR_PHASE = false;	
 
 	// PID values
 	public static final int CARRIAGE_LIFT_PID_PROFILE = 0;
 	public static final int CARRIAGE_LIFT_TIMEOUT = 0;
-	public static final double CARRIAGE_LIFT_P = 0.01;
-	public static final double CARRIAGE_LIFT_I = 0;
-	public static final double CARRIAGE_LIFT_D = 0;
+	public static final double CARRIAGE_LIFT_P = .1;
+	public static final double CARRIAGE_LIFT_I = .01;
+	public static final double CARRIAGE_LIFT_D = .01;
 }
 
