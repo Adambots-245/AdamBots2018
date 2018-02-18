@@ -40,6 +40,7 @@ public class Actuators {
 		leftCarriageMotor = new VictorSP(Constants.LEFT_CARRIAGE_MOTOR_PWM_PORT);
 		rightCarriageMotor = new VictorSP(Constants.RIGHT_CARRIAGE_MOTOR_PWM_PORT);
 		carriageLiftMotor = new TalonSRX(Constants.CARRIAGE_LIFT_MOTOR_PORT);
+		climbMotor = new TalonSRX(Constants.CLIMB_MOTOR_PORT);	
 		
 		//Brake Motors
 		carriageLiftMotor.setNeutralMode(NeutralMode.Brake);		
@@ -123,6 +124,10 @@ public class Actuators {
 
 	public static int getCarriageLiftMotorPosition() {
 		return carriageLiftMotor.getSelectedSensorPosition(Constants.CARRIAGE_LIFT_ENCODER_SENSOR);
+	}
+	
+	public static TalonSRX getClimbMotor() {
+		return climbMotor;
 	}
 
 	public static DoubleSolenoid getLeftArmOpenPneumatic() {

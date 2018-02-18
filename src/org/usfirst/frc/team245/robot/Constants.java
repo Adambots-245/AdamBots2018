@@ -16,7 +16,8 @@ public class Constants {
 	public static final int LEFT_REAR_DRIVE_MOTOR_PORT = 4; //used to be 2
 	public static final int RIGHT_REAR_DRIVE_MOTOR_PORT = 3;
 	public static final int CARRIAGE_LIFT_MOTOR_PORT = 2; //used to be 4
-
+	public static final int CLIMB_MOTOR_PORT = 5;
+	
 	// PWM port map
 	// TODO: Put in actual PWM map
 	public static final int LEFT_INTAKE_MOTOR_PWM_PORT = 0; //used to be 6
@@ -86,5 +87,12 @@ public class Constants {
 	public static final double CARRIAGE_LIFT_P = .1;
 	public static final double CARRIAGE_LIFT_I = .01;
 	public static final double CARRIAGE_LIFT_D = .01;
+	
+	// climb motor speeds
+	// TODO: set actual values for climbing speeds
+	public static final double CLIMB_SPEED_SLOW = 0.3;
+	public static final double CLIMB_SPEED_FAST = 0.7;
+	public static final double CLIMB_SPEED_STOP = 0;
+	
 }
 

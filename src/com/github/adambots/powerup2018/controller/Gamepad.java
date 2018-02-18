@@ -71,6 +71,15 @@ public class Gamepad {
 	 * XBOX 360 Right Vertical Axis (Up=1, Down=-1)
 	 */
 	private static final int AXIS_RIGHT_Y = 5;
+	/**
+	 * XBOX 360 DPad Horizontal Axis (Left=-1, Right=1)
+	 */
+	private static final int AXIS_DPAD_HORIZONTAL = 6;
+	/**
+	 * XBOX 360 DPad Vertical Axis (Up=-1, Right=1)
+	 */
+	private static final int AXIS_DPAD_VERTICAL = 7;
+	
 
 	// Control Instances
 	public static Gamepad primary;
@@ -171,6 +180,21 @@ public class Gamepad {
 
 	public boolean getBack() {
 		return joy.getRawButton(BUTTON_BACK);
+	}
+	
+	public boolean getDPadLeft() {
+		return joy.getRawAxis(AXIS_DPAD_HORIZONTAL) < -0.5;
+	}
+
+	public boolean getDPadRight() {
+		return joy.getRawAxis(AXIS_DPAD_HORIZONTAL) > 0.5;
+	}
+	public boolean getDPadDown() {
+		return joy.getRawAxis(AXIS_DPAD_VERTICAL) < -0.5;
+	}
+
+	public boolean getDPadUp() {
+		return joy.getRawAxis(AXIS_DPAD_VERTICAL) > 0.5;
 	}
 
 	// get number of times toggle buttons have been pressed

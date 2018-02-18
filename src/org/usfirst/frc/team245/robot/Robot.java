@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team245.robot;
 
+import com.github.adambots.powerup2018.climb.Climb;
 import com.github.adambots.powerup2018.controller.Gamepad;
 import com.github.adambots.powerup2018.dash.Dash;
 import com.github.adambots.powerup2018.drive.Drive;
@@ -98,6 +99,10 @@ public class Robot extends IterativeRobot {
 		Intake.setCarriageLiftSpeed(Gamepad.secondary.getLeftY());
 		
 		System.out.println("lift position = [" + Actuators.getCarriageLiftMotorPosition() + "]");
+		
+		Climb.startClimbing(Gamepad.secondary.getDPadDown());
+		Climb.climbFaster(Gamepad.secondary.getDPadUp());
+		Climb.stopClimbing(Gamepad.secondary.getDPadRight());		
 	}
 
 	/**
