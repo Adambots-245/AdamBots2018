@@ -45,8 +45,8 @@ public class Intake {
 			Intake.setArmsMidPneumatic(Constants.PNEUMATIC_REVERSE);
 			break;
 		case 2:
-			Intake.setArmsOpenPneumatic(Constants.PNEUMATIC_FORWARD);
-			Intake.setArmsMidPneumatic(Constants.PNEUMATIC_REVERSE);
+			Intake.setArmsOpenPneumatic(Constants.PNEUMATIC_REVERSE);
+			Intake.setArmsMidPneumatic(Constants.PNEUMATIC_FORWARD);
 			break;
 		case 3:
 			Intake.setArmsOpenPneumatic(Constants.PNEUMATIC_FORWARD);
