@@ -21,8 +21,8 @@ public class Intake {
 	public static void setIntakeWheelsSpeed(double speed) {
 		//speed > 0 is left trigger
 		//speed > 0 is left trigger
-		Actuators.setLeftIntakeMotor(speed);
-		Actuators.setRightIntakeMotor(-speed);
+		Actuators.setLeftIntakeMotor(-speed);
+		Actuators.setRightIntakeMotor(speed);
 	}
 
 	// set both first arm pneumatics
@@ -68,13 +68,13 @@ public class Intake {
 	}
 
 	// toggle the carriage wheels
-	public static void toggleCarriageWheels(boolean intakeButton, boolean outtakeButton) {
+	public static void toggleCarriageWheels(double carriageWheelsSpeed) {
 		boolean isPhotoEyeBlocked = Sensors.getPhotoEyeValue();
 		double speed;
-		if (intakeButton && isPhotoEyeBlocked) {
+		if (carriageWheelsSpeed < 0 && isPhotoEyeBlocked) {
 			speed = Constants.CARRIAGE_MOTOR_INTAKE_SPEED;
 		}
-		else if (outtakeButton) {
+		else if (carriageWheelsSpeed > 0) {
 			speed = Constants.CARRIAGE_MOTOR_OUTTAKE_SPEED;
 		}
 		else {
