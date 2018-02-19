@@ -91,12 +91,12 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Gamepad.update();
 		Drive.mecDrive(Gamepad.primary.getLeftX(), Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
-
+		Intake.resetEncoderOnLimitSwitch();
 		Intake.setIntakeWheelsSpeed(Gamepad.secondary.getTriggers());
-		Intake.toggleCarriageWheels(Gamepad.secondary.getA(), Gamepad.secondary.getB());
+		Intake.toggleCarriageWheels(Gamepad.secondary.getA(), Gamepad.secondary.getB(), Gamepad.secondary.getBack());
 		Intake.armsPosition(Gamepad.secondary.getX(), Gamepad.secondary.getY(), Gamepad.secondary.getB());
 		Intake.setCarriageLiftSpeed(Gamepad.secondary.getLeftY());
-		
+			
 		System.out.println("lift position = [" + Actuators.getCarriageLiftMotorPosition() + "]");
 	}
 

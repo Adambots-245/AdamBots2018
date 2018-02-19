@@ -7,6 +7,7 @@ public class Sensors {
 	// gyro
 	private static ADXRS450_Gyro gyro;
 	private static DigitalInput photoEye;
+	private static DigitalInput limitSwitch;
 	// precondition: run Actuators.init()
 	// initializes all sensors
 	public static void init() {
@@ -24,9 +25,15 @@ public class Sensors {
 		Actuators.getCarriageLiftMotor().configForwardSoftLimitEnable(Constants.CARRIAGE_LIFT_REVERSE_LIMIT_ENABLED, 0);
 		Actuators.getCarriageLiftMotor().configReverseSoftLimitEnable(Constants.CARRIAGE_LIFT_REVERSE_LIMIT_ENABLED, 0);
 		Actuators.getCarriageLiftMotor().setSensorPhase(Constants.CARRIGE_LIFT_MOTOR_PHASE);
-		
+		//initialize encoder
+		//carriageLiftEncoder = new DigitalSource(Constants.CARRIAGE_LIFT_ENCODER_SENSOR);
+		//initialize limitSwitch
+		limitSwitch = new DigitalInput(Constants.CARRIAGE_LIFT_LIMIT_SWITCH_PORT);
 		//initialize photoEye
 		photoEye = new DigitalInput(Constants.PHOTOEYE_PORT);
+	}
+	public static boolean getLimitSwitchValue() {
+		return limitSwitch.get();
 	}
 	public static DigitalInput getPhotoEye() {
 		return photoEye;
@@ -36,7 +43,9 @@ public class Sensors {
 	}
 	public static int getCarriageLiftPosition() {
 		return Actuators.getCarriageLiftMotor().getSelectedSensorPosition(0);
-
+	}
+	public static void resetCarriageEncoder() {
+		Actuators.getCarriageLiftMotor().getSensorCollection().setQuadraturePosition(0, 0);
 	}
 
 }

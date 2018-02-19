@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public class Constants {
 
 	//need photoeye port
-	public static final int PHOTOEYE_PORT = 0;
+	public static final int PHOTOEYE_PORT = 1;
 	
 	// CAN port map
 	// TODO: Put in actual CAN map
@@ -70,6 +70,7 @@ public class Constants {
 
 	// carriage lift
 	// TODO: Find actual limits, increment, phase, and PID for carriage
+	public static final int CARRIAGE_LIFT_LIMIT_SWITCH_PORT = 0;	
 	public static final com.ctre.phoenix.motorcontrol.FeedbackDevice QUAD_ENCODER = com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder;
 	public static final int CARRIAGE_LIFT_ENCODER_SENSOR = 0;
 	public static final int CARRIAGE_LIFT_START_POSITION = 0;

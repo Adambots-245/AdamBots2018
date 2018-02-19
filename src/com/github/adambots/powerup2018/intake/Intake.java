@@ -4,19 +4,24 @@ import org.usfirst.frc.team245.robot.Actuators;
 import org.usfirst.frc.team245.robot.Constants;
 import org.usfirst.frc.team245.robot.Sensors;
 
+import com.github.adambots.powerup2018.controller.Gamepad;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Intake {
 
-	private static int carriageLiftPositionGoal;
-
 	// initial conditions
 	public static void init() {
-		carriageLiftPositionGoal = Actuators.getCarriageLiftMotorPosition();
-		Intake.setCarriageLiftPID(Constants.CARRIAGE_LIFT_P, Constants.CARRIAGE_LIFT_I, Constants.CARRIAGE_LIFT_D,
-				Constants.CARRIAGE_LIFT_TIMEOUT);
+		//carriageLiftPositionGoal = Actuators.getCarriageLiftMotorPosition();
+		//Intake.setCarriageLiftPID(Constants.CARRIAGE_LIFT_P, Constants.CARRIAGE_LIFT_I, Constants.CARRIAGE_LIFT_D,
+				//Constants.CARRIAGE_LIFT_TIMEOUT);
 	}
-
+	//resets encoder if limit switch is pressed
+	public static void resetEncoderOnLimitSwitch() {
+		if (Sensors.getLimitSwitchValue()) {
+			Sensors.resetCarriageEncoder();
+		}
+	}
 	// set the speed of the intake wheels
 	public static void setIntakeWheelsSpeed(double speed) {
 		//speed > 0 is left trigger
@@ -68,11 +73,14 @@ public class Intake {
 	}
 
 	// toggle the carriage wheels
-	public static void toggleCarriageWheels(boolean intakeButton, boolean outtakeButton) {
-		boolean isPhotoEyeBlocked = Sensors.getPhotoEyeValue();
+	public static void toggleCarriageWheels(boolean intakeButton, boolean outtakeButton, boolean overrideButton) {
+		boolean isPhotoEyeOpen = Sensors.getPhotoEyeValue();
 		double speed;
-		if (intakeButton && isPhotoEyeBlocked) {
+		if (intakeButton && (isPhotoEyeOpen || overrideButton)) {
 			speed = Constants.CARRIAGE_MOTOR_INTAKE_SPEED;
+		}
+		else if (intakeButton && !isPhotoEyeOpen && !overrideButton) {
+			speed = Constants.STOP_MOTOR_SPEED;
 		}
 		else if (outtakeButton) {
 			speed = Constants.CARRIAGE_MOTOR_OUTTAKE_SPEED;
@@ -81,7 +89,7 @@ public class Intake {
 			speed = Constants.STOP_MOTOR_SPEED;
 		}
 		Actuators.setLeftCarriageMotor(speed);
-		Actuators.setRightCarriageMotor(-speed);
+		Actuators.setRightCarriageMotor(speed);
 		System.out.println("carriage wheel speed = [" + speed + "]");
 	}
 	// set carriage lift PID
@@ -93,9 +101,19 @@ public class Intake {
 
 	// control the carriage lift
 	public static void setCarriageLiftSpeed(double speed) {
-		//carriageLiftPositionGoal += Actuators.sgnPow(controlSpeed, 2) * Constants.CARRIAGE_LIFT_POSITION_INCREMENT;
-		Actuators.setCarriageLiftMotorSpeed(speed);
-		//System.out.println("lift position goal = [" + carriageLiftPositionGoal + "]");
+		int carriageLiftPosition = Sensors.getCarriageLiftPosition();
+	//bottom is 0, top is ~67,000
+		boolean isLimitSwitchPressed = Sensors.getLimitSwitchValue();
+		
+		if (isLimitSwitchPressed && speed <= 0) {
+			Actuators.setCarriageLiftMotorSpeed(Constants.STOP_MOTOR_SPEED);
+		}
+		else if (carriageLiftPosition >= 67000 && speed >= 0) {
+			Actuators.setCarriageLiftMotorSpeed(Constants.STOP_MOTOR_SPEED);
+		}
+		else {
+			Actuators.setCarriageLiftMotorSpeed(speed);
+		}
 	}
 
 }
