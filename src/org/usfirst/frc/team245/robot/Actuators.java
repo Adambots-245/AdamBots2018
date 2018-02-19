@@ -20,7 +20,8 @@ public class Actuators {
 	private static VictorSP leftCarriageMotor;
 	private static VictorSP rightCarriageMotor;
 	private static TalonSRX carriageLiftMotor;
-
+	private static TalonSRX climbMotor;
+	
 	// pneumatics
 	private static DoubleSolenoid leftArmOpenPneumatic;
 	private static DoubleSolenoid leftArmMidPneumatic;
@@ -185,12 +186,17 @@ public class Actuators {
 	public static void setRightCarriageMotor(double speed) {
 		rightCarriageMotor.set(capSpeed(speed));
 	}
-
+	
 	// set speed of carriage lift motor
 	public static void setCarriageLiftMotorSpeed(double speed) {
 		carriageLiftMotor.set(ControlMode.PercentOutput , capSpeed(speed));
 	}
 
+	// set speed of climb motor
+	public static void setClimbMotorSpeed(double speed) {
+		climbMotor.set(ControlMode.PercentOutput, capSpeed(speed));
+	}
+		
 	// set left arm first pneumatic position
 	public static void setLeftArmOpenPneumatic(DoubleSolenoid.Value value) {
 		leftArmOpenPneumatic.set(value);
@@ -214,4 +220,5 @@ public class Actuators {
 		rightArmMidPneumatic.set(value);
 		System.out.println("RIGHT ARM MID PNEUMATIC: " + value);
 	}
+	
 }
