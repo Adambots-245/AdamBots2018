@@ -9,7 +9,7 @@ import com.github.adambots.powerup2018.controller.Gamepad;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Intake {
-
+	public static int intendedPosition;
 	// initial conditions
 	public static void init() {
 		//carriageLiftPositionGoal = Actuators.getCarriageLiftMotorPosition();
@@ -71,7 +71,7 @@ public class Intake {
 			Intake.setArmsPosition(Constants.ARMS_OUT);
 		}		
 	}
-
+	
 	// toggle the carriage wheels
 	//TODO: add override button
 	public static void toggleCarriageWheels(double carriageWheelsSpeed) {
@@ -93,6 +93,7 @@ public class Intake {
 		Actuators.setLeftCarriageMotor(speed);
 		Actuators.setRightCarriageMotor(speed);
 		System.out.println("carriage wheel speed = [" + speed + "]");
+		System.out.println("photoeye open? = [" + isPhotoEyeOpen + "]");
 	}
 	// set carriage lift PID
 	public static void setCarriageLiftPID(double p, double i, double d, int timeout) {
@@ -100,16 +101,17 @@ public class Intake {
 		Actuators.getCarriageLiftMotor().config_kI(0, i, timeout);
 		Actuators.getCarriageLiftMotor().config_kD(0, d, timeout);
 	}
-
 	// control the carriage lift
 	public static void setCarriageLiftSpeed(double speed) {
 		int carriageLiftPosition = Sensors.getCarriageLiftPosition();
 	//bottom is 0, top is ~67,000
 		boolean isLimitSwitchPressed = Sensors.getLimitSwitchValue();
+		int intendedPosition;
 		
 		if (isLimitSwitchPressed && speed <= 0) {
 			Actuators.setCarriageLiftMotorSpeed(Constants.STOP_MOTOR_SPEED);
 		}
+		//TODO: Calibrate top encoder value
 		else if (carriageLiftPosition >= 67000 && speed >= 0) {
 			Actuators.setCarriageLiftMotorSpeed(Constants.STOP_MOTOR_SPEED);
 		}
@@ -117,11 +119,25 @@ public class Intake {
 			Actuators.setCarriageLiftMotorSpeed(speed);
 		}
 		
+		//TODO: Calibrate encoder value
 		if (speed < -0.05 && carriageLiftPosition < 15000) {
 			Intake.setArmsPosition(Constants.ARMS_OUT);
 		}
 
-
-	}
-
+		double lastSpeed;
+		lastSpeed = speed;
+		if (speed == 0 && lastSpeed != 0) {
+			intendedPosition = carriageLiftPosition;
+			
+			System.out.println("lastSpeed = [" + lastSpeed + "]");
+			System.out.println("speed = [" + speed + "]");
+			System.out.println("intendedPosition = [" + intendedPosition + "]");
+			
+		}
+		
+		//TODO: FIX!! and calibrate
+		if (carriageLiftPosition + 200 < intendedPosition) {
+			Actuators.setCarriageLiftMotorPosition(intendedPosition);
+		}
+	}	
 }
