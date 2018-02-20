@@ -191,6 +191,10 @@ public class Actuators {
 	public static void setCarriageLiftMotorSpeed(double speed) {
 		carriageLiftMotor.set(ControlMode.PercentOutput , capSpeed(speed));
 	}
+	
+	public static void setClimbMotorSpeed(double speed) {
+		climbMotor.set(ControlMode.PercentOutput, capSpeed(speed));
+	}
 
 	// set speed of climb motor
 	public static void setClimbMotorSpeed(double speed) {

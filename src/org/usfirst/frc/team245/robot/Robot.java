@@ -100,9 +100,8 @@ public class Robot extends IterativeRobot {
 		
 		System.out.println("lift position = [" + Actuators.getCarriageLiftMotorPosition() + "]");
 		
-		Climb.startClimbing(Gamepad.secondary.getDPadDown());
-		Climb.climbFaster(Gamepad.secondary.getDPadUp());
-		Climb.stopClimbing(Gamepad.secondary.getDPadRight());		
+		Climb.startClimbing(Gamepad.secondary.getDPadDown(), Gamepad.secondary.getDPadUp());
+	
 	}
 
 	/**

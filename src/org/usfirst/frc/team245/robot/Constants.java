@@ -90,8 +90,8 @@ public class Constants {
 	
 	// climb motor speeds
 	// TODO: set actual values for climbing speeds
-	public static final double CLIMB_SPEED_SLOW = 0.3;
-	public static final double CLIMB_SPEED_FAST = 0.7;
+	public static final double CLIMB_SPEED_SLOW = 0.5;
+	public static final double CLIMB_SPEED_FAST = 1.0;
 	public static final double CLIMB_SPEED_STOP = 0;
 	
 }

@@ -183,18 +183,18 @@ public class Gamepad {
 	}
 	
 	public boolean getDPadLeft() {
-		return joy.getRawAxis(AXIS_DPAD_HORIZONTAL) < -0.5;
+		return joy.getRawAxis(AXIS_DPAD_HORIZONTAL) < -0.05;
 	}
 
 	public boolean getDPadRight() {
-		return joy.getRawAxis(AXIS_DPAD_HORIZONTAL) > 0.5;
+		return joy.getRawAxis(AXIS_DPAD_HORIZONTAL) > 0.05;
 	}
 	public boolean getDPadDown() {
-		return joy.getRawAxis(AXIS_DPAD_VERTICAL) < -0.5;
+		return joy.getRawAxis(AXIS_DPAD_VERTICAL) < -0.05;
 	}
 
 	public boolean getDPadUp() {
-		return joy.getRawAxis(AXIS_DPAD_VERTICAL) > 0.5;
+		return joy.getRawAxis(AXIS_DPAD_VERTICAL) > 0.05;
 	}
 
 	// get number of times toggle buttons have been pressed
