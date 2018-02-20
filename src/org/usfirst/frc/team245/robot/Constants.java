@@ -93,6 +93,7 @@ public class Constants {
 	public static final double CLIMB_SPEED_SLOW = 0.5;
 	public static final double CLIMB_SPEED_FAST = 1.0;
 	public static final double CLIMB_SPEED_STOP = 0;
+	public static final double CLIMB_SPEED_REVERSE = -0.5;
 	
 }
 

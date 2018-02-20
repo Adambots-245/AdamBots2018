@@ -109,5 +109,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		Climb.reverseClimbing(Gamepad.secondary.getBack(), Gamepad.secondary.getStart());
 	}
 }

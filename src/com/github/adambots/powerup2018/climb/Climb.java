@@ -19,4 +19,14 @@ public class Climb {
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_STOP);
 	}
 	
+	public static void reverseClimbing(boolean climbButton, boolean reverseButton) {
+		if (climbButton) {
+			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_SLOW);
+		} else if (reverseButton) {
+			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_REVERSE);
+		} else {
+			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_STOP);
+		}
+	}
+	
 }
