@@ -33,7 +33,7 @@ public class Sensors {
 		photoEye = new DigitalInput(Constants.PHOTOEYE_PORT);
 	}
 	public static boolean getLimitSwitchValue() {
-		return limitSwitch.get();
+		return !limitSwitch.get();
 	}
 	public static DigitalInput getPhotoEye() {
 		return photoEye;

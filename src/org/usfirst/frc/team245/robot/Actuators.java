@@ -185,6 +185,10 @@ public class Actuators {
 	public static void setCarriageLiftMotorSpeed(double speed) {
 		carriageLiftMotor.set(ControlMode.PercentOutput , capSpeed(speed));
 	}
+	
+	public static void setCarriageLiftMotorPosition(double position){
+		carriageLiftMotor.set(ControlMode.Position, position);
+	}
 
 	// set left arm first pneumatic position
 	public static void setLeftArmOpenPneumatic(DoubleSolenoid.Value value) {
