@@ -11,12 +11,13 @@ public class Climb {
 //	}
 //	
 	public static void startClimbing(boolean climbButton, boolean climbFasterButton) {
-		Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_SLOW);
+		if (climbButton) {
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_SLOW);
 		} else if (climbFasterButton) {
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_FAST);
 		} else {
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_STOP);
+		}
 	}
 	
 	public static void reverseClimbing(boolean climbButton, boolean reverseButton) {

@@ -18,7 +18,7 @@ public class Sensors {
 
 		// initialize encoders
 		// TODO: Figure out what the zeros in these arguments are
-		Actuators.getCarriageLiftMotor().configSelectedFeedbackSensor(Constants.QUAD_ENCODER, 0, 0);
+		//Actuators.getCarriageLiftMotor().configSelectedFeedbackSensor(Constants.QUAD_ENCODER, 0, 0);
 		Actuators.getCarriageLiftMotor().setSelectedSensorPosition(0, 0, 0);
 		Actuators.getCarriageLiftMotor().configForwardSoftLimitThreshold(Constants.CARRIAGE_LIFT_FORWARD_LIMIT, 0);
 		Actuators.getCarriageLiftMotor().configReverseSoftLimitThreshold(Constants.CARRIAGE_LIFT_REVERSE_LIMIT, 0);

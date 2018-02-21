@@ -4,8 +4,6 @@ import org.usfirst.frc.team245.robot.Actuators;
 import org.usfirst.frc.team245.robot.Constants;
 import org.usfirst.frc.team245.robot.Sensors;
 
-import com.github.adambots.powerup2018.controller.Gamepad;
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Intake {
@@ -77,20 +75,17 @@ public class Intake {
 	public static void toggleCarriageWheels(double carriageWheelsSpeed) {
 		boolean isPhotoEyeOpen = Sensors.getPhotoEyeValue();
 		double speed;
-		if (intakeButton && (isPhotoEyeOpen || overrideButton)) {
+		if (carriageWheelsSpeed > 0 && isPhotoEyeOpen) {
 			speed = Constants.CARRIAGE_MOTOR_INTAKE_SPEED;
-		}
-		else if (intakeButton && !isPhotoEyeOpen && !overrideButton) {
+		} else if (carriageWheelsSpeed > 0 && !isPhotoEyeOpen) {
 			speed = Constants.STOP_MOTOR_SPEED;
-		}
+		} else if (carriageWheelsSpeed < 0) {
 			speed = Constants.CARRIAGE_MOTOR_OUTTAKE_SPEED;
-		} /*
-		else if (carriageWheelsSpeed > 0 && isPhotoEyeBlocked){
-			speed = Constants.STOP_MOTOR_SPEED;
-		}*/ else {
+		} else {
 			speed = Constants.STOP_MOTOR_SPEED;
 		}
-		Actuators.setLeftCarriageMotor(speed);
+		
+		Actuators.setLeftCarriageMotor(-speed);
 		Actuators.setRightCarriageMotor(speed);
 		System.out.println("carriage wheel speed = [" + speed + "]");
 		System.out.println("photoeye open? = [" + isPhotoEyeOpen + "]");
@@ -112,7 +107,7 @@ public class Intake {
 			Actuators.setCarriageLiftMotorSpeed(Constants.STOP_MOTOR_SPEED);
 		}
 		//TODO: Calibrate top encoder value
-		else if (carriageLiftPosition >= 67000 && speed >= 0) {
+		else if (carriageLiftPosition >= 64000 && speed >= 0) {
 			Actuators.setCarriageLiftMotorSpeed(Constants.STOP_MOTOR_SPEED);
 		}
 		else {
@@ -136,8 +131,9 @@ public class Intake {
 		}
 		
 		//TODO: FIX!! and calibrate
-		if (carriageLiftPosition + 200 < intendedPosition) {
-			Actuators.setCarriageLiftMotorPosition(intendedPosition);
-		}
+		//if (carriageLiftPosition + 200 < intendedPosition) {
+		//	Actuators.setCarriageLiftMotorPosition(intendedPosition);
+		//}
 	}	
+	
 }
