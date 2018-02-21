@@ -71,13 +71,15 @@ public class Intake {
 	public static void toggleCarriageWheels(double carriageWheelsSpeed) {
 		boolean isPhotoEyeBlocked = Sensors.getPhotoEyeValue();
 		double speed;
-		if (carriageWheelsSpeed < 0 && isPhotoEyeBlocked) {
+		if (carriageWheelsSpeed < 0 /*&& !isPhotoEyeBlocked*/) {
 			speed = Constants.CARRIAGE_MOTOR_INTAKE_SPEED;
 		}
 		else if (carriageWheelsSpeed > 0) {
 			speed = Constants.CARRIAGE_MOTOR_OUTTAKE_SPEED;
-		}
-		else {
+		} /*
+		else if (carriageWheelsSpeed > 0 && isPhotoEyeBlocked){
+			speed = Constants.STOP_MOTOR_SPEED;
+		}*/ else {
 			speed = Constants.STOP_MOTOR_SPEED;
 		}
 		Actuators.setLeftCarriageMotor(speed);

@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public class Constants {
 
 	//need photoeye port
-	public static final int PHOTOEYE_PORT = 0;
+	public static final int PHOTOEYE_PORT = 1;//was 0 (limit switch)
 	
 	// CAN port map
 	// TODO: Put in actual CAN map
