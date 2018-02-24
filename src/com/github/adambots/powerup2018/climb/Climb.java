@@ -10,20 +10,20 @@ public class Climb {
 //		climbMotor = Actuators.getClimbMotor();
 //	}
 //	
-	public static void startClimbing(boolean climbButton, boolean climbFasterButton) {
-		if (climbButton) {
+	public static void startClimbing(double climbTrigger) {
+		if (climbTrigger > 0 && climbTrigger <= 0.85) {
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_SLOW);
-		} else if (climbFasterButton) {
+		} else if (climbTrigger > 0.85 && climbTrigger <= 1.0) {
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_FAST);
 		} else {
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_STOP);
 		}
 	}
 	
-	public static void reverseClimbing(boolean climbButton, boolean reverseButton) {
-		if (climbButton) {
+	public static void reverseClimbing(double climbTrigger) {
+		if (climbTrigger > 0 && climbTrigger <= 0.85) {
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_SLOW);
-		} else if (reverseButton) {
+		} else if (climbTrigger > 0.85 && climbTrigger <= 1.0) {
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_REVERSE);
 		} else {
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_STOP);

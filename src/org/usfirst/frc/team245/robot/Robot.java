@@ -95,14 +95,14 @@ public class Robot extends IterativeRobot {
 		
 		Intake.resetEncoderOnLimitSwitch();
 		
-		Intake.setIntakeWheelsSpeed(Gamepad.secondary.getRightY());
-		Intake.toggleCarriageWheels(Gamepad.secondary.getRightY());
+		Intake.setIntakeWheelsSpeed(Gamepad.secondary.getLeftY());
+		Intake.toggleCarriageWheels(Gamepad.secondary.getLeftY());
 		Intake.armsPosition(Gamepad.secondary.getX(), Gamepad.secondary.getY(), Gamepad.secondary.getB());
-		Intake.setCarriageLiftSpeed(Gamepad.secondary.getLeftY());
+		Intake.setCarriageLiftSpeed(Gamepad.secondary.getRightY());
 		
 		System.out.println("lift position = [" + Actuators.getCarriageLiftMotorPosition() + "]");
 		
-		Climb.startClimbing(Gamepad.secondary.getBack(), Gamepad.secondary.getStart());
+		Climb.startClimbing(Gamepad.secondary.getRightTrigger());
 	
 	}
 
@@ -111,6 +111,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		Climb.reverseClimbing(Gamepad.secondary.getBack(), Gamepad.secondary.getStart());
+		Climb.reverseClimbing(Gamepad.secondary.getRightTrigger());
 	}
 }

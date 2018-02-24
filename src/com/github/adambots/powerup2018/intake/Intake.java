@@ -75,18 +75,18 @@ public class Intake {
 	public static void toggleCarriageWheels(double carriageWheelsSpeed) {
 		boolean isPhotoEyeOpen = Sensors.getPhotoEyeValue();
 		double speed;
-		if (carriageWheelsSpeed > 0 && isPhotoEyeOpen) {
-			speed = Constants.CARRIAGE_MOTOR_INTAKE_SPEED;
-		} else if (carriageWheelsSpeed > 0 && !isPhotoEyeOpen) {
+		if (carriageWheelsSpeed < 0 && isPhotoEyeOpen) {
+			speed = carriageWheelsSpeed;
+		} else if (carriageWheelsSpeed < 0 && !isPhotoEyeOpen) {
 			speed = Constants.STOP_MOTOR_SPEED;
-		} else if (carriageWheelsSpeed < 0) {
-			speed = Constants.CARRIAGE_MOTOR_OUTTAKE_SPEED;
+		} else if (carriageWheelsSpeed > 0) {
+			speed = carriageWheelsSpeed;
 		} else {
 			speed = Constants.STOP_MOTOR_SPEED;
 		}
 		
-		Actuators.setLeftCarriageMotor(-speed);
-		Actuators.setRightCarriageMotor(speed);
+		Actuators.setLeftCarriageMotor(speed);
+		Actuators.setRightCarriageMotor(-speed);
 		System.out.println("carriage wheel speed = [" + speed + "]");
 		System.out.println("photoeye open? = [" + isPhotoEyeOpen + "]");
 	}
@@ -117,6 +117,8 @@ public class Intake {
 		//TODO: Calibrate encoder value
 		if (speed < -0.05 && carriageLiftPosition < 15000) {
 			Intake.setArmsPosition(Constants.ARMS_OUT);
+		} else if (speed > 0.05 && carriageLiftPosition > 14000) {
+			Intake.setArmsPosition(Constants.ARMS_IN);
 		}
 
 		double lastSpeed;

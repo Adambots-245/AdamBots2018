@@ -47,8 +47,8 @@ public class Constants {
 	public static final double MIN_MOTOR_SPEED = -1.0;
 	public static final double MAX_MOTOR_SPEED = 1.0;
 	public static final double STOP_MOTOR_SPEED = 0;
-	public static final double CARRIAGE_MOTOR_OUTTAKE_SPEED = -1.0;
-	public static final double CARRIAGE_MOTOR_INTAKE_SPEED = 1.0;
+	//public static final double CARRIAGE_MOTOR_OUTTAKE_SPEED = -1.0;
+	//public static final double CARRIAGE_MOTOR_INTAKE_SPEED = 1.0;
 
 	// PCM port map
 	// TODO: Put in actual PCM map

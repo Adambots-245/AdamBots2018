@@ -133,7 +133,15 @@ public class Gamepad {
 	public double getTriggers() {
 		return deaden(joy.getRawAxis(LEFT_AXIS_TRIGGERS) - joy.getRawAxis(RIGHT_AXIS_TRIGGERS));
 	}
+	
+	public double getLeftTrigger() {
+		return deaden(joy.getRawAxis(LEFT_AXIS_TRIGGERS));
+	}
 
+	public double getRightTrigger() {
+		return deaden(joy.getRawAxis(RIGHT_AXIS_TRIGGERS));
+	}
+	
 	public double getLeftX() {
 		return deaden(joy.getRawAxis(AXIS_LEFT_X));
 	}
