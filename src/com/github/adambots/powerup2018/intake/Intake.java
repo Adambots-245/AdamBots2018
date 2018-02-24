@@ -14,12 +14,14 @@ public class Intake {
 		//Intake.setCarriageLiftPID(Constants.CARRIAGE_LIFT_P, Constants.CARRIAGE_LIFT_I, Constants.CARRIAGE_LIFT_D,
 				//Constants.CARRIAGE_LIFT_TIMEOUT);
 	}
+	
 	//resets encoder if limit switch is pressed
 	public static void resetEncoderOnLimitSwitch() {
 		if (Sensors.getLimitSwitchValue()) {
 			Sensors.resetCarriageEncoder();
 		}
 	}
+	
 	// set the speed of the intake wheels
 	public static void setIntakeWheelsSpeed(double speed) {
 		//speed > 0 is left trigger
@@ -72,10 +74,10 @@ public class Intake {
 	
 	// toggle the carriage wheels
 	//TODO: add override button
-	public static void toggleCarriageWheels(double carriageWheelsSpeed) {
+	public static void toggleCarriageWheels(double carriageWheelsSpeed, boolean overrideButton) {
 		boolean isPhotoEyeOpen = Sensors.getPhotoEyeValue();
 		double speed;
-		if (carriageWheelsSpeed < 0 && isPhotoEyeOpen) {
+		if (carriageWheelsSpeed < 0 && (isPhotoEyeOpen || overrideButton)) {
 			speed = carriageWheelsSpeed;
 		} else if (carriageWheelsSpeed < 0 && !isPhotoEyeOpen) {
 			speed = Constants.STOP_MOTOR_SPEED;
@@ -97,20 +99,19 @@ public class Intake {
 		Actuators.getCarriageLiftMotor().config_kD(0, d, timeout);
 	}
 	// control the carriage lift
-	public static void setCarriageLiftSpeed(double speed) {
+	public static void setCarriageLiftSpeed(double speed, boolean overrideButton) {
 		int carriageLiftPosition = Sensors.getCarriageLiftPosition();
-	//bottom is 0, top is ~67,000
+		//bottom is 0, top is ~67,000
 		boolean isLimitSwitchPressed = Sensors.getLimitSwitchValue();
 		int intendedPosition;
 		
-		if (isLimitSwitchPressed && speed <= 0) {
+		if (overrideButton) {
+			Actuators.setCarriageLiftMotorSpeed(speed);
+		} else if (isLimitSwitchPressed && speed <= 0) {
 			Actuators.setCarriageLiftMotorSpeed(Constants.STOP_MOTOR_SPEED);
-		}
-		//TODO: Calibrate top encoder value
-		else if (carriageLiftPosition >= 64000 && speed >= 0) {
+		} else if (carriageLiftPosition >= 64000 && speed >= 0) {
 			Actuators.setCarriageLiftMotorSpeed(Constants.STOP_MOTOR_SPEED);
-		}
-		else {
+		} else {
 			Actuators.setCarriageLiftMotorSpeed(speed);
 		}
 		
@@ -136,6 +137,7 @@ public class Intake {
 		//if (carriageLiftPosition + 200 < intendedPosition) {
 		//	Actuators.setCarriageLiftMotorPosition(intendedPosition);
 		//}
+		
 	}	
 	
 }

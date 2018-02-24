@@ -96,9 +96,9 @@ public class Robot extends IterativeRobot {
 		Intake.resetEncoderOnLimitSwitch();
 		
 		Intake.setIntakeWheelsSpeed(Gamepad.secondary.getLeftY());
-		Intake.toggleCarriageWheels(Gamepad.secondary.getLeftY());
+		Intake.toggleCarriageWheels(Gamepad.secondary.getLeftY(), Gamepad.secondary.getStart());
 		Intake.armsPosition(Gamepad.secondary.getX(), Gamepad.secondary.getY(), Gamepad.secondary.getB());
-		Intake.setCarriageLiftSpeed(Gamepad.secondary.getRightY());
+		Intake.setCarriageLiftSpeed(Gamepad.secondary.getRightY(), Gamepad.secondary.getBack());
 		
 		System.out.println("lift position = [" + Actuators.getCarriageLiftMotorPosition() + "]");
 		
