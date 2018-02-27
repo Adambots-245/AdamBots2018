@@ -116,9 +116,11 @@ public class Intake {
 		}
 		
 		//TODO: Calibrate encoder value
-		if (speed < -0.05 && speed >= -0.75 && carriageLiftPosition < Constants.CARRIAGE_LIFT_ARM_AUTO_OPEN_THRESHOLD_SLOW) {
+		if (speed < -0.05 && speed >= -0.5 && carriageLiftPosition < Constants.CARRIAGE_LIFT_ARM_AUTO_OPEN_THRESHOLD_SLOW) {
 			Intake.setArmsPosition(Constants.ARMS_OUT);
-		} else if (speed < -0.75 && speed >= -1.0 && carriageLiftPosition < Constants.CARRIAGE_LIFT_ARM_AUTO_OPEN_THRESHOLD_FAST) {
+		} else if (speed < -0.5 && speed >= -1.0 && carriageLiftPosition < Constants.CARRIAGE_LIFT_ARM_AUTO_OPEN_THRESHOLD_FAST) {
+			Intake.setArmsPosition(Constants.ARMS_OUT);
+		} else if (speed > 0.05 && carriageLiftPosition < Constants.CARRIAGE_LIFT_ARM_AUTO_OPEN_INITIAL) {
 			Intake.setArmsPosition(Constants.ARMS_OUT);
 		} else if (speed > 0.05 && carriageLiftPosition > Constants.CARRIAGE_LIFT_ARM_AUTO_CLOSE_THRESHOLD) {
 			Intake.setArmsPosition(Constants.ARMS_IN);

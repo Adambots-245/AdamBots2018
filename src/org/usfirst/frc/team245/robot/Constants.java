@@ -83,6 +83,7 @@ public class Constants {
 	public static final boolean CARRIGE_LIFT_MOTOR_PHASE = false;
 	public static final int CARRIAGE_LIFT_ARM_AUTO_OPEN_THRESHOLD_SLOW = 15000;
 	public static final int CARRIAGE_LIFT_ARM_AUTO_OPEN_THRESHOLD_FAST = 25000;
+	public static final int CARRIAGE_LIFT_ARM_AUTO_OPEN_INITIAL = 5000;
 	public static final int CARRIAGE_LIFT_ARM_AUTO_CLOSE_THRESHOLD = 14000; 
 	
 	// PID values
@@ -98,8 +99,6 @@ public class Constants {
 	public static final double CLIMB_SPEED_FAST = 1.0;
 	public static final double CLIMB_SPEED_STOP = 0;
 	public static final double CLIMB_SPEED_REVERSE = -0.5;
-	
-	// intake and outtake speeds
 	
 }
 
