@@ -26,8 +26,8 @@ public class Intake {
 	public static void setIntakeWheelsSpeed(double speed) {
 		//speed > 0 is left trigger
 		//speed > 0 is left trigger
-		Actuators.setLeftIntakeMotor(-speed);
-		Actuators.setRightIntakeMotor(speed);
+		Actuators.setLeftIntakeMotor(speed);
+		Actuators.setRightIntakeMotor(-speed);
 	}
 
 	// set both first arm pneumatics
@@ -116,8 +116,9 @@ public class Intake {
 		}
 		
 		//TODO: Calibrate encoder value
-		if (speed < -0.05 && carriageLiftPosition < 15000) {
+		if (speed < -0.05 && speed >= -0.5 && carriageLiftPosition < 15000) {
 			Intake.setArmsPosition(Constants.ARMS_OUT);
+		} else if (speed < -0.5 && speed >= -1.0 && carriageLiftPosition < 25000) {
 		} else if (speed > 0.05 && carriageLiftPosition > 14000) {
 			Intake.setArmsPosition(Constants.ARMS_IN);
 		}
