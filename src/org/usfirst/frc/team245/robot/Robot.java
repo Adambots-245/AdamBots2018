@@ -13,10 +13,10 @@ import com.github.adambots.powerup2018.dash.Dash;
 import com.github.adambots.powerup2018.drive.Drive;
 import com.github.adambots.powerup2018.intake.Intake;
 
-import autonModes.leftScale;
+import autonModes.Scale;
 import autonModes.leftSwitch;
 import autonModes.rightScale;
-import autonModes.rightSwitch;
+import autonModes.Switch;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -51,10 +51,8 @@ public class Robot extends IterativeRobot {
 		
 		autoChooser = new SendableChooser<Object>();
 		
-		autoChooser.addObject("leftScale", new leftScale());
-		autoChooser.addObject("leftScale", new rightScale());
-		autoChooser.addObject("leftScale", new leftSwitch());
-		autoChooser.addObject("leftScale", new rightSwitch());
+		autoChooser.addObject("leftScale", new Switch());
+		autoChooser.addObject("leftScale", new Scale());
 		autoChooser.addDefault("Cross Baseline", new crossBaseline());
 			
 		SmartDashboard.putData("Autonomous Paths", autoChooser);
