@@ -11,20 +11,18 @@ public class Climb {
 //	}
 //	
 	public static void startClimbing(double climbTrigger) {
-		if (climbTrigger > 0 && climbTrigger <= 0.85) {
-			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_SLOW);
-		} else if (climbTrigger > 0.85 && climbTrigger <= 1.0) {
-			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_FAST);
+		if (climbTrigger > 0.05) {
+			Actuators.setClimbMotorSpeed(climbTrigger);
 		} else {
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_STOP);
 		}
 	}
 	
-	public static void reverseClimbing(double climbTrigger) {
-		if (climbTrigger > 0 && climbTrigger <= 0.85) {
-			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_SLOW);
-		} else if (climbTrigger > 0.85 && climbTrigger <= 1.0) {
-			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_REVERSE);
+	public static void reverseClimbing(double climbTrigger, double climbReverseTrigger) {
+		if (climbTrigger > 0.05) {
+			Actuators.setClimbMotorSpeed(climbTrigger);
+		} else if (climbReverseTrigger > 0.05) {
+			Actuators.setClimbMotorSpeed(-climbReverseTrigger);
 		} else {
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_STOP);
 		}

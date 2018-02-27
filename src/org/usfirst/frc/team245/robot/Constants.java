@@ -80,8 +80,11 @@ public class Constants {
 	public static final boolean CARRIAGE_LIFT_FORWARD_LIMIT_ENABLED = false;
 	public static final boolean CARRIAGE_LIFT_REVERSE_LIMIT_ENABLED = false;
 	public static final double CARRIAGE_LIFT_POSITION_INCREMENT = 512;
-	public static final boolean CARRIGE_LIFT_MOTOR_PHASE = false;	
-
+	public static final boolean CARRIGE_LIFT_MOTOR_PHASE = false;
+	public static final int CARRIAGE_LIFT_ARM_AUTO_OPEN_THRESHOLD_SLOW = 15000;
+	public static final int CARRIAGE_LIFT_ARM_AUTO_OPEN_THRESHOLD_FAST = 25000;
+	public static final int CARRIAGE_LIFT_ARM_AUTO_CLOSE_THRESHOLD = 14000; 
+	
 	// PID values
 	public static final int CARRIAGE_LIFT_PID_PROFILE = 0;
 	public static final int CARRIAGE_LIFT_TIMEOUT = 0;
@@ -95,6 +98,8 @@ public class Constants {
 	public static final double CLIMB_SPEED_FAST = 1.0;
 	public static final double CLIMB_SPEED_STOP = 0;
 	public static final double CLIMB_SPEED_REVERSE = -0.5;
+	
+	// intake and outtake speeds
 	
 }
 
