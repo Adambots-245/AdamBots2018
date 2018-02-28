@@ -3,11 +3,11 @@ package autonModes;
 import com.github.adambots.powerup2018.auton.Play;
 import com.github.adambots.powerup2018.field.Field;
 
-public class leftScale {
+public class Scale {
 	private boolean leftScaleValue;
 	private static char position = Field.getScale(); 
 	
-		public leftScale(){
+		public Scale(){
 			
 		}
 	
@@ -20,6 +20,10 @@ public class leftScale {
 			if(leftScaleValue){
 			Play.readRecording("LEFTCODE"); ///TODO: call actual pathway on roborio
 			}
+			else{
+				Play.readRecording("RIGHTCODE");
+			}
+			
 		}
 		
 		protected void execute(){
