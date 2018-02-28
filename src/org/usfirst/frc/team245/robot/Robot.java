@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team245.robot;
 
+import com.github.adambots.powerup2018.auton.Record;
 import com.github.adambots.powerup2018.climb.Climb;
 import com.github.adambots.powerup2018.controller.Gamepad;
 import com.github.adambots.powerup2018.dash.Dash;
@@ -80,6 +81,10 @@ public class Robot extends IterativeRobot {
 	 * make sure to add them to the chooser code above as well.
 	 */
 	@Override
+	
+	public void teleopInit(){
+		Record.ghostModeInit();
+	}
 	public void autonomousInit() {
 		m_autoSelected = m_chooser.getSelected();
 		// autoSelected = SmartDashboard.getString("Auto Selector",
@@ -129,6 +134,7 @@ public class Robot extends IterativeRobot {
 		
 		Climb.startClimbing(Gamepad.secondary.getRightTrigger());
 	
+		Record.ghostRecording();
 	}
 
 	/**
