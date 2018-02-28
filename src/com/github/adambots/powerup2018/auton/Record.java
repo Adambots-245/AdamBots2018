@@ -17,7 +17,6 @@ public class Record {
 	private static boolean writing = false;
 	private static boolean ghostRecording = true;
 	
-	
 	private static double boolToDouble(boolean condition){
 		double value;
 		if(condition){
@@ -46,7 +45,7 @@ public class Record {
 		boolean secondaryA = Gamepad.secondary.getA();
 		boolean secondaryB = Gamepad.secondary.getB();
 		
-		
+
 		long timeStamp = System.nanoTime() - startTime;
 		double [] myDoubleArray = {leftPrimaryY,leftPrimaryX,rightPrimaryX,leftSecondaryY, boolToDouble(secondaryA), boolToDouble(secondaryB), (double)timeStamp};
 		indexArray[index] = myDoubleArray;
@@ -60,9 +59,10 @@ public class Record {
 		}
 		System.out.println("Starting to write");
 			try{
-			PrintWriter writer = new PrintWriter("/Documents/ghostModetxt", "UTF-8");
+
+			PrintWriter writer = new PrintWriter("/Documents/ghostMode.txt", "UTF-8");
 				if (ghostRecording == true && indexArray.length >= 749){
-					for(index = 0; index <= 749; index++){
+					for(index = 0; index <= 749; index++);
 					writer.print(index);
 						for(int i = 0; i <7; i++){
 							writer.print(" ");
