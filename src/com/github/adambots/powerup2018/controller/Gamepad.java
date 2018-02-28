@@ -1,9 +1,11 @@
-package org.usfirst.frc.team245.robot;
+package com.github.adambots.powerup2018.controller;
 
 import edu.wpi.first.wpilibj.Joystick;
 
 public class Gamepad {
 	private Joystick joy;
+	private Presses press;
+
 	//// CONSTANTS -------------------------------------------------------------
 	/**
 	 * Primary Driver Controller Port Number.
@@ -69,86 +71,97 @@ public class Gamepad {
 	 * XBOX 360 Right Vertical Axis (Up=1, Down=-1)
 	 */
 	private static final int AXIS_RIGHT_Y = 5;
-	private static final int AXIS_DPAD_HORIZONTAL = 6;
-	//// Control Instances
-	public static Gamepad primary = new Gamepad(PRIMARY_DRIVER);
-	public static Gamepad secondary = new Gamepad(SECONDARY_DRIVER);
-	//// CONSTRUCTOR -----------------------------------------------------------
-
 	/**
-	 * Creates a new Joystick instance on the correct driver port.
+	 * XBOX 360 DPad Horizontal Axis (Left=-1, Right=1)
+	 */
+	private static final int AXIS_DPAD_HORIZONTAL = 6;
+	/**
+	 * XBOX 360 DPad Vertical Axis (Up=-1, Right=1)
+	 */
+	private static final int AXIS_DPAD_VERTICAL = 7;
+	
+
+	// Control Instances
+	public static Gamepad primary;
+	public static Gamepad secondary;
+
+	// Constructor
+	/**
+	 * Creates new Joystick instance and Presses instance on the correct driver
+	 * port.
 	 *
 	 * @param port
 	 *            The joystick port number.
 	 */
 	private Gamepad(int port) {
 		joy = new Joystick(port);
+		try {
+			press = new Presses(this);
+			press.init();
+		} catch (ClassNotFoundException e) {
+			System.out.println("Failed to initialize presses.");
+		}
 	}
 
+	// initializes the primary and secondary drivers
+	public static void init() {
+		primary = new Gamepad(PRIMARY_DRIVER);
+		secondary = new Gamepad(SECONDARY_DRIVER);
+	}
+
+	// updates the number of presses for all the buttons of a given instance
+	private void updatePress() {
+		try {
+			press.updatePresses();
+		} catch (Exception e) {
+			System.out.println("Failed to update presses");
+		}
+	}
+
+	// updates both instances
+	public static void update() {
+		Gamepad.primary.updatePress();
+		Gamepad.secondary.updatePress();
+	}
+
+	// deadzoning
 	private double deaden(double u) {
 		return Math.abs(u) < .15 ? 0 : u;
 	}
 
+	// getting joystick values
 	public double getTriggers() {
 		return deaden(joy.getRawAxis(LEFT_AXIS_TRIGGERS) - joy.getRawAxis(RIGHT_AXIS_TRIGGERS));
 	}
-
-	public boolean getDPadLeft() {
-		return joy.getRawAxis(AXIS_DPAD_HORIZONTAL) < -0.5;
+	
+	public double getLeftTrigger() {
+		return deaden(joy.getRawAxis(LEFT_AXIS_TRIGGERS));
 	}
 
-	public boolean getDPadRight() {
-		return joy.getRawAxis(AXIS_DPAD_HORIZONTAL) > 0.5;
+	public double getRightTrigger() {
+		return deaden(joy.getRawAxis(RIGHT_AXIS_TRIGGERS));
 	}
-
-	/**
-	 * Corresponds to HORIZONTAL input on the LEFT joystick.
-	 *
-	 * @return The X coordinate of the left joystick (-1 is LEFT, 1 is RIGHT)
-	 */
+	
 	public double getLeftX() {
 		return deaden(joy.getRawAxis(AXIS_LEFT_X));
 	}
 
-	/**
-	 * Corresponds to VERTICAL input on the LEFT joystick.
-	 *
-	 * @return The Y coordinate of the LEFT joystick (1 is UP, -1 is DOWN)
-	 */
 	public double getLeftY() {
 		return deaden(-joy.getRawAxis(AXIS_LEFT_Y));
 	}
 
-	/**
-	 * Corresponds to HORIZONTAL input on the RIGHT joystick
-	 *
-	 * @return The X coordinate of the RIGHT joystick (-1 is LEFT, 1 is RIGHT)
-	 */
 	public double getRightX() {
 		return deaden(joy.getRawAxis(AXIS_RIGHT_X));
 	}
 
-	/**
-	 * Corresponds to VERTICAL input on the RIGHT joystick
-	 *
-	 * @return The Y coordinate of the RIGHT joystick (1 is UP, -1 is DOWN)
-	 */
 	public double getRightY() {
 		return deaden(-joy.getRawAxis(AXIS_RIGHT_Y));
 	}
 
-	/**
-	 *
-	 * @return Is the left bumper pressed? [top one]
-	 */
 	public boolean getLB() {
 		return joy.getRawButton(BUTTON_LB);
 	}
 
-	/**
-	 *
-	 * @return Is the right bumper pressed? [top one]
-	 */
 	public boolean getRB() {
 		return joy.getRawButton(BUTTON_RB);
 	}
@@ -176,4 +189,58 @@ public class Gamepad {
 	public boolean getBack() {
 		return joy.getRawButton(BUTTON_BACK);
 	}
+	
+	public boolean getDPadLeft() {
+		return joy.getRawAxis(AXIS_DPAD_HORIZONTAL) < -0.05;
+	}
+
+	public boolean getDPadRight() {
+		return joy.getRawAxis(AXIS_DPAD_HORIZONTAL) > 0.05;
+	}
+	public boolean getDPadDown() {
+		return joy.getRawAxis(AXIS_DPAD_VERTICAL) < -0.05;
+	}
+
+	public boolean getDPadUp() {
+		return joy.getRawAxis(AXIS_DPAD_VERTICAL) > 0.05;
+	}
+
+	// get number of times toggle buttons have been pressed
+	// to add something to the press HashMap, just create a public boolean
+	// getSomething()
+	// method in this class, and it will automatically be added with the key
+	// "Something"
+
+	public int getLBPresses() {
+		return press.getPresses("LB");
+	}
+
+	public int getRBPresses() {
+		return press.getPresses("RB");
+	}
+
+	public int getAPresses() {
+		return press.getPresses("A");
+	}
+
+	public int getBPresses() {
+		return press.getPresses("B");
+	}
+
+	public int getXPresses() {
+		return press.getPresses("X");
+	}
+
+	public int getYPresses() {
+		return press.getPresses("Y");
+	}
+
+	public int getStartPresses() {
+		return press.getPresses("Start");
+	}
+
+	public int getBackPresses() {
+		return press.getPresses("Back");
+	}
+
 }
