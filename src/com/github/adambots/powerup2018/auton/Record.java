@@ -5,6 +5,7 @@ import org.usfirst.frc.team245.robot.*;
 import com.github.adambots.powerup2018.controller.Gamepad;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Time;
 import java.util.Arrays;
 
 import com.github.adambots.powerup2018.controller.Gamepad;
@@ -15,6 +16,7 @@ public class Record {
 	private static int index;
 	private static boolean writing = false;
 	private static boolean ghostRecording = true;
+	
 	
 	private static double boolToDouble(boolean condition){
 		double value;
@@ -58,7 +60,7 @@ public class Record {
 		}
 		System.out.println("Starting to write");
 			try{
-			PrintWriter writer = new PrintWriter("/Documents/ghostMode.txt", "UTF-8");
+			PrintWriter writer = new PrintWriter("/Documents/ghostModetxt", "UTF-8");
 				if (ghostRecording == true && indexArray.length >= 749){
 					for(index = 0; index <= 749; index++){
 					writer.print(index);
