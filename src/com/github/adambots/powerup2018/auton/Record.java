@@ -17,6 +17,7 @@ public class Record {
 	private static boolean writing = false;
 	private static boolean ghostRecording = true;
 	
+	
 	private static double boolToDouble(boolean condition){
 		double value;
 		if(condition){
@@ -59,8 +60,8 @@ public class Record {
 		}
 		System.out.println("Starting to write");
 			try{
+	PrintWriter writer = new PrintWriter("/Documents/ghostModetxt", "UTF-8");
 
-			PrintWriter writer = new PrintWriter("/Documents/ghostMode.txt", "UTF-8");
 				if (ghostRecording == true && indexArray.length >= 749){
 					for(index = 0; index <= 749; index++);
 					writer.print(index);
