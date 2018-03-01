@@ -70,6 +70,7 @@ public class Actuators {
 		rightIntakeMotor.setInverted(Constants.RIGHT_INTAKE_MOTOR_INVERTED);
 		leftCarriageMotor.setInverted(Constants.LEFT_CARRIAGE_MOTOR_INVERTED);
 		rightCarriageMotor.setInverted(Constants.RIGHT_CARRIAGE_MOTOR_INVERTED);
+		carriageLiftMotor.setInverted(true);
 		
 		carriageLiftMotor.enableCurrentLimit(false);
 		//carriageLiftMotor.configPeakCurrentLimit(5, 100);
