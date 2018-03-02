@@ -1,4 +1,4 @@
-package autonModes;
+package com.github.adambots.powerup2018.autonModes;
 
 import com.github.adambots.powerup2018.auton.Play;
 import com.github.adambots.powerup2018.field.Field;

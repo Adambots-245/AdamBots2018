@@ -1,4 +1,4 @@
-package autonModes;
+package com.github.adambots.powerup2018.autonModes;
 
 import org.usfirst.frc.team245.robot.Constants;
 

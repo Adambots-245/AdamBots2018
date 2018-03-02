@@ -8,16 +8,16 @@
 package org.usfirst.frc.team245.robot;
 
 import com.github.adambots.powerup2018.auton.Record;
+import com.github.adambots.powerup2018.autonModes.Scale;
+import com.github.adambots.powerup2018.autonModes.Switch;
+import com.github.adambots.powerup2018.autonModes.leftSwitch;
+import com.github.adambots.powerup2018.autonModes.rightScale;
 import com.github.adambots.powerup2018.climb.Climb;
 import com.github.adambots.powerup2018.controller.Gamepad;
 import com.github.adambots.powerup2018.dash.Dash;
 import com.github.adambots.powerup2018.drive.Drive;
 import com.github.adambots.powerup2018.intake.Intake;
 
-import autonModes.Scale;
-import autonModes.leftSwitch;
-import autonModes.rightScale;
-import autonModes.Switch;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
