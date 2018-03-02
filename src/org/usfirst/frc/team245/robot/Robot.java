@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team245.robot;
 
+import com.github.adambots.powerup2018.auton.AutonConstants;
 import com.github.adambots.powerup2018.climb.Climb;
 import com.github.adambots.powerup2018.controller.Gamepad;
 import com.github.adambots.powerup2018.dash.Dash;
@@ -14,8 +15,9 @@ import com.github.adambots.powerup2018.drive.Drive;
 import com.github.adambots.powerup2018.intake.Intake;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,10 +27,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends IterativeRobot {
-	private static final String kDefaultAuto = "Default";
-	private static final String kCustomAuto = "My Auto";
-	private String m_autoSelected;
-	private SendableChooser<String> m_chooser = new SendableChooser<>();
+	private String positionSelected;
+	private Command autoSelected;
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -37,10 +37,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		System.out.println("Got here");
-		m_chooser.addDefault("Default Auto", kDefaultAuto);
-		m_chooser.addObject("My Auto", kCustomAuto);
-		SmartDashboard.putData("Auto choices", m_chooser);
-		
+		Dash.init();
 		Actuators.init();
 		Gamepad.init();
 		Sensors.init();
@@ -49,6 +46,7 @@ public class Robot extends IterativeRobot {
 		Drive.init();
 	}
 
+	private Timer time;
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable chooser
@@ -63,10 +61,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autoSelected = m_chooser.getSelected();
-		// autoSelected = SmartDashboard.getString("Auto Selector",
-		// defaultAuto);
-		System.out.println("Auto selected: " + m_autoSelected);
+		time = new Timer();
+		time.start();
+//		positionSelected = Dash.getPositionSelected();
+//		autoSelected = Dash.getAutonSelected();
+//		autoSelected.start();
+//		System.out.println("Auto selected: " + autoSelected);
+
 	}
 
 	/**
@@ -74,15 +75,16 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		switch (m_autoSelected) {
-		case kCustomAuto:
-			// Put custom auto code here
-			break;
-		case kDefaultAuto:
-		default:
-			// Put default auto code here
-			break;
+		if(time.get() < AutonConstants.CROSS_BASELINE_TIME) {
+			Drive.autonDrive(0, AutonConstants.CROSS_BASELINE_SPEED, 0);
+		} else {
+			Drive.autonDrive(0, 0, 0);
 		}
+		
+//		if (autoSelected != null) {
+//			System.out.println(autoSelected);
+//			Scheduler.getInstance().run();
+//		}
 	}
 
 	/**
@@ -92,18 +94,18 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Gamepad.update();
 		Drive.mecDrive(Gamepad.primary.getLeftX(), Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
-		
+
 		Intake.resetEncoderOnLimitSwitch();
-		
+
 		Intake.setIntakeWheelsSpeed(Gamepad.secondary.getLeftY());
 		Intake.toggleCarriageWheels(Gamepad.secondary.getLeftY(), Gamepad.secondary.getLB());
 		Intake.armsPosition(Gamepad.secondary.getX(), Gamepad.secondary.getY(), Gamepad.secondary.getB());
 		Intake.setCarriageLiftSpeed(Gamepad.secondary.getRightY(), Gamepad.secondary.getRB());
-		
+
 		System.out.println("lift position = [" + Actuators.getCarriageLiftMotorPosition() + "]");
-		
+
 		Climb.startClimbing(Gamepad.secondary.getRightTrigger());
-	
+
 	}
 
 	/**

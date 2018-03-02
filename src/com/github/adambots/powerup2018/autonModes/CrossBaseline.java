@@ -5,24 +5,54 @@ import org.usfirst.frc.team245.robot.Constants;
 import com.github.adambots.powerup2018.drive.Drive;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.command.Command;
 
-public class CrossBaseline {
+public class CrossBaseline extends Command {
 
-	String waitTimeString;
-	static double waitTimeNum;
+	private Timer time;
+	private double timeToCross;
+	private double percentSpeed;
 
-	protected void init() {
-		waitTimeString = SmartDashboard.getString("Wait time", "no wait time given");
-		waitTimeNum = Double.parseDouble(waitTimeString);
+	public CrossBaseline(double time, double percentSpeed) {
+		this.timeToCross = time;
+		this.percentSpeed = percentSpeed;
+	}
+
+	@Override
+	protected void initialize() {
+		time = new Timer();
+		time.start();
+	}
+
+	@Override
+	protected void execute() {
+		System.out.println("CROSS BASELINE IS RUNNING");
+		try {
+			if (time.get() < timeToCross) {
+				Drive.autonDrive(0, percentSpeed * Constants.MAX_MOTOR_SPEED, 0);
+			} else {
+				double stop = Constants.STOP_MOTOR_SPEED;
+				Drive.autonDrive(stop, stop, stop, stop);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
-	protected static void execute() {
-		Timer time = new Timer();
-		if (time.get() > waitTimeNum) {
-			Drive.mecDrive(0, Constants.AUTON_MOTOR_SPEED, 0);
-		}
+	@Override
+	protected boolean isFinished() {
+		return true;
+	}
+
+	@Override
+	protected void end() {
+		time.stop();
+	}
+
+	@Override
+	protected void interrupted() {
+
 	}
 
 }
