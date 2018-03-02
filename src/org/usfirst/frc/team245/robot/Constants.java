@@ -6,24 +6,24 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Constants {
 
-	//need photoeye port
+	// need photoeye port
 	public static final int PHOTOEYE_PORT = 1;
-	
+
 	// CAN port map
 	// TODO: Put in actual CAN map
 	public static final int LEFT_FRONT_DRIVE_MOTOR_PORT = 0;
 	public static final int RIGHT_FRONT_DRIVE_MOTOR_PORT = 1;
-	public static final int LEFT_REAR_DRIVE_MOTOR_PORT = 2; //used to be 2
+	public static final int LEFT_REAR_DRIVE_MOTOR_PORT = 2; // used to be 2
 	public static final int RIGHT_REAR_DRIVE_MOTOR_PORT = 3;
-	public static final int CARRIAGE_LIFT_MOTOR_PORT = 4; //used to be 4
+	public static final int CARRIAGE_LIFT_MOTOR_PORT = 4; // used to be 4
 	public static final int CLIMB_MOTOR_PORT = 5;
-	
+
 	// PWM port map
 	// TODO: Put in actual PWM map
-	public static final int LEFT_INTAKE_MOTOR_PWM_PORT = 0; //used to be 6
-	public static final int RIGHT_INTAKE_MOTOR_PWM_PORT = 2; //used to be 9
-	public static final int LEFT_CARRIAGE_MOTOR_PWM_PORT = 1; //used to be 7
-	public static final int RIGHT_CARRIAGE_MOTOR_PWM_PORT = 3; //used to be 8
+	public static final int LEFT_INTAKE_MOTOR_PWM_PORT = 0; // used to be 6
+	public static final int RIGHT_INTAKE_MOTOR_PWM_PORT = 2; // used to be 9
+	public static final int LEFT_CARRIAGE_MOTOR_PWM_PORT = 1; // used to be 7
+	public static final int RIGHT_CARRIAGE_MOTOR_PWM_PORT = 3; // used to be 8
 
 	// motor controller inversion
 	public static final boolean LEFT_FRONT_DRIVE_MOTOR_INVERTED = true;
@@ -47,8 +47,8 @@ public class Constants {
 	public static final double MIN_MOTOR_SPEED = -1.0;
 	public static final double MAX_MOTOR_SPEED = 1.0;
 	public static final double STOP_MOTOR_SPEED = 0;
-	//public static final double CARRIAGE_MOTOR_OUTTAKE_SPEED = -1.0;
-	//public static final double CARRIAGE_MOTOR_INTAKE_SPEED = 1.0;
+	// public static final double CARRIAGE_MOTOR_OUTTAKE_SPEED = -1.0;
+	// public static final double CARRIAGE_MOTOR_INTAKE_SPEED = 1.0;
 
 	// PCM port map
 	// TODO: Put in actual PCM map
@@ -71,8 +71,9 @@ public class Constants {
 
 	// carriage lift
 	// TODO: Find actual limits, increment, phase, and PID for carriage
-	public static final int CARRIAGE_LIFT_LIMIT_SWITCH_PORT = 0;	
-	//public static final com.ctre.phoenix.motorcontrol.FeedbackDevice QUAD_ENCODER = com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder;
+	public static final int CARRIAGE_LIFT_LIMIT_SWITCH_PORT = 0;
+	// public static final com.ctre.phoenix.motorcontrol.FeedbackDevice QUAD_ENCODER
+	// = com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder;
 	public static final int CARRIAGE_LIFT_ENCODER_SENSOR = 0;
 	public static final int CARRIAGE_LIFT_START_POSITION = 0;
 	public static final int CARRIAGE_LIFT_FORWARD_LIMIT = 1024;
@@ -84,21 +85,31 @@ public class Constants {
 	public static final int CARRIAGE_LIFT_ARM_AUTO_OPEN_THRESHOLD_SLOW = 15000;
 	public static final int CARRIAGE_LIFT_ARM_AUTO_OPEN_THRESHOLD_FAST = 25000;
 	public static final int CARRIAGE_LIFT_ARM_AUTO_OPEN_INITIAL = 5000;
-	public static final int CARRIAGE_LIFT_ARM_AUTO_CLOSE_THRESHOLD = 14000; 
-	
+	public static final int CARRIAGE_LIFT_ARM_AUTO_CLOSE_THRESHOLD = 14000;
+
 	// PID values
 	public static final int CARRIAGE_LIFT_PID_PROFILE = 0;
 	public static final int CARRIAGE_LIFT_TIMEOUT = 0;
 	public static final double CARRIAGE_LIFT_P = .1;
 	public static final double CARRIAGE_LIFT_I = .01;
 	public static final double CARRIAGE_LIFT_D = .01;
-	
+
 	// climb motor speeds
 	// TODO: set actual values for climbing speeds
 	public static final double CLIMB_SPEED_SLOW = 0.5;
 	public static final double CLIMB_SPEED_FAST = 1.0;
 	public static final double CLIMB_SPEED_STOP = 0;
 	public static final double CLIMB_SPEED_REVERSE = -0.5;
-	
-}
 
+	// GhostCode Constants
+	public static final int TIME_INDEX = 7;
+	public static final int FORWARD = 1;
+	public static final int Z_ROTATION = 3;
+	public static final int RIGHT_SPEED = 2;
+	public static final int ELEVATOR_VALUE = 4;
+	public static final int A_VALUE = 5;
+	public static final int B_VALUE = 6;
+
+	public static final double AUTON_MOTOR_SPEED = 0.5;
+	public static final double AUTON_CROSS_BASELINE_TIME = 2.0;
+}

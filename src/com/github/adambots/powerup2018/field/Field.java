@@ -4,17 +4,17 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 public class Field {
 	
-	 private String fieldPositions = DriverStation.getInstance().getGameSpecificMessage();
+	 private static String fieldPositions = DriverStation.getInstance().getGameSpecificMessage();
 	
-	 public char getOwnSwitch(){
+	 public static char getOwnSwitch(){
 		 return fieldPositions.charAt(0);
 	 }
 	 
-	 public char getScale(){
+	 public static char getScale(){
 		 return fieldPositions.charAt(1);
 	 }
 	 
-	 public char getOppSwitch(){
+	 public static char getOppSwitch(){
 		 return fieldPositions.charAt(2);
 	 }
 }
