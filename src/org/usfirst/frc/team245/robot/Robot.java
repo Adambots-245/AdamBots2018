@@ -8,6 +8,7 @@
 package org.usfirst.frc.team245.robot;
 
 import com.github.adambots.powerup2018.auton.AutonConstants;
+import com.github.adambots.powerup2018.auton.Time;
 import com.github.adambots.powerup2018.climb.Climb;
 import com.github.adambots.powerup2018.controller.Gamepad;
 import com.github.adambots.powerup2018.dash.Dash;
@@ -42,11 +43,9 @@ public class Robot extends IterativeRobot {
 		Gamepad.init();
 		Sensors.init();
 		Intake.init();
-		Dash.init();
 		Drive.init();
 	}
 
-	private Timer time;
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable chooser
@@ -61,12 +60,11 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		time = new Timer();
-		time.start();
-//		positionSelected = Dash.getPositionSelected();
-//		autoSelected = Dash.getAutonSelected();
-//		autoSelected.start();
-//		System.out.println("Auto selected: " + autoSelected);
+		Time.init();
+		positionSelected = Dash.getPositionSelected();
+		autoSelected = Dash.getAutonSelected();
+		autoSelected.start();
+		System.out.println("Auto selected: " + autoSelected);
 
 	}
 
@@ -75,16 +73,16 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		if(time.get() < AutonConstants.CROSS_BASELINE_TIME) {
-			Drive.autonDrive(0, AutonConstants.CROSS_BASELINE_SPEED, 0);
-		} else {
-			Drive.autonDrive(0, 0, 0);
-		}
-		
-//		if (autoSelected != null) {
-//			System.out.println(autoSelected);
-//			Scheduler.getInstance().run();
+//		if(time.get() < AutonConstants.CROSS_BASELINE_TIME) {
+//			Drive.autonDrive(0, AutonConstants.CROSS_BASELINE_SPEED, 0);
+//		} else {
+//			Drive.autonDrive(0, 0, 0);
 //		}
+		if (autoSelected != null) {
+			System.out.println(autoSelected);
+			autoSelected.start();
+			Scheduler.getInstance().run();
+		}
 	}
 
 	/**

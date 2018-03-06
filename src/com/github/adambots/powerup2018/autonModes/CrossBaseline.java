@@ -2,14 +2,13 @@ package com.github.adambots.powerup2018.autonModes;
 
 import org.usfirst.frc.team245.robot.Constants;
 
+import com.github.adambots.powerup2018.auton.Time;
 import com.github.adambots.powerup2018.drive.Drive;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class CrossBaseline extends Command {
 
-	private Timer time;
 	private double timeToCross;
 	private double percentSpeed;
 
@@ -20,15 +19,15 @@ public class CrossBaseline extends Command {
 
 	@Override
 	protected void initialize() {
-		time = new Timer();
-		time.start();
+
 	}
 
 	@Override
 	protected void execute() {
+		double time = Time.getTime();
 		System.out.println("CROSS BASELINE IS RUNNING");
 		try {
-			if (time.get() < timeToCross) {
+			if (time < timeToCross) {
 				Drive.autonDrive(0, percentSpeed * Constants.MAX_MOTOR_SPEED, 0);
 			} else {
 				double stop = Constants.STOP_MOTOR_SPEED;
@@ -47,7 +46,7 @@ public class CrossBaseline extends Command {
 
 	@Override
 	protected void end() {
-		time.stop();
+
 	}
 
 	@Override
