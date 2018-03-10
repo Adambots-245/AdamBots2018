@@ -63,9 +63,9 @@ public class Switch extends Command {
 				rightSpeed = Constants.STOP_MOTOR_SPEED;
 			}
 			Drive.autonDrive(leftSpeed, rightSpeed, leftSpeed, rightSpeed);
-			Actuators.setCarriageLiftMotorSpeed(AutonConstants.SWITCH_CARRIAGE_WHEEL_FIRST_SPEED);
 		} else if (turn == 'S') {
-			Actuators.setCarriageLiftMotorSpeed(AutonConstants.SWITCH_CARRIAGE_WHEEL_SECOND_SPEED);
+			Actuators.setLeftCarriageMotor(AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED);
+			Actuators.setRightCarriageMotor(-AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED);
 		}
 
 	}

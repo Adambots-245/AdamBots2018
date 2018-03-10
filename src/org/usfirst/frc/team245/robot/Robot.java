@@ -60,6 +60,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		Sensors.zeroGyro();
 		Time.init();
 		positionSelected = Dash.getPositionSelected();
 		autoSelected = Dash.getAutonSelected();

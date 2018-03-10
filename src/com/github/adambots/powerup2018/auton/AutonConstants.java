@@ -9,10 +9,10 @@ public class AutonConstants {
 	public static final double SWITCH_SPEED = 0.5;
 	public static final double SWITCH_STRAIGHT_END_TIME = 2.5;
 	public static final double SWITCH_TURN_TIME = 2;
+	public static final double SWITCH_TURN_SPEED = 0.5;
 	public static final double SWITCH_CARRIAGE_WHEEL_SECOND_TIME = 6;
-	public static final double SWITCH_CARRIAGE_WHEEL_FIRST_SPEED = 0.5;
-	public static final double SWITCH_CARRIAGE_WHEEL_SECOND_SPEED = 0.8;
-	public static final double SWITCH_GYRO_POSITION_DELTA = 10;
-	public static final double SWITCH_GYRO_POSITION = 90;
-	
+	public static final double SWITCH_CARRIAGE_WHEEL_SPEED = 1;
+	public static final double SWITCH_GYRO_POSITION = 50;
+	public static final double SWITCH_STRAIGHT_SPEED = 0.5;
+	public static final double SWITCH_STRAIGHT_TIME = 1;
 }

@@ -4,6 +4,7 @@ import com.github.adambots.powerup2018.auton.AutonConstants;
 import com.github.adambots.powerup2018.autonModes.CrossBaseline;
 import com.github.adambots.powerup2018.autonModes.DoNothing;
 import com.github.adambots.powerup2018.autonModes.Switch;
+import com.github.adambots.powerup2018.autonModes.Switch_Scale;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -16,9 +17,9 @@ public class Dash {
 	private static SendableChooser<Command> autonChooser = new SendableChooser<Command>();
 
 	public static void init() {
-//		putPositionChooser();
+		putPositionChooser();
 		putAutonChooser();
-		CameraServer.getInstance().startAutomaticCapture();
+		CameraServer.getInstance().startAutomaticCapture().setResolution(960, 720);
 	}
 
 	public static void putPositionChooser() {
@@ -32,7 +33,8 @@ public class Dash {
 		autonChooser.addDefault("Do Nothing", new DoNothing());
 		autonChooser.addObject("Cross Baseline",
 				new CrossBaseline(AutonConstants.CROSS_BASELINE_TIME, AutonConstants.CROSS_BASELINE_SPEED));
-//		autonChooser.addObject("Switch", new Switch());
+		autonChooser.addObject("Switch", new Switch());
+		autonChooser.addObject("Switch/Scale", new Switch_Scale());
 		SmartDashboard.putData("Auton Choices", autonChooser);
 	}
 
