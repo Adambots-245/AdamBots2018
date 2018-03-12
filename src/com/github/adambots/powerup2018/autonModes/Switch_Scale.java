@@ -17,7 +17,7 @@ public class Switch_Scale extends Command {
 	private String position;
 	private char switchPosition;
 	private char turn = Character.MIN_VALUE;
-
+	
 	public Switch_Scale() {
 		// FINISHED!
 	}
@@ -59,9 +59,11 @@ public class Switch_Scale extends Command {
 				leftSpeed = Constants.STOP_MOTOR_SPEED;
 				rightSpeed = Constants.STOP_MOTOR_SPEED;
 			}
-			if (Math.abs(Sensors.getGyroAngle()) < AutonConstants.SWITCH_GYRO_POSITION) {
+			if (Math.abs(Sensors.getGyroAngle()) < AutonConstants.SWITCH_GYRO_POSITION && position.equalsIgnoreCase("L")) {
 				Drive.autonDrive(leftSpeed, rightSpeed, leftSpeed, rightSpeed);
-			} else {
+			}else if (Math.abs(Sensors.getGyroAngle()) > AutonConstants.SWITCH_GYRO_POSITION) { 
+				Drive.autonDrive(-leftSpeed, -rightSpeed, -leftSpeed, -rightSpeed);
+			}else {
 				Drive.autonDrive(Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED);
 			}
 		} else if (time < (AutonConstants.SWITCH_STRAIGHT_END_TIME + AutonConstants.SWITCH_TURN_TIME
@@ -72,8 +74,10 @@ public class Switch_Scale extends Command {
 			System.out.println("Running straight 2.0");
 		} else if (turn != Character.MIN_VALUE) {
 			Drive.autonDrive(Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED);
+			if(time < (AutonConstants.SWITCH_OUTTAKE_TIME + AutonConstants.SWITCH_STRAIGHT_END_TIME + AutonConstants.SWITCH_TURN_TIME)) {
 			Actuators.setLeftCarriageMotor(AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED);
 			Actuators.setRightCarriageMotor(-AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED);
+			}
 		} else {
 			System.out.println("Turn is " + turn);
 		}

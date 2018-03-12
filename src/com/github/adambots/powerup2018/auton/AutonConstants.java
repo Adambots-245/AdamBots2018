@@ -8,11 +8,14 @@ public class AutonConstants {
 	// Switch
 	public static final double SWITCH_SPEED = 0.5;
 	public static final double SWITCH_STRAIGHT_END_TIME = 2.5;
-	public static final double SWITCH_TURN_TIME = 2;
+	public static final double SWITCH_TURN_TIME = 4;
 	public static final double SWITCH_TURN_SPEED = 0.5;
 	public static final double SWITCH_CARRIAGE_WHEEL_SECOND_TIME = 6;
 	public static final double SWITCH_CARRIAGE_WHEEL_SPEED = 1;
-	public static final double SWITCH_GYRO_POSITION = 50;
-	public static final double SWITCH_STRAIGHT_SPEED = 0.5;
-	public static final double SWITCH_STRAIGHT_TIME = 1;
+	public static final double SWITCH_GYRO_POSITION = 82;
+	public static final double SWITCH_STRAIGHT_SPEED = 1.5;
+	public static final double SWITCH_STRAIGHT_TIME = 4;
+	public static final double SWITCH_OUTTAKE_TIME = 2.5;
+	public static final double SWITCH_GYRO_RIGHT_POSITION = -82;
+	
 }
