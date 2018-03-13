@@ -37,7 +37,7 @@ public class Switch extends Command {
 	protected void execute() {
 		System.out.println(Sensors.getGyroAngle());
 		double time = Time.getTime();
-		System.out.println("SWITCH_SCALE IS RUNNING");
+		System.out.println("SWITCH IS RUNNING");
 		System.out.println(time);
 		if (time <= AutonConstants.SWITCH_STRAIGHT_END_TIME) {
 			double speed = AutonConstants.SWITCH_SPEED;
