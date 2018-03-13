@@ -14,7 +14,7 @@ public class AutonConstants {
 	public static final double SWITCH_CARRIAGE_WHEEL_SPEED = 1;
 	public static final double SWITCH_GYRO_POSITION = 82;
 	public static final double SWITCH_STRAIGHT_SPEED = 1.5;
-	public static final double SWITCH_STRAIGHT_TIME = 4;
+	public static final double SWITCH_STRAIGHT_TIME = 2;
 	public static final double SWITCH_OUTTAKE_TIME = 2.5;
 	public static final double SWITCH_GYRO_RIGHT_POSITION = -82;
 	

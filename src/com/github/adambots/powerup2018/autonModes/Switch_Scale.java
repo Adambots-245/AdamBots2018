@@ -35,6 +35,7 @@ public class Switch_Scale extends Command {
 
 	@Override
 	protected void execute() {
+		System.out.println(Sensors.getGyroAngle());
 		double time = Time.getTime();
 		System.out.println("SWITCH_SCALE IS RUNNING");
 		System.out.println(time);
@@ -61,7 +62,8 @@ public class Switch_Scale extends Command {
 			}
 			if (Math.abs(Sensors.getGyroAngle()) < AutonConstants.SWITCH_GYRO_POSITION && position.equalsIgnoreCase("L")) {
 				Drive.autonDrive(leftSpeed, rightSpeed, leftSpeed, rightSpeed);
-			}else if (Math.abs(Sensors.getGyroAngle()) > AutonConstants.SWITCH_GYRO_POSITION) { 
+			}else if (Math.abs(Sensors.getGyroAngle()) < AutonConstants.SWITCH_GYRO_POSITION) { 
+				System.out.println("Line 66 running");
 				Drive.autonDrive(-leftSpeed, -rightSpeed, -leftSpeed, -rightSpeed);
 			}else {
 				Drive.autonDrive(Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED);
