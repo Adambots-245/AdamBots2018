@@ -100,7 +100,7 @@ public class Intake {
 	}
 	// control the carriage lift
 	public static void setCarriageLiftSpeed(double speed, boolean overrideButton) {
-		int carriageLiftPosition = Sensors.getCarriageLiftPosition();
+		int carriageLiftPosition = Math.abs(Sensors.getCarriageLiftPosition());
 		//bottom is 0, top is ~67,000
 		boolean isLimitSwitchPressed = Sensors.getLimitSwitchValue();
 		int intendedPosition;

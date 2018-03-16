@@ -4,8 +4,10 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 public class Field {
 	
-	 private static String fieldPositions = DriverStation.getInstance().getGameSpecificMessage();
-	
+	private static String fieldPositions;
+	public static void getPosition() {
+		 fieldPositions = DriverStation.getInstance().getGameSpecificMessage();
+	}
 	 public static char getOwnSwitch(){
 		 return fieldPositions.charAt(0);
 	 }

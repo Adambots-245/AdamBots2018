@@ -1,5 +1,7 @@
 package com.github.adambots.powerup2018.autonModes;
 
+import java.io.IOException;
+
 import org.usfirst.frc.team245.robot.Actuators;
 import org.usfirst.frc.team245.robot.Constants;
 import org.usfirst.frc.team245.robot.Sensors;
@@ -25,7 +27,13 @@ public class Switch extends Command {
 	@Override
 	protected void initialize() {
 		position = Dash.getPositionSelected();
-		switchPosition = Field.getOwnSwitch();
+		try{
+			Field.getPosition();
+			switchPosition = Field.getOwnSwitch();
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 		if (position.equalsIgnoreCase(String.valueOf(switchPosition))) {
 			turn = switchPosition == 'L' ? 'L' : 'R';
 		} else {
