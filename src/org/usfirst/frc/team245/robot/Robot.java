@@ -83,6 +83,7 @@ public class Robot extends IterativeRobot {
 			System.out.println(autoSelected);
 			autoSelected.start();
 			Scheduler.getInstance().run();
+			Dash.putMatchTime();
 		}
 	}
 
@@ -92,6 +93,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Gamepad.update();
+		
 		Drive.mecDrive(Gamepad.primary.getLeftX(), Gamepad.primary.getLeftY(), Gamepad.primary.getRightX());
 
 		Intake.resetEncoderOnLimitSwitch();
@@ -104,7 +106,8 @@ public class Robot extends IterativeRobot {
 		System.out.println("lift position = [" + Actuators.getCarriageLiftMotorPosition() + "]");
 
 		Climb.startClimbing(Gamepad.secondary.getRightTrigger());
-
+		
+		Dash.putMatchTime();
 	}
 
 	/**

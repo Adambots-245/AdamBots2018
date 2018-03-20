@@ -41,7 +41,11 @@ public class Switch_Scale extends Command {
 		double time = Time.getTime();
 		System.out.println("SWITCH_SCALE IS RUNNING");
 		System.out.println(time);
-		if (time <= AutonConstants.SWITCH_STRAIGHT_END_TIME) {
+		/*if(turn == Character.MIN_VALUE && time <= AutonConstants.SWITCH_MIDDLE_STRAIGHT_TIME) {
+			double speed = AutonConstants.SWITCH_SPEED;
+			double stop = Constants.STOP_MOTOR_SPEED;
+			Drive.autonDrive(stop, speed, stop);
+		} else*/ if (time <= AutonConstants.SWITCH_STRAIGHT_END_TIME) {
 			double speed = AutonConstants.SWITCH_SPEED;
 			double stop = Constants.STOP_MOTOR_SPEED;
 			Drive.autonDrive(stop, speed, stop);
@@ -82,7 +86,7 @@ public class Switch_Scale extends Command {
 				Actuators.setLeftCarriageMotor(AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED);
 				Actuators.setRightCarriageMotor(-AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED);
 			}
-		} /*else if (turn == Character.MIN_VALUE) {
+		 /*else if (turn == Character.MIN_VALUE) {
 			if (position.equalsIgnoreCase(String.valueOf(scalePosition))) {
 				turn = scalePosition == 'L' ? 'L' : 'R';
 			} 
@@ -94,7 +98,7 @@ public class Switch_Scale extends Command {
 				Drive.autonDrive(stop, speed, stop);
 			System.out.println("Running straight");
 			Actuators.setCarriageLiftMotorSpeed(AutonConstants.SCALE_ELEVATOR_SPEED);
-		} */else {
+		*/} else {
 			System.out.println("Turn is " + turn);
 		}
 		

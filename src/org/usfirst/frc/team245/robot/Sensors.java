@@ -42,7 +42,7 @@ public class Sensors {
 		return photoEye.get();
 	}
 	public static int getCarriageLiftPosition() {
-		return -1 * Actuators.getCarriageLiftMotor().getSelectedSensorPosition(0);
+		return -1*Actuators.getCarriageLiftMotor().getSelectedSensorPosition(0);
 	}
 	public static void resetCarriageEncoder() {
 		Actuators.getCarriageLiftMotor().getSensorCollection().setQuadraturePosition(0, 0);
