@@ -3,6 +3,8 @@ package com.github.adambots.powerup2018.climb;
 import org.usfirst.frc.team245.robot.Actuators;
 import org.usfirst.frc.team245.robot.Constants;
 
+import com.github.adambots.powerup2018.controller.Gamepad;
+
 public class Climb {
 	
 //	// initial conditions
@@ -10,8 +12,19 @@ public class Climb {
 //		climbMotor = Actuators.getClimbMotor();
 //	}
 //	
+	
+	public static void stopClimbing() {
+		double current = Actuators.getClimbMotor().getOutputCurrent();
+		while (current > Constants.CLIMB_MAX_CURRENT) {
+			double rumbleIntensity = Constants.RUMBLE_INTENSITY;
+			int rumbleTime = 1;
+			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_STOP);
+			Gamepad.secondary.rumble(rumbleIntensity, rumbleIntensity, rumbleTime);
+		}
+	}
+	
 	public static void startClimbing(double climbTrigger) {
-		if (climbTrigger > 0.05) {
+		if (climbTrigger > Constants.CLIMB_MIN_SPEED) {
 			Actuators.setClimbMotorSpeed(climbTrigger);
 		} else {
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_STOP);
@@ -19,9 +32,9 @@ public class Climb {
 	}
 	
 	public static void reverseClimbing(double climbTrigger, double climbReverseTrigger) {
-		if (climbTrigger > 0.05) {
+		if (climbTrigger > Constants.CLIMB_MIN_SPEED) {
 			Actuators.setClimbMotorSpeed(climbTrigger);
-		} else if (climbReverseTrigger > 0.05) {
+		} else if (climbReverseTrigger > Constants.CLIMB_MIN_SPEED) {
 			Actuators.setClimbMotorSpeed(-climbReverseTrigger);
 		} else {
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_STOP);

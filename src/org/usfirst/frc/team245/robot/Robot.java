@@ -106,6 +106,7 @@ public class Robot extends IterativeRobot {
 		System.out.println("lift position = [" + Actuators.getCarriageLiftMotorPosition() + "]");
 
 		Climb.startClimbing(Gamepad.secondary.getRightTrigger());
+		Climb.stopClimbing();
 		
 		Dash.putMatchTime();
 	}

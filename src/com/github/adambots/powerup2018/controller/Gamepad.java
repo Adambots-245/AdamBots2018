@@ -1,5 +1,6 @@
 package com.github.adambots.powerup2018.controller;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class Gamepad {
@@ -243,4 +244,18 @@ public class Gamepad {
 		return press.getPresses("Back");
 	}
 
+	// Rumble
+	public void rumble(double l, double r, int time) {
+		long rumbleStartTime;		
+		rumbleStartTime = System.currentTimeMillis();
+			while (System.currentTimeMillis() - rumbleStartTime <= time) {
+				joy.setRumble(RumbleType.kLeftRumble, l);
+				joy.setRumble(RumbleType.kRightRumble, r);
+			}
+			rumbleStartTime = System.currentTimeMillis();			
+			joy.setRumble(RumbleType.kLeftRumble, 0);
+			joy.setRumble(RumbleType.kRightRumble, 0);
+			
+		}
+	
 }

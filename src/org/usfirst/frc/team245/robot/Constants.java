@@ -99,8 +99,11 @@ public class Constants {
 	public static final double CLIMB_SPEED_SLOW = 0.5;
 	public static final double CLIMB_SPEED_FAST = 1.0;
 	public static final double CLIMB_SPEED_STOP = 0;
+	public static final double CLIMB_MIN_SPEED = 0.05;
 	public static final double CLIMB_SPEED_REVERSE = -0.5;
-
+	public static final double CLIMB_MAX_CURRENT = 50.0;
+	public static final double CLIMB_MIN_CURRENT = 10.0;
+	
 	// GhostCode Constants
 	public static final int TIME_INDEX = 7;
 	public static final int FORWARD = 1;
@@ -109,5 +112,8 @@ public class Constants {
 	public static final int ELEVATOR_VALUE = 4;
 	public static final int A_VALUE = 5;
 	public static final int B_VALUE = 6;
+
+	//rumble
+	public static final double RUMBLE_INTENSITY = .5;
 
 }
