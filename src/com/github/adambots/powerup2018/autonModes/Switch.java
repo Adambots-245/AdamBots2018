@@ -47,7 +47,42 @@ public class Switch extends Command {
 		double time = Time.getTime();
 		System.out.println("SWITCH IS RUNNING");
 		System.out.println(time);
-		if (time <= AutonConstants.SWITCH_STRAIGHT_END_TIME) {
+		if (position.equalsIgnoreCase("M")) {
+			if (switchPosition == 'L') {
+				if (time <= AutonConstants.MIDDLE_DIAGONAL_TIME) {
+					double stop = Constants.STOP_MOTOR_SPEED;
+					double diagSpeed = AutonConstants.DIAGONAL_SPEED;
+					Drive.autonDrive(-diagSpeed, diagSpeed, stop);
+					System.out.println("Middle switch diagonal left");
+				} else if (time <= AutonConstants.MIDDLE_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME) {
+					double stop = Constants.STOP_MOTOR_SPEED;
+					double straightSpeed = AutonConstants.MIDDLE_STRAIGHT_SPEED;
+					Drive.autonDrive(stop, straightSpeed, stop);
+					System.out.println("Middle switch forward");
+				} else if (time > AutonConstants.MIDDLE_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME) {
+					double carriageSpeed = AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED;
+					Actuators.setLeftCarriageMotor(-carriageSpeed);
+					Actuators.setRightCarriageMotor(carriageSpeed);
+				}
+			} else if (switchPosition == 'R') {
+				if (time <= AutonConstants.MIDDLE_DIAGONAL_TIME) {
+					double stop = Constants.STOP_MOTOR_SPEED;
+					double diagSpeed = AutonConstants.DIAGONAL_SPEED;
+					Drive.autonDrive(diagSpeed, diagSpeed, stop);
+					System.out.println("Middle switch diagonal right");
+				} else if (time <= AutonConstants.MIDDLE_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME) {
+					double stop = Constants.STOP_MOTOR_SPEED;
+					double straightSpeed = AutonConstants.MIDDLE_STRAIGHT_SPEED;
+					Drive.autonDrive(stop, straightSpeed, stop);
+					System.out.println("Middle switch forward");
+				} else if (time > AutonConstants.MIDDLE_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME) {
+					double carriageSpeed = AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED;
+					Actuators.setLeftCarriageMotor(-carriageSpeed);
+					Actuators.setRightCarriageMotor(carriageSpeed);
+				}
+			}
+		}
+		else if (time <= AutonConstants.SWITCH_STRAIGHT_END_TIME) {
 			double speed = AutonConstants.SWITCH_SPEED;
 			double stop = Constants.STOP_MOTOR_SPEED;
 			Drive.autonDrive(stop, speed, stop);

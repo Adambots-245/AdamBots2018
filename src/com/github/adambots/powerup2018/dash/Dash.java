@@ -28,6 +28,7 @@ public class Dash {
 		positionChooser.addDefault("None", null);
 		positionChooser.addObject("Left", "L");
 		positionChooser.addObject("Right", "R");
+		positionChooser.addObject("Middle", "M");
 		SmartDashboard.putData("Position on Field", positionChooser);
 	}
 	
