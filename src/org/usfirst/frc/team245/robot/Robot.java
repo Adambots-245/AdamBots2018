@@ -7,7 +7,10 @@
 
 package org.usfirst.frc.team245.robot;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import com.github.adambots.powerup2018.auton.AutonConstants;
+import com.github.adambots.powerup2018.auton.AutonRoutine;
 import com.github.adambots.powerup2018.auton.Time;
 import com.github.adambots.powerup2018.climb.Climb;
 import com.github.adambots.powerup2018.controller.Gamepad;
@@ -29,7 +32,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  */
 public class Robot extends IterativeRobot {
 	private String positionSelected;
-	private Command autoSelected;
+	private AutonRoutine autoSelected;
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -60,11 +63,16 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		System.out.println("started autonomous Init");
 		Sensors.zeroGyro();
+		System.out.println("zeroed gyro");
 		Time.init();
+		System.out.println("initialized time");
 		positionSelected = Dash.getPositionSelected();
+		System.out.println("got selected position");
 		autoSelected = Dash.getAutonSelected();
-		autoSelected.start();
+		System.out.println("got selected auton");
+		autoSelected.initialize();
 		System.out.println("Auto selected: " + autoSelected);
 
 	}
@@ -79,10 +87,10 @@ public class Robot extends IterativeRobot {
 //		} else {
 //			Drive.autonDrive(0, 0, 0);
 //		}
+		System.out.println("autonPeriodic");
 		if (autoSelected != null) {
 			System.out.println(autoSelected);
-			autoSelected.start();
-			Scheduler.getInstance().run();
+			autoSelected.execute();
 			Dash.putMatchTime();
 		}
 	}

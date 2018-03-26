@@ -2,12 +2,13 @@ package com.github.adambots.powerup2018.autonModes;
 
 import org.usfirst.frc.team245.robot.Constants;
 
+import com.github.adambots.powerup2018.auton.AutonRoutine;
 import com.github.adambots.powerup2018.auton.Time;
 import com.github.adambots.powerup2018.drive.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CrossBaseline extends Command {
+public class CrossBaseline extends AutonRoutine {
 
 	private double timeToCross;
 	private double percentSpeed;
@@ -18,12 +19,12 @@ public class CrossBaseline extends Command {
 	}
 
 	@Override
-	protected void initialize() {
+	public void initialize() {
 
 	}
 
 	@Override
-	protected void execute() {
+	public void execute() {
 		double time = Time.getTime();
 		System.out.println("CROSS BASELINE IS RUNNING");
 		try {
@@ -39,17 +40,17 @@ public class CrossBaseline extends Command {
 
 	}
 
-	@Override
+	
 	protected boolean isFinished() {
 		return true;
 	}
 
-	@Override
+	
 	protected void end() {
 
 	}
 
-	@Override
+	
 	protected void interrupted() {
 
 	}

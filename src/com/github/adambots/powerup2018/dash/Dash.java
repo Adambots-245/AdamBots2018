@@ -1,6 +1,7 @@
 package com.github.adambots.powerup2018.dash;
 
 import com.github.adambots.powerup2018.auton.AutonConstants;
+import com.github.adambots.powerup2018.auton.AutonRoutine;
 import com.github.adambots.powerup2018.autonModes.CrossBaseline;
 import com.github.adambots.powerup2018.autonModes.DoNothing;
 import com.github.adambots.powerup2018.autonModes.Switch;
@@ -8,14 +9,13 @@ import com.github.adambots.powerup2018.autonModes.Switch_Scale;
 import com.github.adambots.powerup2018.field.Field;
 
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Dash {
 
 	private static SendableChooser<String> positionChooser = new SendableChooser<String>();
-	private static SendableChooser<Command> autonChooser = new SendableChooser<Command>();
+	private static SendableChooser<AutonRoutine> autonChooser = new SendableChooser<AutonRoutine>();
 
 	public static void init() {
 		putMatchTime();
@@ -45,7 +45,7 @@ public class Dash {
 		return positionChooser.getSelected();
 	}
 
-	public static Command getAutonSelected() {
+	public static AutonRoutine getAutonSelected() {
 		return autonChooser.getSelected();
 	}
 	

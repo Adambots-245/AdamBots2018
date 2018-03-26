@@ -48,7 +48,7 @@ public class Sensors {
 		Actuators.getCarriageLiftMotor().getSensorCollection().setQuadraturePosition(0, 0);
 	}
 	public static void zeroGyro() {
-		gyro.calibrate();
+		gyro.reset();
 	}
 	public static double getGyroAngle() {
 		return gyro.getAngle();

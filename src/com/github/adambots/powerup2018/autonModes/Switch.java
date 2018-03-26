@@ -7,6 +7,7 @@ import org.usfirst.frc.team245.robot.Constants;
 import org.usfirst.frc.team245.robot.Sensors;
 
 import com.github.adambots.powerup2018.auton.AutonConstants;
+import com.github.adambots.powerup2018.auton.AutonRoutine;
 import com.github.adambots.powerup2018.auton.Time;
 import com.github.adambots.powerup2018.dash.Dash;
 import com.github.adambots.powerup2018.drive.Drive;
@@ -14,7 +15,7 @@ import com.github.adambots.powerup2018.field.Field;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Switch extends Command {
+public class Switch extends AutonRoutine{
 
 	private String position;
 	private char switchPosition;
@@ -25,7 +26,7 @@ public class Switch extends Command {
 	}
 
 	@Override
-	protected void initialize() {
+	public void initialize() {
 		position = Dash.getPositionSelected();
 		try{
 			Field.getPosition();
@@ -42,7 +43,7 @@ public class Switch extends Command {
 	}
 
 	@Override
-	protected void execute() {
+	public void execute() {
 		System.out.println(Sensors.getGyroAngle());
 		double time = Time.getTime();
 		System.out.println("SWITCH IS RUNNING");
@@ -51,8 +52,9 @@ public class Switch extends Command {
 			if (switchPosition == 'L') {
 				if (time <= AutonConstants.MIDDLE_DIAGONAL_TIME) {
 					double stop = Constants.STOP_MOTOR_SPEED;
-					double diagSpeed = AutonConstants.DIAGONAL_SPEED;
-					Drive.autonDrive(-diagSpeed, diagSpeed, stop);
+					double diagStraightSpeed = AutonConstants.DIAGONAL_STRAIGHT_SPEED;
+					double diagStrafeSpeed = AutonConstants.DIAGONAL_SIDE_SPEED;
+					Drive.autonDrive(-diagStrafeSpeed, diagStraightSpeed, stop);
 					System.out.println("Middle switch diagonal left");
 				} else if (time <= AutonConstants.MIDDLE_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME) {
 					double stop = Constants.STOP_MOTOR_SPEED;
@@ -61,14 +63,15 @@ public class Switch extends Command {
 					System.out.println("Middle switch forward");
 				} else if (time > AutonConstants.MIDDLE_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME) {
 					double carriageSpeed = AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED;
-					Actuators.setLeftCarriageMotor(-carriageSpeed);
-					Actuators.setRightCarriageMotor(carriageSpeed);
+					Actuators.setLeftCarriageMotor(carriageSpeed);
+					Actuators.setRightCarriageMotor(-carriageSpeed);
 				}
 			} else if (switchPosition == 'R') {
 				if (time <= AutonConstants.MIDDLE_DIAGONAL_TIME) {
 					double stop = Constants.STOP_MOTOR_SPEED;
-					double diagSpeed = AutonConstants.DIAGONAL_SPEED;
-					Drive.autonDrive(diagSpeed, diagSpeed, stop);
+					double diagStraightSpeed = AutonConstants.DIAGONAL_STRAIGHT_SPEED;
+					double diagStrafeSpeed = AutonConstants.DIAGONAL_SIDE_SPEED;
+					Drive.autonDrive(diagStrafeSpeed, diagStraightSpeed, stop);					
 					System.out.println("Middle switch diagonal right");
 				} else if (time <= AutonConstants.MIDDLE_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME) {
 					double stop = Constants.STOP_MOTOR_SPEED;
@@ -77,8 +80,8 @@ public class Switch extends Command {
 					System.out.println("Middle switch forward");
 				} else if (time > AutonConstants.MIDDLE_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME) {
 					double carriageSpeed = AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED;
-					Actuators.setLeftCarriageMotor(-carriageSpeed);
-					Actuators.setRightCarriageMotor(carriageSpeed);
+					Actuators.setLeftCarriageMotor(carriageSpeed);
+					Actuators.setRightCarriageMotor(-carriageSpeed);
 				}
 			}
 		}
@@ -129,13 +132,13 @@ public class Switch extends Command {
 
 	}
 
-	@Override
+	//@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
-	@Override
+	//@Override
 	protected void end() {
 		// System.out.println("end, (0,0,0,0)");
 		// Drive.autonDrive(0, 0, 0, 0);
@@ -143,7 +146,7 @@ public class Switch extends Command {
 
 	}
 
-	@Override
+	//@Override
 	protected void interrupted() {
 		// TODO Auto-generated method stub
 
