@@ -12,6 +12,7 @@ import com.github.adambots.powerup2018.drive.Drive;
 import com.github.adambots.powerup2018.field.Field;
 import com.github.adambots.powerup2018.intake.Intake;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Switch_Scale extends AutonRoutine {
@@ -132,14 +133,17 @@ public class Switch_Scale extends AutonRoutine {
 			double liftSpeed = AutonConstants.SCALE_ELEVATOR_LOWER_SPEED;
 			Intake.setArmsPosition(Constants.ARMS_OUT);
 			Intake.setCarriageLiftSpeed(liftSpeed, false);
+			//Actuators.setLeftArmMidPneumatic(DoubleSolenoid.Value.kForward);
+			//Actuators.setRightArmMidPneumatic(DoubleSolenoid.Value.kForward);
 			//Actuators.setCarriageLiftMotorSpeed(-liftSpeed);
 		}
 		//end lower elevator
 			//start raise elevator
 			else if (time < (AutonConstants.SCALE_STRAIGHT_END_TIME + AutonConstants.SCALE_TURN_TIME + AutonConstants.SCALE_BACK_TIME + AutonConstants.SCALE_ELEVATOR_LOWER_TIME + AutonConstants.SCALE_ELEVATOR_RAISE_TIME) && scaleTurn != Character.MIN_VALUE) {
-				if (Actuators.getCarriageLiftMotorPosition() < 65000) {
+				if (Math.abs(Actuators.getCarriageLiftMotorPosition()) < 30000) {
 					double liftSpeed = AutonConstants.SCALE_ELEVATOR_RAISE_SPEED;
 					Intake.setCarriageLiftSpeed(liftSpeed, false);
+					//Actuators.setCarriageLiftMotorSpeed(liftSpeed);
 				}
 				System.out.println("raising elevator");
 			}

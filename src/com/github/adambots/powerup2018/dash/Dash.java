@@ -1,5 +1,7 @@
 package com.github.adambots.powerup2018.dash;
 
+import org.usfirst.frc.team245.robot.Actuators;
+
 import com.github.adambots.powerup2018.auton.AutonConstants;
 import com.github.adambots.powerup2018.auton.AutonRoutine;
 import com.github.adambots.powerup2018.autonModes.CrossBaseline;
@@ -48,7 +50,9 @@ public class Dash {
 	public static AutonRoutine getAutonSelected() {
 		return autonChooser.getSelected();
 	}
-	
+	public static void putEncoderValue(){
+		SmartDashboard.putNumber("Encoder Value", Actuators.getCarriageLiftMotorPosition());
+	}
 	public static void putMatchTime() {
 		SmartDashboard.putNumber("Match Time", Field.getMatchTime());
 	}

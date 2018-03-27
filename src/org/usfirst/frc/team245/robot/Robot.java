@@ -92,6 +92,8 @@ public class Robot extends IterativeRobot {
 			System.out.println(autoSelected);
 			autoSelected.execute();
 			Dash.putMatchTime();
+			Dash.putEncoderValue();
+			Intake.resetEncoderOnLimitSwitch();
 		}
 	}
 
