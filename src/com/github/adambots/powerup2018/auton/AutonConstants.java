@@ -23,9 +23,9 @@ public class AutonConstants {
 	// Middle Switch
 	//public static final double DIAGONAL_SPEED = 0.25;
 	public static final double DIAGONAL_STRAIGHT_SPEED = 0.25;
-	public static final double DIAGONAL_SIDE_SPEED = 0.75;
+	public static final double DIAGONAL_SIDE_SPEED = 07.5;
 	public static final double MIDDLE_STRAIGHT_SPEED = 0.3;
-	public static final double MIDDLE_DIAGONAL_TIME = 1.8;
+	public static final double MIDDLE_DIAGONAL_TIME = 1.5;//was 1.8
 	public static final double MIDDLE_STRAIGHT_TIME = 2.0;
 	
 	
@@ -36,7 +36,7 @@ public class AutonConstants {
 	public static final double SCALE_TURN_SPEED = 0.5;
 	public static final double SCALE_GYRO_POSITION = 82;
 	public static final double SCALE_BACK_TIME = 2;
-	public static final double SCALE_BACK_SPEED = -.2;
+	public static final double SCALE_BACK_SPEED = -0.2;
 	public static final double SCALE_ELEVATOR_RAISE_SPEED = 1;
 	public static final double SCALE_FORWARD_SPEED = 0.5;
 	public static final double SCALE_ELEVATOR_LOWER_TIME = 2;
