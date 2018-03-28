@@ -41,10 +41,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		System.out.println("Got here");
+		
 		Dash.init();
 		Actuators.init();
-		Gamepad.init();
 		Sensors.init();
+		Gamepad.init();
 		Intake.init();
 		Drive.init();
 	}

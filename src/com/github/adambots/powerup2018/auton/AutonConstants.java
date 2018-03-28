@@ -12,7 +12,7 @@ public class AutonConstants {
 	public static final double SWITCH_TURN_TIME = 2.0;
 	public static final double SWITCH_TURN_SPEED = 0.5;
 	public static final double SWITCH_CARRIAGE_WHEEL_SECOND_TIME = 6;
-	public static final double SWITCH_CARRIAGE_WHEEL_SPEED = 1;
+	public static final double SWITCH_CARRIAGE_WHEEL_SPEED = 0.65;
 	public static final double SWITCH_GYRO_POSITION = 82;
 	public static final double SWITCH_STRAIGHT_SPEED = 1.5;
 	public static final double SWITCH_STRAIGHT_TIME = 2;
@@ -25,8 +25,9 @@ public class AutonConstants {
 	public static final double DIAGONAL_STRAIGHT_SPEED = 0.25;
 	public static final double DIAGONAL_SIDE_SPEED = 07.5;
 	public static final double MIDDLE_STRAIGHT_SPEED = 0.3;
-	public static final double MIDDLE_DIAGONAL_TIME = 1.5;//was 1.8
-	public static final double MIDDLE_STRAIGHT_TIME = 2.0;
+	public static final double MIDDLE_LEFT_DIAGONAL_TIME = 1.4;//was 1.8
+	public static final double MIDDLE_RIGHT_DIAGONAL_TIME = 1.2;
+	public static final double MIDDLE_STRAIGHT_TIME = 2.2;
 	
 	
 	//Scale
