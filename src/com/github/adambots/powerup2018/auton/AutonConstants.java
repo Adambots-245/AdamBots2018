@@ -32,7 +32,7 @@ public class AutonConstants {
 	
 	//Scale
 	public static final double SCALE_ELEVATOR_LOWER_SPEED = -1;
-	public static final double SCALE_STRAIGHT_END_TIME = 4.5;//was 3.0, not proven 4/10 
+	public static final double SCALE_STRAIGHT_END_TIME = 4.6;//was 3.0, not proven 4/10 
 	public static final double SCALE_TURN_TIME = 2.0;
 	public static final double SCALE_TURN_SPEED = 0.5;
 	public static final double SCALE_GYRO_POSITION = 82;
@@ -44,5 +44,8 @@ public class AutonConstants {
 	public static final double SCALE_ELEVATOR_RAISE_TIME = 3;
 	public static final double SCALE_FORWARD_TIME = .55;
 	public static final double SCALE_CARRIAGE_WHEEL_SPEED = 1;
+	public static final double SCALE_OUTTAKE_TIME = 1.0;
+	public static final double SCALE_END_BACK_TIME = 1.0;
+	public static final double SCALE_END_TURN_TIME = 1.0;
 	
 }
