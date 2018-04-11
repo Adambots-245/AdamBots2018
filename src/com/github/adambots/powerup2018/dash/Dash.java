@@ -24,7 +24,7 @@ public class Dash {
 		putPositionChooser();
 		putAutonChooser();
 		//CameraServer.getInstance().startAutomaticCapture(0).setResolution(160, 120);
-		///////CameraServer.getInstance().startAutomaticCapture(1).setResolution(640, 480);
+		CameraServer.getInstance().startAutomaticCapture(1).setResolution(640, 480);
 	}
 
 	public static void putPositionChooser() {
