@@ -12,6 +12,7 @@ import com.github.adambots.powerup2018.auton.Time;
 import com.github.adambots.powerup2018.dash.Dash;
 import com.github.adambots.powerup2018.drive.Drive;
 import com.github.adambots.powerup2018.field.Field;
+import com.github.adambots.powerup2018.intake.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -27,6 +28,7 @@ public class Switch extends AutonRoutine{
 
 	@Override
 	public void initialize() {
+		Intake.setArmsPosition(Constants.ARMS_IN);
 		position = Dash.getPositionSelected();
 		try{
 			Field.getPosition();
@@ -61,7 +63,7 @@ public class Switch extends AutonRoutine{
 					double straightSpeed = AutonConstants.MIDDLE_STRAIGHT_SPEED;
 					Drive.autonDrive(stop, straightSpeed, stop);
 					System.out.println("Middle switch forward");
-				} else if (time > AutonConstants.MIDDLE_LEFT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME) {
+				} else if (time > AutonConstants.MIDDLE_LEFT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME + 0.25) {
 					double carriageSpeed = AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED;
 					Actuators.setLeftCarriageMotor(carriageSpeed);
 					Actuators.setRightCarriageMotor(-carriageSpeed);
@@ -78,7 +80,7 @@ public class Switch extends AutonRoutine{
 					double straightSpeed = AutonConstants.MIDDLE_STRAIGHT_SPEED;
 					Drive.autonDrive(stop, straightSpeed, stop);
 					System.out.println("Middle switch forward");
-				} else if (time > AutonConstants.MIDDLE_RIGHT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME) {
+				} else if (time > AutonConstants.MIDDLE_RIGHT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME + 0.25) {
 					double carriageSpeed = AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED;
 					Actuators.setLeftCarriageMotor(carriageSpeed);
 					Actuators.setRightCarriageMotor(-carriageSpeed);

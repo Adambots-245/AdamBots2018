@@ -41,7 +41,17 @@ public class Intake {
 		Actuators.setLeftArmMidPneumatic(value);
 		Actuators.setRightArmMidPneumatic(value);
 	}
-
+	
+	public static void setArmsRightDiamondPosition(DoubleSolenoid.Value forwardValue, DoubleSolenoid.Value reverseValue) {
+		Actuators.setLeftArmOpenPneumatic(forwardValue);
+		Actuators.setRightArmOpenPneumatic(reverseValue);
+	}
+	
+	public static void setArmsLeftDiamondPosition(DoubleSolenoid.Value forwardValue, DoubleSolenoid.Value reverseValue) {
+		Actuators.setLeftArmOpenPneumatic(reverseValue);
+		Actuators.setRightArmOpenPneumatic(forwardValue);
+	}
+																																																																																						
 	// set arm pneumatic position to position from Constants class
 	public static void setArmsPosition(int constantPosition) {
 		switch (constantPosition) {
@@ -70,6 +80,16 @@ public class Intake {
 		} else if (outButton) {
 			Intake.setArmsPosition(Constants.ARMS_OUT);
 		}		
+	}
+	//fixes diamond cube position
+	public static void setArmsDiamondPosition(boolean fixDiamond) {
+		if (fixDiamond) {
+			double speed = Constants.MAX_MOTOR_SPEED;
+			double stop = Constants.MIN_MOTOR_SPEED;
+			Intake.setArmsLeftDiamondPosition(Constants.PNEUMATIC_FORWARD, Constants.PNEUMATIC_REVERSE);
+			Actuators.setLeftIntakeMotor(stop);
+			Actuators.setRightIntakeMotor(speed);
+		}
 	}
 	
 	// toggle the carriage wheels

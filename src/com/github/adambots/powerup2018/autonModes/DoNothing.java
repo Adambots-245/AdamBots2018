@@ -4,6 +4,7 @@ import org.usfirst.frc.team245.robot.Constants;
 
 import com.github.adambots.powerup2018.auton.AutonRoutine;
 import com.github.adambots.powerup2018.drive.Drive;
+import com.github.adambots.powerup2018.intake.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -17,6 +18,7 @@ public class DoNothing extends AutonRoutine {
 	public void initialize() {
 		double STOP = Constants.STOP_MOTOR_SPEED;
 		Drive.autonDrive(STOP, STOP, STOP, STOP);
+		Intake.setArmsPosition(Constants.ARMS_IN);
 	}
 
 	@Override

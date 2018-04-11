@@ -95,6 +95,7 @@ public class Robot extends IterativeRobot {
 			Dash.putMatchTime();
 			Dash.putEncoderValue();
 			Intake.resetEncoderOnLimitSwitch();
+			System.out.println("encoder value = [" + Sensors.getCarriageLiftPosition() + "]");
 		}
 	}
 
@@ -113,6 +114,7 @@ public class Robot extends IterativeRobot {
 		Intake.toggleCarriageWheels(Gamepad.secondary.getLeftY(), Gamepad.secondary.getLB());
 		Intake.armsPosition(Gamepad.secondary.getX(), Gamepad.secondary.getY(), Gamepad.secondary.getB());
 		Intake.setCarriageLiftSpeed(Gamepad.secondary.getRightY(), Gamepad.secondary.getRB());
+		Intake.setArmsDiamondPosition(Gamepad.secondary.getA());
 
 		System.out.println("lift position = [" + Actuators.getCarriageLiftMotorPosition() + "]");
 

@@ -1,6 +1,7 @@
 package com.github.adambots.powerup2018.autonModes;
 
 import org.usfirst.frc.team245.robot.Actuators;
+import org.usfirst.frc.team245.robot.Constants;
 
 import com.github.adambots.powerup2018.auton.AutonConstants;
 import com.github.adambots.powerup2018.auton.AutonRoutine;
@@ -8,6 +9,7 @@ import com.github.adambots.powerup2018.auton.AutonRoutine;
 import com.github.adambots.powerup2018.auton.Time;
 import com.github.adambots.powerup2018.drive.Drive;
 import com.github.adambots.powerup2018.field.Field;
+import com.github.adambots.powerup2018.intake.Intake;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -24,6 +26,7 @@ public class Scale extends AutonRoutine{
 		}	
 
 		protected void init(){
+			Intake.setArmsPosition(Constants.ARMS_IN);
 			time = Time.getTime();
 			
 			if(position != 'L'){

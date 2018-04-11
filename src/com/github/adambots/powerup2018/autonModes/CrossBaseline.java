@@ -5,6 +5,7 @@ import org.usfirst.frc.team245.robot.Constants;
 import com.github.adambots.powerup2018.auton.AutonRoutine;
 import com.github.adambots.powerup2018.auton.Time;
 import com.github.adambots.powerup2018.drive.Drive;
+import com.github.adambots.powerup2018.intake.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -20,7 +21,7 @@ public class CrossBaseline extends AutonRoutine {
 
 	@Override
 	public void initialize() {
-
+		Intake.setArmsPosition(Constants.ARMS_IN);
 	}
 
 	@Override

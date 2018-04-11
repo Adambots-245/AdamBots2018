@@ -28,6 +28,7 @@ public class Switch_Scale extends AutonRoutine {
 
 	@Override
 	public void initialize() {
+		Intake.setArmsPosition(Constants.ARMS_IN);
 		position = Dash.getPositionSelected();
 		Field.getPosition();
 		switchPosition = Field.getOwnSwitch();
@@ -97,6 +98,13 @@ public class Switch_Scale extends AutonRoutine {
 				Actuators.setRightCarriageMotor(-AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED);
 			}
 		}//start scale 
+		//start scale further straight
+		else if (time <= AutonConstants.SCALE_STRAIGHT_END_TIME && scaleTurn != Character.MIN_VALUE) {
+			double speed = AutonConstants.SWITCH_SPEED;
+			double stop = Constants.STOP_MOTOR_SPEED;
+			Drive.autonDrive(stop, speed, stop);
+			System.out.println("Extra scale straight");
+		}
 		//start scale turn
 		else if (time < (AutonConstants.SCALE_STRAIGHT_END_TIME + AutonConstants.SCALE_TURN_TIME) && scaleTurn != Character.MIN_VALUE) {
 			double leftSpeed, rightSpeed;
@@ -115,7 +123,7 @@ public class Switch_Scale extends AutonRoutine {
 			} if (Math.abs(Sensors.getGyroAngle()) < AutonConstants.SCALE_GYRO_POSITION && position.equalsIgnoreCase("L")) {
 				Drive.autonDrive(leftSpeed, rightSpeed, leftSpeed, rightSpeed);
 			} else if (Math.abs(Sensors.getGyroAngle()) < AutonConstants.SCALE_GYRO_POSITION) { 
-				System.out.println("Line 66 running");
+				System.out.println("Turning");
 				Drive.autonDrive(-leftSpeed, -rightSpeed, -leftSpeed, -rightSpeed);
 			} else {
 				Drive.autonDrive(Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED);
@@ -125,7 +133,7 @@ public class Switch_Scale extends AutonRoutine {
 			double speed = AutonConstants.SCALE_BACK_SPEED;
 			double stop = Constants.STOP_MOTOR_SPEED;
 			Drive.autonDrive(stop, speed, stop);
-			System.out.println("Running straight 2.0");
+			System.out.println("Running straight back");
 		}
 			//end scale reverse
 			//start lower elevator
@@ -140,10 +148,15 @@ public class Switch_Scale extends AutonRoutine {
 		//end lower elevator
 			//start raise elevator
 			else if (time < (AutonConstants.SCALE_STRAIGHT_END_TIME + AutonConstants.SCALE_TURN_TIME + AutonConstants.SCALE_BACK_TIME + AutonConstants.SCALE_ELEVATOR_LOWER_TIME + AutonConstants.SCALE_ELEVATOR_RAISE_TIME) && scaleTurn != Character.MIN_VALUE) {
-				if (Math.abs(Actuators.getCarriageLiftMotorPosition()) < 30000) {
+				if (Math.abs(Actuators.getCarriageLiftMotorPosition()) < 64000) {
 					double liftSpeed = AutonConstants.SCALE_ELEVATOR_RAISE_SPEED;
 					Intake.setCarriageLiftSpeed(liftSpeed, false);
 					//Actuators.setCarriageLiftMotorSpeed(liftSpeed);
+				}
+				else {
+					double liftSpeed = Constants.STOP_MOTOR_SPEED;
+					Intake.setCarriageLiftSpeed(liftSpeed, false);
+					
 				}
 				System.out.println("raising elevator");
 			}
