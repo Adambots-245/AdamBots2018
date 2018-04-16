@@ -13,6 +13,8 @@ public class Climb {
 //	}
 //	
 	
+	
+	
 	public static void stopClimbing() {
 		double current = Actuators.getClimbMotor().getOutputCurrent();
 		while (current > Constants.CLIMB_MAX_CURRENT) {
@@ -20,6 +22,7 @@ public class Climb {
 			int rumbleTime = 1;
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_STOP);
 			Gamepad.secondary.rumble(rumbleIntensity, rumbleIntensity, rumbleTime);
+			System.out.println("CLIMB MOTOR CURRENT = [" + current + "]");
 		}
 	}
 	

@@ -6,6 +6,8 @@ import com.github.adambots.powerup2018.auton.AutonConstants;
 import com.github.adambots.powerup2018.auton.AutonRoutine;
 import com.github.adambots.powerup2018.autonModes.CrossBaseline;
 import com.github.adambots.powerup2018.autonModes.DoNothing;
+import com.github.adambots.powerup2018.autonModes.Scale;
+import com.github.adambots.powerup2018.autonModes.Scale_Switch;
 import com.github.adambots.powerup2018.autonModes.Switch;
 import com.github.adambots.powerup2018.autonModes.Switch_Scale;
 import com.github.adambots.powerup2018.field.Field;
@@ -23,8 +25,8 @@ public class Dash {
 		putMatchTime();
 		putPositionChooser();
 		putAutonChooser();
-		//CameraServer.getInstance().startAutomaticCapture(0).setResolution(160, 120);
-		CameraServer.getInstance().startAutomaticCapture(1).setResolution(640, 480);
+		CameraServer.getInstance().startAutomaticCapture();//.setResolution(160, 120);
+		//CameraServer.getInstance().startAutomaticCapture(1).setResolution(640, 480);
 	}
 
 	public static void putPositionChooser() {
@@ -41,6 +43,8 @@ public class Dash {
 				new CrossBaseline(AutonConstants.CROSS_BASELINE_TIME, AutonConstants.CROSS_BASELINE_SPEED));
 		autonChooser.addObject("Switch", new Switch());
 		autonChooser.addObject("Switch/Scale", new Switch_Scale());
+		autonChooser.addObject("Scale/Switch", new Scale_Switch());
+		autonChooser.addObject("Scale", new Scale());
 		SmartDashboard.putData("Auton Choices", autonChooser);
 	}
 

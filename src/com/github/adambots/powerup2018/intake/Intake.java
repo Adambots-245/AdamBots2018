@@ -129,7 +129,7 @@ public class Intake {
 			Actuators.setCarriageLiftMotorSpeed(speed);
 		} else if (isLimitSwitchPressed && speed <= 0) {
 			Actuators.setCarriageLiftMotorSpeed(Constants.STOP_MOTOR_SPEED);
-		} else if (carriageLiftPosition >= 64000 && speed >= 0) {
+		} else if (carriageLiftPosition >= 61000 && speed >= 0) {
 			Actuators.setCarriageLiftMotorSpeed(Constants.STOP_MOTOR_SPEED);
 		} else {
 			Actuators.setCarriageLiftMotorSpeed(speed);

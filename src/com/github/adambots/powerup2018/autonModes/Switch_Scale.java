@@ -58,12 +58,15 @@ public class Switch_Scale extends AutonRoutine {
 		} else*/ 
 		//switch start
 		//cross baseline start
+		
+		
 		if (time <= AutonConstants.SWITCH_STRAIGHT_END_TIME) {
 			double speed = AutonConstants.SWITCH_SPEED;
 			double stop = Constants.STOP_MOTOR_SPEED;
 			Drive.autonDrive(stop, speed, stop);
 			System.out.println("Running straight");
 		//cross baseline end
+			
 		} else if (time < (AutonConstants.SWITCH_STRAIGHT_END_TIME + AutonConstants.SWITCH_TURN_TIME) && switchTurn != Character.MIN_VALUE) {
 			double leftSpeed, rightSpeed;
 			  if (position.equalsIgnoreCase("L")) {
@@ -133,7 +136,7 @@ public class Switch_Scale extends AutonRoutine {
 				Drive.autonDrive(Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED);
 			}
 			
-			if (Math.abs(Actuators.getCarriageLiftMotorPosition()) < 64000) {
+			if (Math.abs(Actuators.getCarriageLiftMotorPosition()) < 61000) {
 				double liftSpeed = AutonConstants.SCALE_ELEVATOR_RAISE_SPEED;
 				Intake.setCarriageLiftSpeed(liftSpeed, false);
 				//Actuators.setCarriageLiftMotorSpeed(liftSpeed);
@@ -151,7 +154,7 @@ public class Switch_Scale extends AutonRoutine {
 			Drive.autonDrive(stop, speed, stop);
 			System.out.println("Running straight back");
 			
-			if (Math.abs(Actuators.getCarriageLiftMotorPosition()) < 64000) {
+			if (Math.abs(Actuators.getCarriageLiftMotorPosition()) < 61000) {
 				double liftSpeed = AutonConstants.SCALE_ELEVATOR_RAISE_SPEED;
 				Intake.setCarriageLiftSpeed(liftSpeed, false);
 				//Actuators.setCarriageLiftMotorSpeed(liftSpeed);
@@ -203,7 +206,7 @@ public class Switch_Scale extends AutonRoutine {
 				Drive.autonDrive(stop, speed, stop);
 				System.out.println("driving to scale after reversing");
 				
-				if (Math.abs(Actuators.getCarriageLiftMotorPosition()) < 64000) {
+				if (Math.abs(Actuators.getCarriageLiftMotorPosition()) < 61000) {
 					double liftSpeed = AutonConstants.SCALE_ELEVATOR_RAISE_SPEED;
 					Intake.setCarriageLiftSpeed(liftSpeed, false);
 					//Actuators.setCarriageLiftMotorSpeed(liftSpeed);
