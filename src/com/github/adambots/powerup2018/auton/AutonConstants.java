@@ -19,6 +19,8 @@ public class AutonConstants {
 	public static final double SWITCH_STRAIGHT_TIME = 2;
 	public static final double SWITCH_OUTTAKE_TIME = 2.5;
 	public static final double SWITCH_GYRO_RIGHT_POSITION = -82;
+	public static final double MIDDLE_SWITCH_OUTTAKE_TIME = .25;
+	
 	//public static final double SWITCH_MIDDLE_STRAIGHT_TIME = 2;
 	//middle switch cube 2
 	public static final double MIDDLE_LEFT_SIDE_DIAGONAL_BACK_TIME = 1.7;
