@@ -15,14 +15,16 @@ public class Climb {
 	
 	
 	
-	public static void stopClimbing() {
+	public static void stopClimbing(boolean overrideButton) {
 		double current = Actuators.getClimbMotor().getOutputCurrent();
-		while (current > Constants.CLIMB_MAX_CURRENT) {
+		if (current > Constants.CLIMB_MAX_CURRENT) {
 			double rumbleIntensity = Constants.RUMBLE_INTENSITY;
 			int rumbleTime = 1;
-			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_STOP);
-			Gamepad.secondary.rumble(rumbleIntensity, rumbleIntensity, rumbleTime);
-			System.out.println("CLIMB MOTOR CURRENT = [" + current + "]");
+			if ( !overrideButton ) {
+				Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_STOP);
+				Gamepad.secondary.rumble(rumbleIntensity, rumbleIntensity, rumbleTime);
+				System.out.println("CLIMB MOTOR CURRENT = [" + current + "]");					
+			}
 		}
 	}
 	
@@ -31,7 +33,7 @@ public class Climb {
 			Actuators.setClimbMotorSpeed(climbTrigger);
 		} else {
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_STOP);
-		}
+		} 
 	}
 	
 	public static void reverseClimbing(double climbTrigger, double climbReverseTrigger) {
@@ -43,5 +45,4 @@ public class Climb {
 			Actuators.setClimbMotorSpeed(Constants.CLIMB_SPEED_STOP);
 		}
 	}
-	
-}
+	}
