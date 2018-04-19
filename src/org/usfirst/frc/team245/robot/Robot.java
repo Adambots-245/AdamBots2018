@@ -114,12 +114,12 @@ public class Robot extends IterativeRobot {
 		Intake.toggleCarriageWheels(Gamepad.secondary.getLeftY(), Gamepad.secondary.getLB());
 		Intake.armsPosition(Gamepad.secondary.getX(), Gamepad.secondary.getY(), Gamepad.secondary.getB());
 		Intake.setCarriageLiftSpeed(Gamepad.secondary.getRightY(), Gamepad.secondary.getRB());
-		Intake.setArmsDiamondPosition(Gamepad.secondary.getA());
+		Intake.setArmsDiamondPosition(Gamepad.secondary.getA(), Sensors.getPhotoEyeValue());
 
 		System.out.println("lift position = [" + Actuators.getCarriageLiftMotorPosition() + "]");
 
 		Climb.startClimbing(Gamepad.secondary.getRightTrigger());
-		Climb.stopClimbing();
+		Climb.stopClimbing(Gamepad.secondary.getRB());
 		
 		Dash.putMatchTime();
 	}

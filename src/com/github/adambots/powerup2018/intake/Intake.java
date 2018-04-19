@@ -82,8 +82,9 @@ public class Intake {
 		}		
 	}
 	//fixes diamond cube position
-	public static void setArmsDiamondPosition(boolean fixDiamond) {
-		if (fixDiamond) {
+	//added override for the photoeye if false
+	public static void setArmsDiamondPosition(boolean fixDiamond, boolean photoEye) {
+		if (fixDiamond && !photoEye) {
 			double speed = Constants.MAX_MOTOR_SPEED;
 			double stop = Constants.MIN_MOTOR_SPEED;
 			Intake.setArmsLeftDiamondPosition(Constants.PNEUMATIC_FORWARD, Constants.PNEUMATIC_REVERSE);
