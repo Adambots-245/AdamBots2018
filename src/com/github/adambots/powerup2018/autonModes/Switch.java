@@ -62,11 +62,10 @@ public class Switch extends AutonRoutine {
 					double straightSpeed = AutonConstants.MIDDLE_STRAIGHT_SPEED;
 					Drive.autonDrive(stop, straightSpeed, stop);
 					System.out.println("Middle switch forward");
-				} else if (time > AutonConstants.MIDDLE_LEFT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
+				} else if (time <= AutonConstants.MIDDLE_LEFT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
 						+ AutonConstants.MIDDLE_SWITCH_OUTTAKE_TIME) {
 					double carriageSpeed = AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED;
-					Actuators.setLeftCarriageMotor(carriageSpeed);
-					Actuators.setRightCarriageMotor(-carriageSpeed);
+					Intake.toggleCarriageWheels(carriageSpeed, false);
 					// Start cube 2
 				} else if (time <= AutonConstants.MIDDLE_LEFT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
 						+ AutonConstants.MIDDLE_SWITCH_OUTTAKE_TIME + AutonConstants.MIDDLE_BACK_TIME) {
@@ -74,6 +73,7 @@ public class Switch extends AutonRoutine {
 					double straightSpeed = AutonConstants.MIDDLE_BACK_SPEED;
 					double liftSpeed = AutonConstants.SWITCH_ELEVATOR_LOWER_SPEED;
 					Intake.setCarriageLiftSpeed(liftSpeed, false);
+					Intake.toggleCarriageWheels(stop, false);
 					Drive.autonDrive(stop, straightSpeed, stop);
 					System.out.println("Middle switch backward");
 				} else if (time <= AutonConstants.MIDDLE_LEFT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
@@ -96,7 +96,7 @@ public class Switch extends AutonRoutine {
 					Drive.autonDrive(stop, straightSpeed, stop);
 					Intake.setCarriageLiftSpeed(liftSpeed, false);
 					double intakeSpeed = AutonConstants.SWITCH_INTAKE_SPEED;
-					Intake.setIntakeWheelsSpeed(intakeSpeed);
+					Intake.toggleCarriageWheels(intakeSpeed, false);
 					System.out.println("Middle switch forward for cube");
 				} // else if (time < AutonConstants.MIDDLE_LEFT_DIAGONAL_TIME +
 					// AutonConstants.MIDDLE_STRAIGHT_TIME +
@@ -131,40 +131,33 @@ public class Switch extends AutonRoutine {
 						Intake.setCarriageLiftSpeed(liftSpeed, false);
 					}
 					System.out.println("raising elevator");
+
+				} else if (time <= AutonConstants.MIDDLE_LEFT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
+						+ AutonConstants.MIDDLE_SWITCH_OUTTAKE_TIME + AutonConstants.MIDDLE_BACK_TIME
+						+ AutonConstants.MIDDLE_LEFT_SIDE_DIAGONAL_BACK_TIME
+						+ AutonConstants.MIDDLE_LEFT_SIDE_DIAGONAL_BACK_TIME + AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME
+						+ AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME + AutonConstants.MIDDLE_BACK_TIME) {
+					if (Math.abs(Actuators.getCarriageLiftMotorPosition()) < 20000) {
+						double liftSpeed = AutonConstants.SCALE_ELEVATOR_RAISE_SPEED;
+						Intake.setCarriageLiftSpeed(liftSpeed, false);
+						// Actuators.setCarriageLiftMotorSpeed(liftSpeed);
+					} else {
+						double liftSpeed = Constants.STOP_MOTOR_SPEED;
+						Intake.setCarriageLiftSpeed(liftSpeed, false);
+					}
+					System.out.println("raising elevator");
+					double stop = Constants.STOP_MOTOR_SPEED;
+					double straightSpeed = -AutonConstants.MIDDLE_BACK_SPEED;
+					Drive.autonDrive(stop, straightSpeed, stop);
+				} else if (time > AutonConstants.MIDDLE_LEFT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
+						+ AutonConstants.MIDDLE_SWITCH_OUTTAKE_TIME + AutonConstants.MIDDLE_BACK_TIME
+						+ AutonConstants.MIDDLE_LEFT_SIDE_DIAGONAL_BACK_TIME
+						+ AutonConstants.MIDDLE_LEFT_SIDE_DIAGONAL_BACK_TIME + AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME
+						+ AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME + AutonConstants.MIDDLE_BACK_TIME
+						+ AutonConstants.MIDDLE_CUBE_OUTTAKE_TIME) {
+					Intake.toggleCarriageWheels(AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED, false);
+					System.out.println("raising elevator");
 				}
-			} else if (time <= AutonConstants.MIDDLE_LEFT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
-					+ AutonConstants.MIDDLE_SWITCH_OUTTAKE_TIME + AutonConstants.MIDDLE_BACK_TIME
-					+ AutonConstants.MIDDLE_LEFT_SIDE_DIAGONAL_BACK_TIME
-					+ AutonConstants.MIDDLE_LEFT_SIDE_DIAGONAL_BACK_TIME + AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME
-					+ AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME + AutonConstants.MIDDLE_BACK_TIME) {
-				if (Math.abs(Actuators.getCarriageLiftMotorPosition()) < 20000) {
-					double liftSpeed = AutonConstants.SCALE_ELEVATOR_RAISE_SPEED;
-					Intake.setCarriageLiftSpeed(liftSpeed, false);
-					// Actuators.setCarriageLiftMotorSpeed(liftSpeed);
-				} else {
-					double liftSpeed = Constants.STOP_MOTOR_SPEED;
-					Intake.setCarriageLiftSpeed(liftSpeed, false);
-				}
-				System.out.println("raising elevator");
-				double stop = Constants.STOP_MOTOR_SPEED;
-				double straightSpeed = -AutonConstants.MIDDLE_BACK_SPEED;
-				Drive.autonDrive(stop, straightSpeed, stop);
-			} else if (time <= AutonConstants.MIDDLE_LEFT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
-					+ AutonConstants.MIDDLE_SWITCH_OUTTAKE_TIME + AutonConstants.MIDDLE_BACK_TIME
-					+ AutonConstants.MIDDLE_LEFT_SIDE_DIAGONAL_BACK_TIME
-					+ AutonConstants.MIDDLE_LEFT_SIDE_DIAGONAL_BACK_TIME + AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME
-					+ AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME + AutonConstants.MIDDLE_BACK_TIME
-					+ AutonConstants.MIDDLE_CUBE_OUTTAKE_TIME) {
-				if (Math.abs(Actuators.getCarriageLiftMotorPosition()) < 20000) {
-					double liftSpeed = AutonConstants.SCALE_ELEVATOR_RAISE_SPEED;
-					Intake.setCarriageLiftSpeed(liftSpeed, false);
-					// Actuators.setCarriageLiftMotorSpeed(liftSpeed);
-				} else {
-					double liftSpeed = Constants.STOP_MOTOR_SPEED;
-					Intake.setCarriageLiftSpeed(liftSpeed, false);
-				}
-				System.out.println("raising elevator");
-				Intake.setIntakeWheelsSpeed(-AutonConstants.SWITCH_INTAKE_SPEED);
 
 				// Start Right switch
 			} else if (switchPosition == 'R') {
@@ -172,18 +165,17 @@ public class Switch extends AutonRoutine {
 					double stop = Constants.STOP_MOTOR_SPEED;
 					double diagStraightSpeed = AutonConstants.DIAGONAL_STRAIGHT_SPEED;
 					double diagStrafeSpeed = AutonConstants.DIAGONAL_SIDE_SPEED;
-					Drive.autonDrive(diagStrafeSpeed, diagStraightSpeed, stop);
-					System.out.println("Middle switch diagonal right");
+					Drive.autonDrive(-diagStrafeSpeed, diagStraightSpeed, stop);
+					System.out.println("Middle switch diagonal left");
 				} else if (time <= AutonConstants.MIDDLE_RIGHT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME) {
 					double stop = Constants.STOP_MOTOR_SPEED;
 					double straightSpeed = AutonConstants.MIDDLE_STRAIGHT_SPEED;
 					Drive.autonDrive(stop, straightSpeed, stop);
 					System.out.println("Middle switch forward");
-				} else if (time > AutonConstants.MIDDLE_RIGHT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
+				} else if (time <= AutonConstants.MIDDLE_RIGHT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
 						+ AutonConstants.MIDDLE_SWITCH_OUTTAKE_TIME) {
 					double carriageSpeed = AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED;
-					Actuators.setLeftCarriageMotor(carriageSpeed);
-					Actuators.setRightCarriageMotor(-carriageSpeed);
+					Intake.toggleCarriageWheels(carriageSpeed, false);
 					// Start cube 2
 				} else if (time <= AutonConstants.MIDDLE_RIGHT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
 						+ AutonConstants.MIDDLE_SWITCH_OUTTAKE_TIME + AutonConstants.MIDDLE_BACK_TIME) {
@@ -191,6 +183,7 @@ public class Switch extends AutonRoutine {
 					double straightSpeed = AutonConstants.MIDDLE_BACK_SPEED;
 					double liftSpeed = AutonConstants.SWITCH_ELEVATOR_LOWER_SPEED;
 					Intake.setCarriageLiftSpeed(liftSpeed, false);
+					Intake.toggleCarriageWheels(stop, false);
 					Drive.autonDrive(stop, straightSpeed, stop);
 					System.out.println("Middle switch backward");
 				} else if (time <= AutonConstants.MIDDLE_RIGHT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
@@ -200,9 +193,9 @@ public class Switch extends AutonRoutine {
 					double diagStraightSpeed = AutonConstants.DIAGONAL_STRAIGHT_BACK_SPEED;
 					double diagStrafeSpeed = AutonConstants.DIAGONAL_SIDE_BACK_SPEED;
 					double liftSpeed = AutonConstants.SWITCH_ELEVATOR_LOWER_SPEED;
-					Drive.autonDrive(diagStrafeSpeed, diagStraightSpeed, stop);
+					Drive.autonDrive(-diagStrafeSpeed, diagStraightSpeed, stop);
 					Intake.setCarriageLiftSpeed(liftSpeed, false);
-					System.out.println("Middle switch diagonal right side back");
+					System.out.println("Middle switch diagonal left side back");
 				} else if (time <= AutonConstants.MIDDLE_RIGHT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
 						+ AutonConstants.MIDDLE_SWITCH_OUTTAKE_TIME + AutonConstants.MIDDLE_BACK_TIME
 						+ AutonConstants.MIDDLE_RIGHT_SIDE_DIAGONAL_BACK_TIME
@@ -213,20 +206,12 @@ public class Switch extends AutonRoutine {
 					Drive.autonDrive(stop, straightSpeed, stop);
 					Intake.setCarriageLiftSpeed(liftSpeed, false);
 					double intakeSpeed = AutonConstants.SWITCH_INTAKE_SPEED;
-					Intake.setIntakeWheelsSpeed(intakeSpeed);/// TODO: Make
-																/// certain
-																/// these wheels
-																/// stop either
-																/// by photo eye
-																/// or by
-																/// another line
-																/// in the next
-																/// elif
+					Intake.toggleCarriageWheels(intakeSpeed, false);
 					System.out.println("Middle switch forward for cube");
-				} // else if (time < AutonConstants.MIDDLE_LEFT_DIAGONAL_TIME +
+				} // else if (time < AutonConstants.MIDDLE_RIGHT_DIAGONAL_TIME +
 					// AutonConstants.MIDDLE_STRAIGHT_TIME +
 					// AutonConstants.MIDDLE_BACK_TIME +
-					// AutonConstants.MIDDLE_LEFT_SIDE_DIAGONAL_BACK_TIME +
+					// AutonConstants.MIDDLE_RIGHT_SIDE_DIAGONAL_BACK_TIME +
 					// AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME) {
 					// double intakeSpeed = AutonConstants.SWITCH_INTAKE_SPEED;
 					// Intake.setIntakeWheelsSpeed(intakeSpeed);
@@ -245,7 +230,7 @@ public class Switch extends AutonRoutine {
 						+ AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME) {
 					double stop = Constants.STOP_MOTOR_SPEED;
 					double straightSpeed = -AutonConstants.DIAGONAL_STRAIGHT_BACK_SPEED;
-					double diagSpeed = AutonConstants.DIAGONAL_SIDE_BACK_SPEED;
+					double diagSpeed = -AutonConstants.DIAGONAL_SIDE_BACK_SPEED;
 					Drive.autonDrive(diagSpeed, straightSpeed, stop);
 					if (Math.abs(Actuators.getCarriageLiftMotorPosition()) < 20000) {
 						double liftSpeed = AutonConstants.SCALE_ELEVATOR_RAISE_SPEED;
@@ -256,25 +241,35 @@ public class Switch extends AutonRoutine {
 						Intake.setCarriageLiftSpeed(liftSpeed, false);
 					}
 					System.out.println("raising elevator");
-				}
-			} else if (time <= AutonConstants.MIDDLE_RIGHT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
-					+ AutonConstants.MIDDLE_SWITCH_OUTTAKE_TIME + AutonConstants.MIDDLE_BACK_TIME
-					+ AutonConstants.MIDDLE_RIGHT_SIDE_DIAGONAL_BACK_TIME
-					+ AutonConstants.MIDDLE_RIGHT_SIDE_DIAGONAL_BACK_TIME + AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME
-					+ AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME + AutonConstants.MIDDLE_BACK_TIME) {
-				double stop = Constants.STOP_MOTOR_SPEED;
-				double straightSpeed = -AutonConstants.MIDDLE_BACK_SPEED;
-				Drive.autonDrive(stop, straightSpeed, stop);
-			} else if (time <= AutonConstants.MIDDLE_RIGHT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
-					+ AutonConstants.MIDDLE_SWITCH_OUTTAKE_TIME + AutonConstants.MIDDLE_BACK_TIME
-					+ AutonConstants.MIDDLE_RIGHT_SIDE_DIAGONAL_BACK_TIME
-					+ AutonConstants.MIDDLE_RIGHT_SIDE_DIAGONAL_BACK_TIME + AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME
-					+ AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME + AutonConstants.MIDDLE_BACK_TIME
-					+ AutonConstants.MIDDLE_CUBE_OUTTAKE_TIME) {
-				Intake.setIntakeWheelsSpeed(-AutonConstants.SWITCH_INTAKE_SPEED);
 
+				} else if (time <= AutonConstants.MIDDLE_RIGHT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
+						+ AutonConstants.MIDDLE_SWITCH_OUTTAKE_TIME + AutonConstants.MIDDLE_BACK_TIME
+						+ AutonConstants.MIDDLE_RIGHT_SIDE_DIAGONAL_BACK_TIME
+						+ AutonConstants.MIDDLE_RIGHT_SIDE_DIAGONAL_BACK_TIME + AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME
+						+ AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME + AutonConstants.MIDDLE_BACK_TIME) {
+					if (Math.abs(Actuators.getCarriageLiftMotorPosition()) < 20000) {
+						double liftSpeed = AutonConstants.SCALE_ELEVATOR_RAISE_SPEED;
+						Intake.setCarriageLiftSpeed(liftSpeed, false);
+						// Actuators.setCarriageLiftMotorSpeed(liftSpeed);
+					} else {
+						double liftSpeed = Constants.STOP_MOTOR_SPEED;
+						Intake.setCarriageLiftSpeed(liftSpeed, false);
+					}
+					System.out.println("raising elevator");
+					double stop = Constants.STOP_MOTOR_SPEED;
+					double straightSpeed = -AutonConstants.MIDDLE_BACK_SPEED;
+					Drive.autonDrive(stop, straightSpeed, stop);
+				} else if (time > AutonConstants.MIDDLE_RIGHT_DIAGONAL_TIME + AutonConstants.MIDDLE_STRAIGHT_TIME
+						+ AutonConstants.MIDDLE_SWITCH_OUTTAKE_TIME + AutonConstants.MIDDLE_BACK_TIME
+						+ AutonConstants.MIDDLE_RIGHT_SIDE_DIAGONAL_BACK_TIME
+						+ AutonConstants.MIDDLE_RIGHT_SIDE_DIAGONAL_BACK_TIME + AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME
+						+ AutonConstants.MIDDLE_STRAIGHT_CUBE_TIME + AutonConstants.MIDDLE_BACK_TIME
+						+ AutonConstants.MIDDLE_CUBE_OUTTAKE_TIME) {
+					Intake.toggleCarriageWheels(AutonConstants.SWITCH_CARRIAGE_WHEEL_SPEED, false);
+					System.out.println("raising elevator");
+				}
 			}
-			// end cube 2
+			// start side switch
 		} else if (time <= AutonConstants.SWITCH_STRAIGHT_END_TIME) {
 			double speed = AutonConstants.SWITCH_SPEED;
 			double stop = Constants.STOP_MOTOR_SPEED;
