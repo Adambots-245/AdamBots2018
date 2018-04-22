@@ -24,7 +24,8 @@ public class Scale extends AutonRoutine {
 	private char scalePosition;
 	private char switchTurn = Character.MIN_VALUE;
 	private char scaleTurn = Character.MIN_VALUE;
-
+	private String scaleCrossover;
+	
 	public Scale() {
 
 	}
@@ -46,11 +47,17 @@ public class Scale extends AutonRoutine {
 			scaleTurn = Character.MIN_VALUE;
 		}
 		System.out.println("Field is" + scalePosition);
-	
-		//scaleTurn = position.charAt(0);
-				
+
+		// scaleTurn = position.charAt(0);
+		
+		//check crossover code
+		if (position.equalsIgnoreCase(String.valueOf('L')) && scalePosition == 'R'){
+			scaleCrossover = "Right";
+		}else if(position.equalsIgnoreCase(String.valueOf('R')) && scalePosition == 'L'){
+			scaleCrossover = "Left";
 		}
-	
+		
+	}
 
 	public void execute() {
 		System.out.println(Sensors.getGyroAngle());
@@ -60,17 +67,18 @@ public class Scale extends AutonRoutine {
 		/*
 		 * if(turn == Character.MIN_VALUE && time <=
 		 * AutonConstants.SWITCH_MIDDLE_STRAIGHT_TIME) { double speed =
-		 * AutonConstants.SWITCH_SPEED; double stop = Constants.STOP_MOTOR_SPEED;
-		 * Drive.autonDrive(stop, speed, stop); } else
+		 * AutonConstants.SWITCH_SPEED; double stop =
+		 * Constants.STOP_MOTOR_SPEED; Drive.autonDrive(stop, speed, stop); }
+		 * else
 		 */
 		// switch start
 		// cross baseline start
-	//	if (time <= AutonConstants.PNEUMATIC_WAIT_TIME) {
-		//	double stop = Constants.STOP_MOTOR_SPEED;
-			//Drive.autonDrive(stop, stop, stop);
-			//System.out.println("Waiting");
-			
-		//}
+		// if (time <= AutonConstants.PNEUMATIC_WAIT_TIME) {
+		// double stop = Constants.STOP_MOTOR_SPEED;
+		// Drive.autonDrive(stop, stop, stop);
+		// System.out.println("Waiting");
+
+		// }
 		if (time <= AutonConstants.PNEUMATIC_WAIT_TIME + AutonConstants.SWITCH_STRAIGHT_END_TIME) {
 			double speed = AutonConstants.SWITCH_SPEED;
 			double stop = Constants.STOP_MOTOR_SPEED;
@@ -80,7 +88,8 @@ public class Scale extends AutonRoutine {
 		}
 		// start scale
 		// start scale further straight
-		else if (time <= AutonConstants.PNEUMATIC_WAIT_TIME + AutonConstants.SCALE_STRAIGHT_END_TIME && scaleTurn != Character.MIN_VALUE) {
+		else if (time <= AutonConstants.PNEUMATIC_WAIT_TIME + AutonConstants.SCALE_STRAIGHT_END_TIME
+				&& scaleTurn != Character.MIN_VALUE) {
 			double speed = AutonConstants.SWITCH_SPEED;
 			double stop = Constants.STOP_MOTOR_SPEED;
 			Drive.autonDrive(stop, speed, stop);
@@ -91,8 +100,8 @@ public class Scale extends AutonRoutine {
 			System.out.println("Extra scale straight");
 		}
 		// start scale turn
-		else if (time < (AutonConstants.PNEUMATIC_WAIT_TIME  + AutonConstants.SCALE_STRAIGHT_END_TIME + AutonConstants.SCALE_TURN_TIME)
-				&& scaleTurn != Character.MIN_VALUE) {
+		else if (time < (AutonConstants.PNEUMATIC_WAIT_TIME + AutonConstants.SCALE_STRAIGHT_END_TIME
+				+ AutonConstants.SCALE_TURN_TIME) && scaleTurn != Character.MIN_VALUE) {
 			double leftSpeed, rightSpeed;
 			if (position.equalsIgnoreCase("L")) {
 				System.out.println("ignorecase L");
@@ -128,8 +137,9 @@ public class Scale extends AutonRoutine {
 			}
 			System.out.println("raising elevator");
 			// start scale reverse (drive back toward field edge)
-		} else if (time < (AutonConstants.PNEUMATIC_WAIT_TIME + AutonConstants.SCALE_STRAIGHT_END_TIME + AutonConstants.SCALE_TURN_TIME
-				+ AutonConstants.SCALE_BACK_TIME) && scaleTurn != Character.MIN_VALUE) {
+		} else if (time < (AutonConstants.PNEUMATIC_WAIT_TIME + AutonConstants.SCALE_STRAIGHT_END_TIME
+				+ AutonConstants.SCALE_TURN_TIME + AutonConstants.SCALE_BACK_TIME)
+				&& scaleTurn != Character.MIN_VALUE) {
 			double speed = AutonConstants.SCALE_BACK_SPEED;
 			double stop = Constants.STOP_MOTOR_SPEED;
 			Drive.autonDrive(stop, speed, stop);
@@ -150,34 +160,38 @@ public class Scale extends AutonRoutine {
 
 		/*
 		 * //start lower elevator else if (time <
-		 * (AutonConstants.SCALE_STRAIGHT_END_TIME + AutonConstants.SCALE_TURN_TIME +
-		 * AutonConstants.SCALE_BACK_TIME + AutonConstants.SCALE_ELEVATOR_LOWER_TIME) &&
-		 * scaleTurn != Character.MIN_VALUE) { double liftSpeed =
+		 * (AutonConstants.SCALE_STRAIGHT_END_TIME +
+		 * AutonConstants.SCALE_TURN_TIME + AutonConstants.SCALE_BACK_TIME +
+		 * AutonConstants.SCALE_ELEVATOR_LOWER_TIME) && scaleTurn !=
+		 * Character.MIN_VALUE) { double liftSpeed =
 		 * AutonConstants.SCALE_ELEVATOR_LOWER_SPEED;
 		 * Intake.setArmsPosition(Constants.ARMS_OUT);
 		 * Intake.setCarriageLiftSpeed(liftSpeed, false);
 		 * //Actuators.setLeftArmMidPneumatic(DoubleSolenoid.Value.kForward);
 		 * //Actuators.setRightArmMidPneumatic(DoubleSolenoid.Value.kForward);
-		 * //Actuators.setCarriageLiftMotorSpeed(-liftSpeed); } //end lower elevator
+		 * //Actuators.setCarriageLiftMotorSpeed(-liftSpeed); } //end lower
+		 * elevator
 		 */
 
 		/*
 		 * //start raise elevator else if (time <
-		 * (AutonConstants.SCALE_STRAIGHT_END_TIME + AutonConstants.SCALE_TURN_TIME +
-		 * AutonConstants.SCALE_BACK_TIME + AutonConstants.SCALE_ELEVATOR_RAISE_TIME) &&
-		 * scaleTurn != Character.MIN_VALUE) { if
+		 * (AutonConstants.SCALE_STRAIGHT_END_TIME +
+		 * AutonConstants.SCALE_TURN_TIME + AutonConstants.SCALE_BACK_TIME +
+		 * AutonConstants.SCALE_ELEVATOR_RAISE_TIME) && scaleTurn !=
+		 * Character.MIN_VALUE) { if
 		 * (Math.abs(Actuators.getCarriageLiftMotorPosition()) < 64000) { double
 		 * liftSpeed = AutonConstants.SCALE_ELEVATOR_RAISE_SPEED;
 		 * Intake.setCarriageLiftSpeed(liftSpeed, false);
-		 * //Actuators.setCarriageLiftMotorSpeed(liftSpeed); } else { double liftSpeed =
-		 * Constants.STOP_MOTOR_SPEED; Intake.setCarriageLiftSpeed(liftSpeed, false);
+		 * //Actuators.setCarriageLiftMotorSpeed(liftSpeed); } else { double
+		 * liftSpeed = Constants.STOP_MOTOR_SPEED;
+		 * Intake.setCarriageLiftSpeed(liftSpeed, false);
 		 * 
 		 * } System.out.println("raising elevator"); } //end raise elevator
 		 */
 
 		// start drive to scale after reversing
-		else if (time < (AutonConstants.PNEUMATIC_WAIT_TIME + AutonConstants.SCALE_STRAIGHT_END_TIME + AutonConstants.SCALE_TURN_TIME
-				+ AutonConstants.SCALE_BACK_TIME + AutonConstants.SCALE_FORWARD_TIME)
+		else if (time < (AutonConstants.PNEUMATIC_WAIT_TIME + AutonConstants.SCALE_STRAIGHT_END_TIME
+				+ AutonConstants.SCALE_TURN_TIME + AutonConstants.SCALE_BACK_TIME + AutonConstants.SCALE_FORWARD_TIME)
 				&& scaleTurn != Character.MIN_VALUE) {
 			double speed = AutonConstants.SCALE_FORWARD_SPEED;
 			double stop = Constants.STOP_MOTOR_SPEED;
@@ -197,8 +211,8 @@ public class Scale extends AutonRoutine {
 		}
 		// end drive to scale after reversing
 		// outtake cube
-		else if (time < (AutonConstants.PNEUMATIC_WAIT_TIME + AutonConstants.SCALE_STRAIGHT_END_TIME + AutonConstants.SCALE_TURN_TIME
-				+ AutonConstants.SCALE_BACK_TIME + AutonConstants.SCALE_FORWARD_TIME
+		else if (time < (AutonConstants.PNEUMATIC_WAIT_TIME + AutonConstants.SCALE_STRAIGHT_END_TIME
+				+ AutonConstants.SCALE_TURN_TIME + AutonConstants.SCALE_BACK_TIME + AutonConstants.SCALE_FORWARD_TIME
 				+ AutonConstants.SCALE_OUTTAKE_TIME) && scaleTurn != Character.MIN_VALUE) {
 			Drive.autonDrive(Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED);
 			if (time > (AutonConstants.SCALE_STRAIGHT_END_TIME + AutonConstants.SCALE_TURN_TIME
@@ -206,16 +220,18 @@ public class Scale extends AutonRoutine {
 				Actuators.setLeftCarriageMotor(AutonConstants.SCALE_CARRIAGE_WHEEL_SPEED);
 				Actuators.setRightCarriageMotor(-AutonConstants.SCALE_CARRIAGE_WHEEL_SPEED);
 			}
-		} else if (time < (AutonConstants.PNEUMATIC_WAIT_TIME + AutonConstants.SCALE_STRAIGHT_END_TIME + AutonConstants.SCALE_TURN_TIME
-				+ AutonConstants.SCALE_BACK_TIME + AutonConstants.SCALE_FORWARD_TIME + AutonConstants.SCALE_OUTTAKE_TIME
-				+ AutonConstants.SCALE_END_BACK_TIME) && scaleTurn != Character.MIN_VALUE) {
+		} else if (time < (AutonConstants.PNEUMATIC_WAIT_TIME + AutonConstants.SCALE_STRAIGHT_END_TIME
+				+ AutonConstants.SCALE_TURN_TIME + AutonConstants.SCALE_BACK_TIME + AutonConstants.SCALE_FORWARD_TIME
+				+ AutonConstants.SCALE_OUTTAKE_TIME + AutonConstants.SCALE_END_BACK_TIME)
+				&& scaleTurn != Character.MIN_VALUE) {
 			double speed = AutonConstants.SCALE_BACK_SPEED;
 			double stop = Constants.STOP_MOTOR_SPEED;
 			Drive.autonDrive(stop, speed, stop);
 			System.out.println("Running straight back");
-		} else if (time < (AutonConstants.PNEUMATIC_WAIT_TIME + AutonConstants.SCALE_STRAIGHT_END_TIME + AutonConstants.SCALE_TURN_TIME + AutonConstants.SCALE_BACK_TIME + AutonConstants.SCALE_FORWARD_TIME + AutonConstants.SCALE_OUTTAKE_TIME
-				+ AutonConstants.SCALE_END_BACK_TIME + AutonConstants.SCALE_END_TURN_TIME)
-				&& scaleTurn != Character.MIN_VALUE) {
+		} else if (time < (AutonConstants.PNEUMATIC_WAIT_TIME + AutonConstants.SCALE_STRAIGHT_END_TIME
+				+ AutonConstants.SCALE_TURN_TIME + AutonConstants.SCALE_BACK_TIME + AutonConstants.SCALE_FORWARD_TIME
+				+ AutonConstants.SCALE_OUTTAKE_TIME + AutonConstants.SCALE_END_BACK_TIME
+				+ AutonConstants.SCALE_END_TURN_TIME) && scaleTurn != Character.MIN_VALUE) {
 			Sensors.zeroGyro();
 			System.out.println("the gyro is zeroed");
 			double leftSpeed, rightSpeed;
@@ -242,7 +258,61 @@ public class Scale extends AutonRoutine {
 				Drive.autonDrive(Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED);
 			}
 
-		} else if (scaleTurn != Character.MIN_VALUE) {
+			// start Crossover
+		} else if (time <= AutonConstants.CROSSOVER_STRAIGHT_ENDTIME && scaleCrossover == "Left") {
+			double stop = Constants.STOP_MOTOR_SPEED;
+			double straightSpeed = AutonConstants.CROSSOVER_STRAIGHT_SPEED;
+			Drive.autonDrive(stop, straightSpeed, stop);
+			Intake.setCarriageLiftSpeed(AutonConstants.CROSSOVER_ELEVATOR_LOWER_SPEED, false);
+		} else if (time <= AutonConstants.CROSSOVER_STRAIGHT_ENDTIME + AutonConstants.CROSSOVER_TURN_TIME
+				&& scaleCrossover == "Left") {
+			double stop = Constants.STOP_MOTOR_SPEED;
+			double turnSpeed = AutonConstants.CROSSOVER_TURN_SPEED;
+			Drive.autonDrive(stop, stop, turnSpeed);
+		} else if (time <= AutonConstants.CROSSOVER_STRAIGHT_ENDTIME + AutonConstants.CROSSOVER_TURN_TIME
+				+ AutonConstants.CROSSOVER_STRAIGHT_TIME && scaleCrossover == "Left") {
+			double stop = Constants.STOP_MOTOR_SPEED;
+			double straightSpeed = AutonConstants.CROSSOVER_STRAIGHT_SPEED;
+			Drive.autonDrive(stop, straightSpeed, stop);
+
+			if (Math.abs(Actuators.getCarriageLiftMotorPosition()) < 30000) {
+				double liftSpeed = AutonConstants.SCALE_ELEVATOR_RAISE_SPEED;
+				Intake.setCarriageLiftSpeed(liftSpeed, false);
+				// Actuators.setCarriageLiftMotorSpeed(liftSpeed);
+			} else {
+				double liftSpeed = Constants.STOP_MOTOR_SPEED;
+				Intake.setCarriageLiftSpeed(liftSpeed, false);
+
+			}
+
+		} else if (time <= AutonConstants.CROSSOVER_STRAIGHT_ENDTIME + 2 * AutonConstants.CROSSOVER_TURN_TIME
+				+ AutonConstants.CROSSOVER_STRAIGHT_TIME && scaleCrossover == "Left") {
+			double stop = Constants.STOP_MOTOR_SPEED;
+			double turnSpeed = AutonConstants.CROSSOVER_TURN_SPEED;
+			Drive.autonDrive(stop, stop, -turnSpeed);
+		} else if (time <= AutonConstants.CROSSOVER_STRAIGHT_ENDTIME + 2 * AutonConstants.CROSSOVER_TURN_TIME
+				+ AutonConstants.CROSSOVER_STRAIGHT_TIME + AutonConstants.CROSSOVER_SCALE_STRAIGHT_TIME
+				&& scaleTurn == 'L') {
+			double stop = Constants.STOP_MOTOR_SPEED;
+			double straightSpeed = AutonConstants.CROSSOVER_SCALE_STRAIGHT_SPEED;
+			Drive.autonDrive(stop, straightSpeed, stop);
+		} else if (time <= AutonConstants.CROSSOVER_STRAIGHT_ENDTIME + 2 * AutonConstants.CROSSOVER_TURN_TIME
+				+ AutonConstants.CROSSOVER_STRAIGHT_TIME + AutonConstants.CROSSOVER_SCALE_STRAIGHT_TIME
+				+ AutonConstants.CROSSOVER_SCALE_OUTTAKE_TIME && scaleCrossover == "Left") {
+			double stop = Constants.STOP_MOTOR_SPEED;
+			double outtakeSpeed = AutonConstants.CROSSOVER_CARRIAGE_WHEEL_SPEED;
+			Drive.autonDrive(stop, stop, stop);
+			Intake.toggleCarriageWheels(outtakeSpeed, false);
+		} else if (time <= AutonConstants.CROSSOVER_STRAIGHT_ENDTIME + 2 * AutonConstants.CROSSOVER_TURN_TIME
+				+ AutonConstants.CROSSOVER_STRAIGHT_TIME + AutonConstants.CROSSOVER_SCALE_STRAIGHT_TIME
+				+ AutonConstants.CROSSOVER_SCALE_OUTTAKE_TIME + AutonConstants.CROSSOVER_BACK_TIME
+				&& scaleCrossover == "Left") {
+			double stop = Constants.STOP_MOTOR_SPEED;
+			double backSpeed = AutonConstants.CROSSOVER_BACK_SPEED;
+			Drive.autonDrive(stop, backSpeed, stop);
+		}
+
+		else if (scaleTurn != Character.MIN_VALUE) {
 			double stop = Constants.STOP_MOTOR_SPEED;
 			Drive.autonDrive(stop, stop, stop);
 		}
